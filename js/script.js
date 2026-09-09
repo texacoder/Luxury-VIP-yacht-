@@ -718,11 +718,21 @@
     { id: 'drone-photography', name: 'Drone Photography', price: 7000, description: 'Aerial photos and video of your yacht and group during the charter.' }
   ];
 
+  // Booking and payment are handled over WhatsApp, not through the site —
+  // two numbers so there's a fallback if one is unreachable. Digits-only
+  // form is what wa.me links require; the display form is for showing to
+  // guests (tel: links, footer, contact page).
+  var WHATSAPP_NUMBERS = [
+    { digits: '971544033888', display: '+971 54 403 3888' },
+    { digits: '971545763101', display: '+971 54 576 3101' }
+  ];
+
   // Expose to other scripts on the page (booking flow, admin, etc.)
   window.VIPYachts = {
     YACHTS: YACHTS,
     PACKAGES: PACKAGES,
     ADDONS: ADDONS,
+    WHATSAPP_NUMBERS: WHATSAPP_NUMBERS,
     BASE: BASE
   };
 
@@ -788,6 +798,11 @@
     return (value === null || value === undefined || value === '') ? '—' : value + (suffix || '');
   }
   window.VIPYachts.formatSpec = formatSpec;
+
+  function whatsappLink(digits, message) {
+    return 'https://wa.me/' + digits + (message ? '?text=' + encodeURIComponent(message) : '');
+  }
+  window.VIPYachts.whatsappLink = whatsappLink;
 
   /* =========================================================
      5. HEADER + FOOTER TEMPLATES
@@ -905,7 +920,7 @@
             '<div class="footer-social">' +
               '<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Instagram">IG</a>' +
               '<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Facebook">FB</a>' +
-              '<a href="https://wa.me/971500000000" target="_blank" rel="noopener" aria-label="Message VIP Yachts on WhatsApp">WA</a>' +
+              '<a href="' + whatsappLink(WHATSAPP_NUMBERS[0].digits) + '" target="_blank" rel="noopener" aria-label="Message VIP Yachts on WhatsApp">WA</a>' +
             '</div>' +
           '</div>' +
           '<div class="footer-col">' +
@@ -930,7 +945,7 @@
             '<h4>Dubai Marina Yacht Club</h4>' +
             '<address>' +
               '<span>Marina Walk, Dubai Marina, Dubai, UAE</span>' +
-              '<span><a href="tel:+97145551234">+971 4 555 1234</a></span>' +
+              '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a> / <a href="tel:+' + WHATSAPP_NUMBERS[1].digits + '">' + WHATSAPP_NUMBERS[1].display + '</a></span>' +
               '<span><a href="mailto:charter@vipyachts.ae">charter@vipyachts.ae</a></span>' +
               '<span>Daily, 8:00 AM – 10:00 PM</span>' +
             '</address>' +

@@ -30,9 +30,7 @@
         packageId: null,
         addonIds: [],
         details: { name: '', email: '', phone: '', date: '', time: '', guests: '', special: '' },
-        paymentMethod: 'card',
-        reference: null,
-        paidStatus: 'pending'
+        reference: null
       };
     }
     function saveState() {
@@ -301,106 +299,81 @@
     });
 
     /* ============================================================
-       STEP 3 — PAYMENT
+       STEP 3 — CONFIRM & WHATSAPP
+       Booking and payment happen over WhatsApp, not on this site.
+       This step assembles the order into a pre-filled WhatsApp
+       message and hands off to one of two numbers (a fallback in
+       case one is unreachable).
        ============================================================ */
-    var paymentBtns = qsa('.payment-method-btn');
-    var cardBlock = qs('#card-payment-block');
-    var cashBlock = qs('#cash-payment-block');
-    var payNowBtn = qs('#pay-now-btn');
+    function buildWhatsAppMessage() {
+      var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
+      var calc = calcTotal();
+      var addonNames = state.addonIds.map(function (id) {
+        var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
+        return addon ? addon.name : null;
+      }).filter(Boolean);
+
+      var lines = ['Hi VIP Yachts! I\'d like to book a charter.', ''];
+      if (state.reference) lines.push('Booking Reference: ' + state.reference);
+      if (yacht) lines.push('Yacht: ' + yacht.name);
+      if (calc.pkg) lines.push('Package: ' + calc.pkg.name + ' (' + calc.pkg.hours + 'h)');
+      if (addonNames.length) lines.push('Add-ons: ' + addonNames.join(', '));
+      if (state.details.date) lines.push('Date: ' + state.details.date);
+      if (state.details.time) lines.push('Time: ' + state.details.time);
+      if (state.details.guests) lines.push('Guests: ' + state.details.guests);
+      lines.push('');
+      if (state.details.name) lines.push('Name: ' + state.details.name);
+      if (state.details.phone) lines.push('Phone: ' + state.details.phone);
+      if (state.details.email) lines.push('Email: ' + state.details.email);
+      if (state.details.special) lines.push('Special Request: ' + state.details.special);
+      lines.push('');
+      lines.push('Estimated Total: ' + data.formatAED(calc.total));
+
+      return lines.join('\n');
+    }
 
     function renderStep3() {
+      // Generate the reference as soon as the customer reaches this step
+      // (not on click) so it's actually included in the WhatsApp message
+      // they send, not just shown after the fact on the confirmation step.
+      if (!state.reference) {
+        state.reference = data.generateBookingReference();
+        saveState();
+      }
+
       var calc = calcTotal();
-      var lines = qs('#payment-summary-lines');
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       var pkg = calc.pkg;
 
       var linesHtml = '';
       if (yacht && pkg) linesHtml += '<div><dt>' + yacht.name + ' — ' + pkg.name + '</dt><dd>' + data.formatAED(calc.pkgPrice) + '</dd></div>';
       if (calc.addonTotal > 0) linesHtml += '<div><dt>Add-ons</dt><dd>' + data.formatAED(calc.addonTotal) + '</dd></div>';
-      lines.innerHTML = linesHtml;
+      qs('#payment-summary-lines').innerHTML = linesHtml;
       qs('#payment-summary-total').textContent = data.formatAED(calc.total);
 
-      paymentBtns.forEach(function (btn) {
-        var active = btn.dataset.method === state.paymentMethod;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-checked', String(active));
-      });
-      cardBlock.hidden = state.paymentMethod !== 'card';
-      cashBlock.hidden = state.paymentMethod !== 'cash';
-      payNowBtn.textContent = state.paymentMethod === 'card' ? 'Pay Now' : 'Confirm Booking';
+      var detailsHtml = '';
+      if (state.details.name) detailsHtml += '<div><dt>Name</dt><dd>' + state.details.name + '</dd></div>';
+      if (state.details.phone) detailsHtml += '<div><dt>Phone</dt><dd>' + state.details.phone + '</dd></div>';
+      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + state.details.date + '</dd></div>';
+      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + state.details.time + '</dd></div>';
+      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + state.details.guests + '</dd></div>';
+      qs('#whatsapp-your-details').innerHTML = detailsHtml;
 
-      updateCardPreview();
-    }
-
-    paymentBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        state.paymentMethod = btn.dataset.method;
-        saveState();
-        renderStep3();
-      });
-    });
-
-    /* Live card preview */
-    var cardNumberInput = qs('#card-number');
-    var cardNameInput = qs('#card-name');
-    var cardExpiryInput = qs('#card-expiry');
-    var cardCvvInput = qs('#card-cvv');
-
-    function formatCardNumber(value) {
-      var digits = value.replace(/\D/g, '').slice(0, 16);
-      return digits.replace(/(.{4})/g, '$1 ').trim();
-    }
-    function formatExpiry(value) {
-      var digits = value.replace(/\D/g, '').slice(0, 4);
-      if (digits.length >= 3) return digits.slice(0, 2) + '/' + digits.slice(2);
-      return digits;
-    }
-    function updateCardPreview() {
-      var num = cardNumberInput.value.replace(/\D/g, '');
-      var masked = (num || '').padEnd(16, '•').replace(/(.{4})/g, '$1 ').trim();
-      qs('#card-preview-number').textContent = num ? masked : '•••• •••• •••• ••••';
-      qs('#card-preview-name').textContent = cardNameInput.value.trim().toUpperCase() || 'FULL NAME';
-      qs('#card-preview-expiry').textContent = cardExpiryInput.value || 'MM/YY';
-    }
-    cardNumberInput.addEventListener('input', function () {
-      cardNumberInput.value = formatCardNumber(cardNumberInput.value);
-      updateCardPreview();
-    });
-    cardExpiryInput.addEventListener('input', function () {
-      cardExpiryInput.value = formatExpiry(cardExpiryInput.value);
-      updateCardPreview();
-    });
-    cardNameInput.addEventListener('input', updateCardPreview);
-    cardCvvInput.addEventListener('input', function () {
-      cardCvvInput.value = cardCvvInput.value.replace(/\D/g, '').slice(0, 4);
-    });
-
-    function validateCardForm() {
-      var valid = true;
-      function setErr(field, msg) {
-        var errEl = qs('#error-card-' + field);
-        var input = qs('#card-' + field);
-        if (msg) { errEl.textContent = msg; input.setAttribute('aria-invalid', 'true'); valid = false; }
-        else { errEl.textContent = ''; input.removeAttribute('aria-invalid'); }
-      }
-      var num = cardNumberInput.value.replace(/\D/g, '');
-      setErr('number', num.length === 16 ? '' : 'Enter a valid 16-digit card number.');
-      setErr('name', cardNameInput.value.trim() ? '' : 'Enter the name on the card.');
-      var expiryPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
-      setErr('expiry', expiryPattern.test(cardExpiryInput.value) ? '' : 'Enter expiry as MM/YY.');
-      setErr('cvv', cardCvvInput.value.length >= 3 ? '' : 'Enter a valid CVV.');
-      return valid;
+      var message = buildWhatsAppMessage();
+      var numbers = data.WHATSAPP_NUMBERS;
+      qs('#whatsapp-btn-primary').href = data.whatsappLink(numbers[0].digits, message);
+      qs('#whatsapp-btn-secondary').href = data.whatsappLink(numbers[1].digits, message);
     }
 
     qs('#step3-back').addEventListener('click', function () { goToStep(2); });
 
-    payNowBtn.addEventListener('click', function () {
-      if (state.paymentMethod === 'card' && !validateCardForm()) return;
-      state.reference = data.generateBookingReference();
-      state.paidStatus = state.paymentMethod === 'card' ? 'paid' : 'pending-payment';
-      saveState();
+    function handleWhatsAppContinue() {
+      // Reference is already generated in renderStep3, before this element's
+      // href was built, so it's guaranteed to be in the message being sent.
       goToStep(4);
-    });
+    }
+    qs('#whatsapp-btn-primary').addEventListener('click', handleWhatsAppContinue);
+    qs('#whatsapp-btn-secondary').addEventListener('click', handleWhatsAppContinue);
 
     /* ============================================================
        STEP 4 — CONFIRMATION
@@ -419,12 +392,7 @@
       detailsHtml += '<div><dt>Total</dt><dd>' + data.formatAED(calc.total) + '</dd></div>';
       qs('#confirmation-details').innerHTML = '<dl class="order-summary-lines">' + detailsHtml + '</dl>';
 
-      var paidStep = qs('#status-paid');
-      var completedStep = qs('#status-completed');
-      if (state.paidStatus === 'paid') {
-        paidStep.classList.add('is-complete');
-        paidStep.querySelector('.status-icon').textContent = '✓';
-      }
+      qs('#confirmation-whatsapp-link').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, buildWhatsAppMessage());
     }
 
     /* ---------- Initial render ---------- */
