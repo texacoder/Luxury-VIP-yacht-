@@ -371,12 +371,19 @@ textarea:focus-visible,
   transform: translateY(14px);
   transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
-/* The site-wide .btn-gold shadow is tuned for CTAs with room to breathe
-   (hero, closing sections). In the compact mobile menu list it read as an
-   oversized glow relative to the button, so it's tightened further here. */
-.mobile-nav .btn-gold,
-.mobile-nav .btn-gold:hover,
-.mobile-nav .btn-gold:active{ box-shadow: none; }
+/* The site-wide .btn-gold is a bright gradient fill with a glow shadow —
+   tuned for CTAs with room to breathe (hero, closing sections). In the
+   compact mobile menu that much saturated gold reads as an oversized glow,
+   so it's replaced here with a flatter, bordered gold outline instead of
+   just shrinking the shadow (which wasn't enough on its own). */
+.mobile-nav .btn-gold{
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  box-shadow: none;
+}
+.mobile-nav .btn-gold:hover{ background: rgba(201,162,75,0.1); box-shadow: none; }
+.mobile-nav .btn-gold:active{ background: rgba(201,162,75,0.16); box-shadow: none; transform: scale(0.97); }
 .mobile-nav.is-open a,
 .mobile-nav.is-open .btn{ opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce){
