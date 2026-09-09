@@ -30,7 +30,8 @@
         packageId: null,
         addonIds: [],
         details: { name: '', email: '', phone: '', date: '', time: '', guests: '', special: '' },
-        reference: null
+        reference: null,
+        loggedToSheet: false
       };
     }
     function saveState() {
@@ -344,6 +345,31 @@
       var calc = calcTotal();
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       var pkg = calc.pkg;
+
+      // Log once per booking, not on every re-render (e.g. clicking back
+      // then forward again shouldn't create duplicate sheet rows).
+      if (!state.loggedToSheet) {
+        var addonNamesForLog = state.addonIds.map(function (id) {
+          var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
+          return addon ? addon.name : null;
+        }).filter(Boolean);
+        data.logBookingToSheet({
+          reference: state.reference,
+          yacht: yacht ? yacht.name : '',
+          package: pkg ? pkg.name : '',
+          addons: addonNamesForLog.join(', '),
+          date: state.details.date,
+          time: state.details.time,
+          guests: state.details.guests,
+          name: state.details.name,
+          phone: state.details.phone,
+          email: state.details.email,
+          special: state.details.special,
+          total: calc.total
+        });
+        state.loggedToSheet = true;
+        saveState();
+      }
 
       var linesHtml = '';
       if (yacht && pkg) linesHtml += '<div><dt>' + yacht.name + ' — ' + pkg.name + '</dt><dd>' + data.formatAED(calc.pkgPrice) + '</dd></div>';

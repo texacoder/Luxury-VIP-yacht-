@@ -727,6 +727,16 @@
     { digits: '971545763101', display: '+971 54 576 3101' }
   ];
 
+  // Google Apps Script Web App URL that logs each booking as a row in a
+  // Google Sheet — this is what makes the booking reference a real,
+  // persistent record instead of just text in a WhatsApp message. Set this
+  // after deploying the Apps Script (see setup instructions). Left blank,
+  // logging is silently skipped and the site still works exactly as before.
+  var SHEET_WEBHOOK_URL = '';
+  // Matches the SHARED_TOKEN constant in the Apps Script — a light deterrent
+  // against random internet bots spamming the sheet via a leaked/guessed URL.
+  var SHEET_WEBHOOK_TOKEN = 'vy-booking-2026';
+
   // Expose to other scripts on the page (booking flow, admin, etc.)
   window.VIPYachts = {
     YACHTS: YACHTS,
@@ -803,6 +813,23 @@
     return 'https://wa.me/' + digits + (message ? '?text=' + encodeURIComponent(message) : '');
   }
   window.VIPYachts.whatsappLink = whatsappLink;
+
+  // Fire-and-forget: logs a booking to the Google Sheet backing
+  // SHEET_WEBHOOK_URL. Never blocks or breaks the booking flow — if the URL
+  // isn't configured, or the request fails for any reason (offline, sheet
+  // misconfigured, etc.), the WhatsApp handoff (the actual source of truth)
+  // still works exactly the same either way.
+  function logBookingToSheet(fields) {
+    if (!SHEET_WEBHOOK_URL) return;
+    try {
+      var body = new URLSearchParams(Object.assign({ token: SHEET_WEBHOOK_TOKEN }, fields));
+      // mode: 'no-cors' sidesteps CORS entirely for this write-only call —
+      // Apps Script Web Apps don't reliably send the CORS headers needed
+      // for the browser to read a response, so this doesn't try to.
+      fetch(SHEET_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: body }).catch(function () {});
+    } catch (e) { /* logging is best-effort only */ }
+  }
+  window.VIPYachts.logBookingToSheet = logBookingToSheet;
 
   /* =========================================================
      5. HEADER + FOOTER TEMPLATES
