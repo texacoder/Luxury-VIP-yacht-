@@ -204,10 +204,10 @@ textarea:focus-visible,
 .btn-gold{
   background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
   color: var(--deep-navy);
-  box-shadow: 0 6px 20px rgba(201,162,75,0.28);
+  box-shadow: 0 3px 10px rgba(201,162,75,0.22);
 }
-.btn-gold:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(201,162,75,0.4); }
-.btn-gold:active{ transform: translateY(0) scale(0.97); box-shadow: 0 4px 14px rgba(201,162,75,0.3); }
+.btn-gold:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px rgba(201,162,75,0.3); }
+.btn-gold:active{ transform: translateY(0) scale(0.97); box-shadow: 0 2px 8px rgba(201,162,75,0.22); }
 
 .btn-outline{
   background: transparent;
