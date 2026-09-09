@@ -15,7 +15,6 @@
     var util = window.VIPYachtsUtil;
     var qs = util.qs;
     var qsa = util.qsa;
-    var base = data.BASE;
 
     /* ---------- State ---------- */
     var state = loadState();
@@ -104,12 +103,12 @@
         return (
           '<button class="booking-yacht-card' + (selected ? ' is-selected' : '') + '" data-yacht-id="' + yacht.id + '" aria-pressed="' + selected + '">' +
             '<div class="booking-yacht-media">' +
-              '<img src="' + base + yacht.image + '" alt="' + yacht.name + '" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + yacht.name + '\'}))">' +
+              data.yachtCardMediaHtml(yacht) +
             '</div>' +
             '<div class="booking-yacht-body">' +
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
-              '<p>' + yacht.guests + ' Guests · ' + yacht.cabins + ' Cabins</p>' +
+              '<p>' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
               '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
             '</div>' +
           '</button>'
@@ -282,7 +281,10 @@
 
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       if (!guests) { setErr('guests', 'Please enter your guest count.'); }
-      else if (yacht && Number(guests) > yacht.guests) { setErr('guests', 'This yacht holds up to ' + yacht.guests + ' guests.'); }
+      // Some yachts don't have a confirmed capacity yet (yacht.guests is null) —
+      // skip the max-guest check rather than comparing against null, which
+      // JS coerces to 0 and would block every booking for that yacht.
+      else if (yacht && yacht.guests != null && Number(guests) > yacht.guests) { setErr('guests', 'This yacht holds up to ' + yacht.guests + ' guests.'); }
       else { setErr('guests', ''); }
 
       return valid && !!state.packageId;

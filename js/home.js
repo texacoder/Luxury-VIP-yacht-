@@ -1,7 +1,8 @@
 /* =========================================================
    HOMEPAGE MODULE
-   Renders the fleet preview + packages preview and wires the
-   hero video play/pause control. Only runs on index.html.
+   Renders the fleet preview + packages preview and detects
+   whether the hero background video actually plays. Only runs
+   on index.html.
    ========================================================= */
 (function () {
   'use strict';
@@ -14,13 +15,11 @@
     var qs = util.qs;
     var qsa = util.qsa;
 
-    /* ---------- Hero video play/pause ---------- */
+    /* ---------- Hero video fallback detection ---------- */
     var video = qs('#hero-video');
-    var toggle = qs('#hero-play-toggle');
-    if (video && toggle) {
+    if (video) {
       var markNoVideo = function () {
         qs('.hero').classList.add('no-video');
-        toggle.style.display = 'none';
       };
       // Fires when the browser can't fetch the file at all (404, network error).
       video.addEventListener('error', markNoVideo);
@@ -34,19 +33,6 @@
       }, 2500);
       video.addEventListener('canplay', function () {
         qs('.hero').classList.remove('no-video');
-      });
-      toggle.addEventListener('click', function () {
-        if (video.paused) {
-          video.play();
-          toggle.setAttribute('aria-pressed', 'false');
-          toggle.setAttribute('aria-label', 'Pause background video');
-          toggle.querySelector('.hero-play-icon').textContent = '❚❚';
-        } else {
-          video.pause();
-          toggle.setAttribute('aria-pressed', 'true');
-          toggle.setAttribute('aria-label', 'Play background video');
-          toggle.querySelector('.hero-play-icon').textContent = '▶';
-        }
       });
     }
 
@@ -69,14 +55,13 @@
       return (
         '<article class="yacht-card fade-up">' +
           '<div class="yacht-card-media">' +
-            '<img src="' + base + yacht.image + '" alt="' + yacht.name + ' underway" ' +
-              'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + yacht.name + '\'}))">' +
+            data.yachtCardMediaHtml(yacht, ' underway') +
             '<span class="badge badge-gold yacht-card-tier">' + yacht.tierLabel + '</span>' +
             '<button class="yacht-card-fav" aria-label="Save ' + yacht.name + ' to favourites" aria-pressed="false" data-fav="' + yacht.id + '">&hearts;</button>' +
           '</div>' +
           '<div class="yacht-card-body">' +
             '<h3>' + yacht.name + '</h3>' +
-            '<p class="yacht-card-tagline">' + yacht.guests + ' Guests · ' + yacht.cabins + ' Cabins</p>' +
+            '<p class="yacht-card-tagline">' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
             '<div class="yacht-card-footer">' +
               '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
               '<a href="' + base + 'pages/yacht-detail.html?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +

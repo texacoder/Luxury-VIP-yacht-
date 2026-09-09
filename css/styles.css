@@ -374,8 +374,9 @@ textarea:focus-visible,
 /* The site-wide .btn-gold shadow is tuned for CTAs with room to breathe
    (hero, closing sections). In the compact mobile menu list it read as an
    oversized glow relative to the button, so it's tightened further here. */
-.mobile-nav .btn-gold{ box-shadow: 0 2px 6px rgba(201,162,75,0.18); }
-.mobile-nav .btn-gold:active{ box-shadow: 0 1px 4px rgba(201,162,75,0.16); }
+.mobile-nav .btn-gold,
+.mobile-nav .btn-gold:hover,
+.mobile-nav .btn-gold:active{ box-shadow: none; }
 .mobile-nav.is-open a,
 .mobile-nav.is-open .btn{ opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce){
@@ -563,16 +564,6 @@ textarea:focus-visible,
   margin-bottom: var(--space-6);
 }
 .hero-actions{ display: flex; align-items: center; gap: var(--space-5); }
-.hero-play{
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.4);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--white);
-  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
-}
-.hero-play:hover{ border-color: var(--gold); background: rgba(255,255,255,0.08); }
-.hero-play-icon{ font-size: 0.8rem; letter-spacing: 1px; }
 
 .hero-stats{
   position: absolute;

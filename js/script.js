@@ -766,6 +766,29 @@
   }
   window.VIPYachts.generateBookingReference = generateBookingReference;
 
+  // A yacht with no image/gallery yet (image: '') has genuinely never had a
+  // photo supplied — that's different from a real photo file 404ing, so it
+  // gets its own honest placeholder instead of an <img> tag that's certain
+  // to fail. Yachts that DO have a path still go through <img>+onerror, in
+  // case that specific file is ever temporarily unavailable.
+  function yachtCardMediaHtml(yacht, altSuffix) {
+    if (!yacht.image) {
+      return '<div class="img-fallback">Images will be uploaded soon</div>';
+    }
+    var alt = yacht.name + (altSuffix || '');
+    var escapedName = yacht.name.replace(/'/g, "\\'");
+    return '<img src="' + BASE + yacht.image + '" alt="' + alt + '" ' +
+      'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + escapedName + '\'}))">';
+  }
+  window.VIPYachts.yachtCardMediaHtml = yachtCardMediaHtml;
+
+  // Several yachts have unconfirmed specs (see TODOs in the YACHTS list above)
+  // — rendering those fields directly would print the literal word "null".
+  function formatSpec(value, suffix) {
+    return (value === null || value === undefined || value === '') ? '—' : value + (suffix || '');
+  }
+  window.VIPYachts.formatSpec = formatSpec;
+
   /* =========================================================
      5. HEADER + FOOTER TEMPLATES
      ========================================================= */

@@ -31,11 +31,15 @@
 
     /* ---------- Hero ---------- */
     var heroImg = qs('#yacht-hero-image');
-    heroImg.src = base + yacht.image;
-    heroImg.alt = yacht.name + ' underway near Dubai Marina';
-    heroImg.onerror = function () {
-      this.replaceWith(Object.assign(document.createElement('div'), { className: 'img-fallback', textContent: yacht.name, style: 'width:100%;height:100%;' }));
-    };
+    if (!yacht.image) {
+      heroImg.replaceWith(Object.assign(document.createElement('div'), { className: 'img-fallback', textContent: 'Images will be uploaded soon', style: 'width:100%;height:100%;' }));
+    } else {
+      heroImg.src = base + yacht.image;
+      heroImg.alt = yacht.name + ' underway near Dubai Marina';
+      heroImg.onerror = function () {
+        this.replaceWith(Object.assign(document.createElement('div'), { className: 'img-fallback', textContent: yacht.name, style: 'width:100%;height:100%;' }));
+      };
+    }
     qs('#breadcrumb-name').textContent = yacht.name;
     qs('#yacht-tier-badge').textContent = yacht.tierLabel;
     qs('#yacht-name').textContent = yacht.name;
@@ -44,13 +48,13 @@
     /* ---------- Quick spec strip ---------- */
     var specStrip = qs('#yacht-spec-strip');
     var specs = [
-      { label: 'Guests', value: yacht.guests },
-      { label: 'Cabins', value: yacht.cabins },
-      { label: 'Washrooms', value: yacht.washrooms },
-      { label: 'Length', value: yacht.length + ' ft' },
-      { label: 'Crew', value: yacht.crew },
-      { label: 'Top Speed', value: yacht.speedKnots + ' kn' },
-      { label: 'Year', value: yacht.year }
+      { label: 'Guests', value: data.formatSpec(yacht.guests) },
+      { label: 'Cabins', value: data.formatSpec(yacht.cabins) },
+      { label: 'Washrooms', value: data.formatSpec(yacht.washrooms) },
+      { label: 'Length', value: data.formatSpec(yacht.length, ' ft') },
+      { label: 'Crew', value: data.formatSpec(yacht.crew) },
+      { label: 'Top Speed', value: data.formatSpec(yacht.speedKnots, ' kn') },
+      { label: 'Year', value: data.formatSpec(yacht.year) }
     ];
     specStrip.innerHTML = specs.map(function (s) {
       return '<li><span class="spec-value">' + s.value + '</span><span class="spec-label">' + s.label + '</span></li>';
@@ -64,7 +68,7 @@
     var videoEl = qs('#yacht-video');
     var videoSrc = qs('#yacht-video-src');
     var videoFallback = qs('#yacht-video-fallback');
-    videoEl.poster = base + yacht.image;
+    videoEl.poster = yacht.image ? base + yacht.image : '';
     videoSrc.src = base + yacht.video;
     videoEl.load();
     videoEl.addEventListener('error', function () {
@@ -74,10 +78,10 @@
     videoFallback.style.display = 'none';
 
     /* ---------- Gallery + Lightbox ---------- */
-    var galleryImages = yacht.gallery && yacht.gallery.length ? yacht.gallery : [yacht.image];
+    var galleryImages = yacht.gallery && yacht.gallery.length ? yacht.gallery : (yacht.image ? [yacht.image] : []);
     var galleryEl = qs('#yacht-gallery');
     if (!galleryImages.length) {
-      galleryEl.innerHTML = '<p>Gallery images for this yacht are coming soon.</p>';
+      galleryEl.innerHTML = '<p>Images will be uploaded soon.</p>';
     } else {
       galleryEl.innerHTML = galleryImages.map(function (src, i) {
         return (
@@ -144,10 +148,10 @@
 
     /* ---------- Sticky booking sidebar ---------- */
     qs('#yacht-sidebar-price').textContent = data.formatYachtPrice(yacht.pricePerDay);
-    qs('#sidebar-guests').textContent = yacht.guests;
-    qs('#sidebar-cabins').textContent = yacht.cabins;
-    qs('#sidebar-crew').textContent = yacht.crew;
-    qs('#sidebar-length').textContent = yacht.length + ' ft';
+    qs('#sidebar-guests').textContent = data.formatSpec(yacht.guests);
+    qs('#sidebar-cabins').textContent = data.formatSpec(yacht.cabins);
+    qs('#sidebar-crew').textContent = data.formatSpec(yacht.crew);
+    qs('#sidebar-length').textContent = data.formatSpec(yacht.length, ' ft');
     qs('#yacht-book-btn').href = base + 'pages/booking.html?yacht=' + yacht.id;
   };
 })();
