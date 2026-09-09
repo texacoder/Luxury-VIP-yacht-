@@ -381,6 +381,8 @@ textarea:focus-visible,
   border: 1px solid var(--gold);
   color: var(--gold-light);
   box-shadow: none;
+  padding: 0.65em 1.5em;
+  font-size: 0.8rem;
 }
 .mobile-nav .btn-gold:hover{ background: rgba(201,162,75,0.1); box-shadow: none; }
 .mobile-nav .btn-gold:active{ background: rgba(201,162,75,0.16); box-shadow: none; transform: scale(0.97); }
