@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — VIP Yachts</title>
+<meta name="description" content="VIP Yachts internal admin dashboard for managing yachts, bookings, customers, and payments.">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="admin-body">
+<a href="#admin-main" class="skip-link">Skip to main content</a>
+
+<div class="admin-shell">
+
+  <aside class="admin-sidebar">
+    <a href="../index.html" class="brand admin-brand">
+      <img src="../images/logo.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-fallback',textContent:'VY'}))">
+      <span>VIP Yachts</span>
+    </a>
+    <nav class="admin-nav" aria-label="Admin navigation">
+      <a href="admin.html" class="admin-nav-link is-active">Dashboard</a>
+      <a href="fleet.html" class="admin-nav-link">Yachts</a>
+      <a href="admin.html#bookings" class="admin-nav-link">Bookings</a>
+      <a href="admin.html#customers" class="admin-nav-link">Customers</a>
+      <a href="admin.html#payments" class="admin-nav-link">Payments</a>
+      <a href="admin.html#reports" class="admin-nav-link">Reports</a>
+      <a href="admin.html#settings" class="admin-nav-link">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="admin-main" id="admin-main">
+    <header class="admin-topbar">
+      <h1>Dashboard</h1>
+      <div class="admin-topbar-user">
+        <span>Admin User</span>
+      </div>
+    </header>
+
+    <section class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Total Yachts</span>
+        <span class="admin-stat-value" id="stat-total-yachts">—</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Total Bookings</span>
+        <span class="admin-stat-value">248</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Revenue</span>
+        <span class="admin-stat-value">AED 1.8M</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="admin-stat-label">Active Users</span>
+        <span class="admin-stat-value">176</span>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="bookings">
+      <div class="admin-panel-head">
+        <h2>Recent Bookings</h2>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th scope="col">Customer</th>
+              <th scope="col">Yacht</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="admin-bookings-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

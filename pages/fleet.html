@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Yachts — VIP Yachts</title>
+<meta name="description" content="Browse the full VIP Yachts fleet across Luxury, Premium, and Classic tiers. Filter by guest count and tier to find the right yacht for your charter.">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<main id="main-content">
+  <section class="page-hero page-hero--fleet">
+    <div class="container page-hero-inner fade-up">
+      <p class="eyebrow">The Fleet</p>
+      <h1>Our Yachts</h1>
+      <p>Choose from a fleet of premium yachts for your perfect getaway.</p>
+    </div>
+  </section>
+
+  <section class="section bg-deep">
+    <div class="container">
+      <div class="fleet-toolbar fade-up">
+        <div class="filter-group" role="group" aria-label="Filter by tier">
+          <button class="filter-chip is-active" data-tier="all">All Yachts</button>
+          <button class="filter-chip" data-tier="premium">Premium</button>
+          <button class="filter-chip" data-tier="classic">Classic</button>
+        </div>
+        <div class="filter-select-wrap">
+          <label for="guest-filter" class="sr-only">Filter by guest capacity</label>
+          <select id="guest-filter">
+            <option value="0">Any Guest Count</option>
+            <option value="8">8+ Guests</option>
+            <option value="12">12+ Guests</option>
+            <option value="16">16+ Guests</option>
+            <option value="20">20+ Guests</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="fleet-result-count" id="fleet-result-count" aria-live="polite"></p>
+
+      <div class="fleet-grid" id="fleet-grid"></div>
+
+      <div class="empty-state" id="fleet-empty-state" hidden>
+        <h3>No yachts match those filters</h3>
+        <p>Try widening your guest count or choosing a different tier.</p>
+        <button class="btn btn-outline" id="fleet-reset-btn">Reset Filters</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="../js/script.js"></script>
+<script src="../js/fleet.js"></script>
+</body>
+</html>

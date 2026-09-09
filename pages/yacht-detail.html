@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Yacht Details — VIP Yachts</title>
+<meta name="description" content="View full specifications, gallery, and pricing for this yacht, then start your VIP Yachts charter booking.">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<main id="main-content">
+
+  <!-- ===================== NOT FOUND STATE ===================== -->
+  <section class="section yacht-not-found-section" id="yacht-not-found" hidden>
+    <div class="container empty-state">
+      <h1>We Couldn't Find That Yacht</h1>
+      <p>The yacht you're looking for may have been renamed or is no longer in our fleet.</p>
+      <a href="fleet.html" class="btn btn-gold">Browse the Fleet</a>
+    </div>
+  </section>
+
+  <!-- ===================== YACHT DETAIL CONTENT ===================== -->
+  <div id="yacht-detail-content" hidden>
+
+    <section class="page-hero page-hero--media">
+      <div class="page-hero-media-bg">
+        <img id="yacht-hero-image" src="" alt="">
+      </div>
+      <div class="container page-hero-inner">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a><span class="sep">/</span>
+          <a href="fleet.html">Yachts</a><span class="sep">/</span>
+          <span class="current" id="breadcrumb-name">Yacht</span>
+        </nav>
+        <span class="badge badge-gold" id="yacht-tier-badge">Tier</span>
+        <h1 id="yacht-name">Yacht Name</h1>
+        <p id="yacht-tagline"></p>
+      </div>
+    </section>
+
+    <section class="section bg-deep">
+      <div class="container yacht-detail-grid">
+
+        <div class="yacht-detail-main">
+
+          <!-- Quick specs -->
+          <ul class="spec-strip" id="yacht-spec-strip"></ul>
+
+          <!-- Overview -->
+          <div class="detail-block fade-up">
+            <h2>Overview</h2>
+            <p id="yacht-description"></p>
+            <p id="yacht-overview"></p>
+          </div>
+
+          <!-- Video tour -->
+          <div class="detail-block fade-up" id="yacht-video-block">
+            <h2>Video Tour</h2>
+            <div class="video-frame">
+              <video id="yacht-video" controls preload="none" poster="">
+                <source id="yacht-video-src" src="" type="video/mp4">
+              </video>
+              <div class="img-fallback video-fallback" id="yacht-video-fallback">Video tour coming soon</div>
+            </div>
+          </div>
+
+          <!-- Gallery -->
+          <div class="detail-block fade-up">
+            <h2>Gallery</h2>
+            <div class="detail-gallery" id="yacht-gallery"></div>
+          </div>
+
+          <!-- Features -->
+          <div class="detail-block fade-up">
+            <h2>Features & Amenities</h2>
+            <ul class="feature-list" id="yacht-features"></ul>
+          </div>
+
+          <!-- Deck breakdown -->
+          <div class="detail-block fade-up">
+            <h2>Deck Breakdown</h2>
+            <ul class="deck-list" id="yacht-decks"></ul>
+          </div>
+
+        </div>
+
+        <!-- Sticky booking sidebar -->
+        <aside class="booking-sidebar fade-up">
+          <div class="booking-sidebar-inner">
+            <p class="booking-sidebar-price" id="yacht-sidebar-price"></p>
+            <p class="booking-sidebar-label">Starting price per charter</p>
+            <hr class="divider">
+            <dl class="booking-sidebar-facts">
+              <div><dt>Guests</dt><dd id="sidebar-guests"></dd></div>
+              <div><dt>Cabins</dt><dd id="sidebar-cabins"></dd></div>
+              <div><dt>Crew</dt><dd id="sidebar-crew"></dd></div>
+              <div><dt>Length</dt><dd id="sidebar-length"></dd></div>
+            </dl>
+            <a href="#" class="btn btn-gold btn-block" id="yacht-book-btn">Book Now</a>
+            <p class="booking-sidebar-note">No payment required to start — confirm details on the next step.</p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#10094;</button>
+    <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">&#10095;</button>
+  </div>
+
+</main>
+
+<script src="../js/script.js"></script>
+<script src="../js/yacht-detail.js"></script>
+</body>
+</html>

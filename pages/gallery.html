@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — VIP Yachts</title>
+<meta name="description" content="Browse photos of the VIP Yachts fleet, onboard experiences, and Dubai Marina charters.">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<main id="main-content">
+  <section class="page-hero">
+    <div class="container page-hero-inner fade-up">
+      <p class="eyebrow">Gallery</p>
+      <h1>See the Fleet</h1>
+      <p>A closer look at our yachts, onboard experiences, and life on the water in Dubai Marina.</p>
+    </div>
+  </section>
+
+  <section class="section bg-deep">
+    <div class="container">
+      <div class="filter-group fade-up" role="group" aria-label="Filter gallery by category" id="gallery-filters">
+        <button class="filter-chip is-active" data-category="all">All</button>
+        <button class="filter-chip" data-category="fleet">Fleet</button>
+        <button class="filter-chip" data-category="interiors">Interiors</button>
+        <button class="filter-chip" data-category="experiences">Experiences</button>
+        <button class="filter-chip" data-category="marina">Marina</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid"></div>
+
+      <div class="empty-state" id="gallery-empty-state" hidden>
+        <h3>No photos in this category yet</h3>
+        <p>Check back soon, or browse another category.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#10094;</button>
+    <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">&#10095;</button>
+  </div>
+</main>
+
+<script src="../js/script.js"></script>
+<script src="../js/gallery.js"></script>
+</body>
+</html>

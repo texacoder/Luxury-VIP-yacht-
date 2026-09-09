@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — VIP Yachts</title>
+<meta name="description" content="Contact VIP Yachts at Dubai Marina Yacht Club. Call, email, or send us a message to plan your charter.">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<main id="main-content">
+  <section class="page-hero">
+    <div class="container page-hero-inner fade-up">
+      <p class="eyebrow">Contact</p>
+      <h1>Get in Touch</h1>
+      <p>Have a question before you book, or planning something custom? Send us a message and our team will get back to you.</p>
+    </div>
+  </section>
+
+  <section class="section bg-deep">
+    <div class="container contact-grid">
+
+      <div class="contact-info fade-up">
+        <h2>Visit or Reach Us</h2>
+        <ul class="contact-details">
+          <li>
+            <h3>Address</h3>
+            <p>Dubai Marina Yacht Club<br>Marina Walk, Dubai Marina<br>Dubai, United Arab Emirates</p>
+          </li>
+          <li>
+            <h3>Phone</h3>
+            <p><a href="tel:+97145551234">+971 4 555 1234</a></p>
+          </li>
+          <li>
+            <h3>Email</h3>
+            <p><a href="mailto:charter@vipyachts.ae">charter@vipyachts.ae</a></p>
+          </li>
+          <li>
+            <h3>Hours</h3>
+            <p>Daily, 8:00 AM – 10:00 PM</p>
+          </li>
+        </ul>
+
+        <div class="map-embed">
+          <!-- Google Maps iframe placeholder: replace src below with an embed URL for
+               "Dubai Marina Yacht Club, Marina Walk, Dubai Marina, Dubai, UAE" -->
+          <div class="map-placeholder img-fallback">Map: Dubai Marina Yacht Club</div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap fade-up">
+        <h2>Send a Message</h2>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <label for="contact-name">Full Name</label>
+            <input type="text" id="contact-name" name="name" required autocomplete="name">
+            <span class="form-error" id="error-name" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" required autocomplete="email">
+            <span class="form-error" id="error-email" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="contact-phone">Phone Number</label>
+            <input type="tel" id="contact-phone" name="phone" required autocomplete="tel">
+            <span class="form-error" id="error-phone" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="contact-subject">Subject</label>
+            <select id="contact-subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="booking">Booking Question</option>
+              <option value="custom">Custom Charter Request</option>
+              <option value="feedback">Feedback</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="form-error" id="error-subject" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+            <span class="form-error" id="error-message" role="alert"></span>
+          </div>
+          <button type="submit" class="btn btn-gold btn-block">Send Message</button>
+        </form>
+
+        <div class="form-success" id="contact-success" hidden role="status">
+          <h3>Message Sent</h3>
+          <p>Thanks for reaching out — our team will reply within one business day.</p>
+          <button class="btn btn-outline" id="contact-reset-btn">Send Another Message</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script src="../js/script.js"></script>
+<script src="../js/contact.js"></script>
+</body>
+</html>
