@@ -87,12 +87,13 @@
             <textarea id="contact-message" name="message" rows="5" required></textarea>
             <span class="form-error" id="error-message" role="alert"></span>
           </div>
-          <button type="submit" class="btn btn-gold btn-block">Send Message</button>
+          <button type="submit" class="btn btn-gold btn-block">Send via WhatsApp</button>
+          <p class="form-error" id="contact-submit-error" role="alert" hidden></p>
         </form>
 
         <div class="form-success" id="contact-success" hidden role="status">
-          <h3>Message Sent</h3>
-          <p>Thanks for reaching out — our team will reply within one business day.</p>
+          <h3>WhatsApp Opened</h3>
+          <p>We've opened WhatsApp with your message pre-filled — send it from there to reach our team.</p>
           <button class="btn btn-outline" id="contact-reset-btn">Send Another Message</button>
         </div>
       </div>
@@ -101,7 +102,7 @@
   </section>
 </main>
 
-<script src="../js/script.js?v=5"></script>
-<script src="../js/contact.js?v=5"></script>
+<script src="../js/script.js?v=6"></script>
+<script src="../js/contact.js?v=6"></script>
 </body>
 </html>
