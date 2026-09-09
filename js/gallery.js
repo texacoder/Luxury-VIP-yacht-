@@ -12,19 +12,18 @@
     var qsa = util.qsa;
     var base = data.BASE;
 
+    // Only reference image files that actually exist in /images — an entry
+    // pointing at a missing file falls back to a plain placeholder box, which
+    // looks broken on a gallery page whose whole purpose is showing photos.
     var IMAGES = [
-      { src: 'images/gallery-fleet-1.png', category: 'fleet', alt: 'Golden Horizon underway at sunset' },
-      { src: 'images/gallery-fleet-2.png', category: 'fleet', alt: 'Sea Empress docked at Dubai Marina Yacht Club' },
-      { src: 'images/gallery-fleet-3.png', category: 'fleet', alt: 'Wave Rider cruising at speed' },
+      { src: 'images/gallery-fleet-1.png', category: 'fleet', alt: 'Fleet yacht underway at sunset' },
+      { src: 'images/gallery-fleet-3.png', category: 'fleet', alt: 'Yacht cruising at speed near Dubai Marina' },
       { src: 'images/gallery-interior-1.png', category: 'interiors', alt: 'Yacht salon with ivory leather seating' },
-      { src: 'images/gallery-interior-2.png', category: 'interiors', alt: 'Master stateroom aboard Golden Horizon' },
       { src: 'images/gallery-interior-3.png', category: 'interiors', alt: 'Onboard dining table set for guests' },
       { src: 'images/gallery-exp-1.png', category: 'experiences', alt: 'Guests enjoying an onboard BBQ' },
-      { src: 'images/gallery-exp-2.png', category: 'experiences', alt: 'Jet ski beside a yacht at anchor' },
       { src: 'images/gallery-exp-3.png', category: 'experiences', alt: 'DJ set on the aft deck at sunset' },
       { src: 'images/gallery-marina-1.png', category: 'marina', alt: 'Dubai Marina skyline from the water' },
-      { src: 'images/gallery-marina-2.png', category: 'marina', alt: 'Fleet docked along the Marina walk' },
-      { src: 'images/gallery-marina-3.png', category: 'marina', alt: 'Sunset view over Palm Jumeirah from a yacht' }
+      { src: 'images/gallery-marina-2.png', category: 'marina', alt: 'Fleet docked along the Marina walk' }
     ];
 
     var grid = qs('#gallery-grid');

@@ -376,6 +376,9 @@ textarea:focus-visible,
 .mt-0{ margin-top: 0; }
 .fade-up{ opacity: 0; transform: translateY(24px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
 .fade-up.is-visible{ opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .fade-up{ opacity: 1; transform: none; transition: none; }
+}
 
 .badge{
   display: inline-block;

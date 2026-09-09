@@ -63,7 +63,7 @@
               '<span>' + yacht.length + ' ft</span>' +
             '</div>' +
             '<div class="yacht-card-footer">' +
-              '<span class="yacht-card-price">' + data.formatAED(yacht.pricePerDay) + '<small> / day</small></span>' +
+              '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
               '<a href="' + base + 'pages/yacht-detail.html?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
             '</div>' +
           '</div>' +

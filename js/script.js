@@ -776,6 +776,15 @@
   }
   window.VIPYachts.formatAED = formatAED;
 
+  // Several yachts in the fleet don't have a confirmed day rate yet (see TODOs
+  // in the YACHTS list above). Rendering "AED 0 / day" for those would look
+  // like a pricing bug, so every price display should go through this instead
+  // of calling formatAED directly on a yacht's pricePerDay.
+  function formatYachtPrice(amount) {
+    return amount ? formatAED(amount) + ' / day' : 'Price on Request';
+  }
+  window.VIPYachts.formatYachtPrice = formatYachtPrice;
+
   function qs(sel, ctx) { return (ctx || document).querySelector(sel); }
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 

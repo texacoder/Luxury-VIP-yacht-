@@ -143,7 +143,7 @@
     }).join('');
 
     /* ---------- Sticky booking sidebar ---------- */
-    qs('#yacht-sidebar-price').textContent = data.formatAED(yacht.pricePerDay) + ' / day';
+    qs('#yacht-sidebar-price').textContent = data.formatYachtPrice(yacht.pricePerDay);
     qs('#sidebar-guests').textContent = yacht.guests;
     qs('#sidebar-cabins').textContent = yacht.cabins;
     qs('#sidebar-crew').textContent = yacht.crew;

@@ -110,7 +110,7 @@
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
               '<p>' + yacht.guests + ' Guests · ' + yacht.cabins + ' Cabins</p>' +
-              '<span class="booking-yacht-price">' + data.formatAED(yacht.pricePerDay) + ' / day</span>' +
+              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
             '</div>' +
           '</button>'
         );
