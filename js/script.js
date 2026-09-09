@@ -829,8 +829,12 @@
       return '<a href="' + href + '" class="' + active.trim() + '"' + ariaCurrent + '>' + item.label + '</a>';
     }).join('');
 
-    var mobileLinksHtml = navItems.map(function (item) {
-      return '<a href="' + BASE + item.href + '">' + item.label + '</a>';
+    var mobileLinksHtml = navItems.map(function (item, i) {
+      var href = BASE + item.href;
+      var active = CURRENT_PAGE === item.key ? ' is-active' : '';
+      var ariaCurrent = CURRENT_PAGE === item.key ? ' aria-current="page"' : '';
+      var delay = ' style="transition-delay:' + (i * 0.04) + 's"';
+      return '<a href="' + href + '" class="' + active.trim() + '"' + ariaCurrent + delay + '>' + item.label + '</a>';
     }).join('');
 
     var header = document.createElement('header');
@@ -859,7 +863,7 @@
     mobileNav.setAttribute('role', 'dialog');
     mobileNav.setAttribute('aria-modal', 'true');
     mobileNav.setAttribute('aria-label', 'Mobile navigation');
-    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking.html" class="btn btn-gold">Book Now</a>';
+    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking.html" class="btn btn-gold" style="transition-delay:' + (navItems.length * 0.04) + 's">Book Now</a>';
 
     document.body.insertBefore(mobileNav, document.body.firstChild);
     document.body.insertBefore(header, document.body.firstChild);

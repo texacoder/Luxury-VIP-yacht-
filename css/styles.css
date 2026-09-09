@@ -316,8 +316,16 @@ textarea:focus-visible,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-6);
+  /* justify-content: center would let the top of a tall list (or a short
+     viewport, e.g. a real phone with its browser chrome visible) get
+     clipped above the visible area with no way to scroll to it. Anchoring
+     to the top of a scrollable panel, offset below the fixed header,
+     guarantees every item — including the first — is always reachable. */
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: var(--space-5);
+  padding: calc(var(--header-height) + var(--space-6)) var(--space-5) calc(var(--space-7) + env(safe-area-inset-bottom, 0px));
   transform: translateY(-100%);
   transition: transform var(--dur-med) var(--ease);
 }
@@ -326,8 +334,31 @@ textarea:focus-visible,
   font-family: var(--font-display);
   font-size: 1.6rem;
   color: var(--text-primary);
+  position: relative;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
-.mobile-nav .btn{ margin-top: var(--space-4); }
+.mobile-nav a::after{
+  content: '';
+  position: absolute; left: 50%; bottom: -8px;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width var(--dur-fast) var(--ease), left var(--dur-fast) var(--ease);
+}
+.mobile-nav a:hover, .mobile-nav a:focus-visible, .mobile-nav a.is-active{ color: var(--gold-light); }
+.mobile-nav a:hover::after, .mobile-nav a:focus-visible::after, .mobile-nav a.is-active::after{ width: 32px; left: calc(50% - 16px); }
+.mobile-nav .btn{
+  margin-top: var(--space-4);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.mobile-nav.is-open a,
+.mobile-nav.is-open .btn{ opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .mobile-nav a, .mobile-nav .btn{ transition-delay: 0s !important; }
+}
 
 /* -------------------- 7. FOOTER -------------------- */
 .site-footer{
