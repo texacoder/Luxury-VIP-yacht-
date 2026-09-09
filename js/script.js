@@ -233,18 +233,8 @@
       crew: 3,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-mayyas-75-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-mayyas-75-exterior-1.jpg',
-        'images/yacht-mayyas-75-exterior-2.jpg',
-        'images/yacht-mayyas-75-main-salon-1.jpg',
-        'images/yacht-mayyas-75-main-salon-2.jpg',
-        'images/yacht-mayyas-75-twin-room.jpg',
-        'images/yacht-mayyas-75-master-cabin.jpg',
-        'images/yacht-mayyas-75-flybridge-1.jpg',
-        'images/yacht-mayyas-75-flybridge-2.jpg',
-        'images/yacht-mayyas-75-bow.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
+      image: '', // TODO: image not yet added — pending brochure asset upload
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
       video: '',
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins — Master and Twin — each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
@@ -269,23 +259,8 @@
       crew: 5,
       speedKnots: 18,
       year: null,
-      image: 'images/yacht-majesty-88-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-majesty-88-exterior-1.jpg',
-        'images/yacht-majesty-88-exterior-2.jpg',
-        'images/yacht-majesty-88-main-salon.jpg',
-        'images/yacht-majesty-88-dining-bar-1.jpg',
-        'images/yacht-majesty-88-dining-bar-2.jpg',
-        'images/yacht-majesty-88-sunbed.jpg',
-        'images/yacht-majesty-88-jacuzzi.jpg',
-        'images/yacht-majesty-88-helm.jpg',
-        'images/yacht-majesty-88-lower-deck-hallway.jpg',
-        'images/yacht-majesty-88-master-cabin.jpg',
-        'images/yacht-majesty-88-master-bath.jpg',
-        'images/yacht-majesty-88-double-room.jpg',
-        'images/yacht-majesty-88-twin-room.jpg',
-        'images/yacht-majesty-88-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
+      image: '', // TODO: image not yet added — pending brochure asset upload
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
       video: '',
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
@@ -310,17 +285,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-majesty-59-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-majesty-59-exterior-1.jpg',
-        'images/yacht-majesty-59-exterior-2.jpg',
-        'images/yacht-majesty-59-main-salon-1.jpg',
-        'images/yacht-majesty-59-main-salon-2.jpg',
-        'images/yacht-majesty-59-main-salon-3.jpg',
-        'images/yacht-majesty-59-master-cabin-1.jpg',
-        'images/yacht-majesty-59-master-cabin-2.jpg',
-        'images/yacht-majesty-59-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
+      image: '', // TODO: image not yet added — pending brochure asset upload
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
       video: '',
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is a 59-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 59 accommodates up to 25 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. The Master cabin comes with an en-suite bathroom. A main salon with dining area and a spacious flybridge featuring its own dining area round out the experience, alongside jetski and a variety of water sports.',
@@ -345,16 +311,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-jasmine-55-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-jasmine-55-exterior-1.jpg',
-        'images/yacht-jasmine-55-exterior-2.jpg',
-        'images/yacht-jasmine-55-main-saloon-1.jpg',
-        'images/yacht-jasmine-55-main-saloon-2.jpg',
-        'images/yacht-jasmine-55-bedroom-1.jpg',
-        'images/yacht-jasmine-55-bedroom-2.jpg',
-        'images/yacht-jasmine-55-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
+      image: '', // TODO: image not yet added — pending brochure asset upload
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
       video: '',
       description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
