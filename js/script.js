@@ -990,6 +990,19 @@
     document.body.appendChild(footer);
   }
 
+  function buildWhatsAppFab() {
+    var greeting = 'Hi VIP Yachts! I have a question about chartering a yacht.';
+    var fab = document.createElement('a');
+    fab.className = 'whatsapp-fab';
+    fab.href = whatsappLink(WHATSAPP_NUMBERS[0].digits, greeting);
+    fab.target = '_blank';
+    fab.rel = 'noopener';
+    fab.setAttribute('aria-label', 'Chat with VIP Yachts on WhatsApp');
+    fab.innerHTML =
+      '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.7 4.61 1.908 6.482L4 29l7.716-1.878A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.98 16.87c-.297.836-1.47 1.53-2.408 1.73-.64.136-1.475.245-4.29-.922-3.602-1.492-5.92-5.14-6.1-5.38-.177-.24-1.457-1.94-1.457-3.7 0-1.76.92-2.62 1.246-2.98.326-.36.71-.45.947-.45.237 0 .474.002.68.012.218.01.51-.083.798.608.297.71.998 2.454 1.086 2.633.088.18.147.39.03.63-.118.24-.177.39-.353.6-.177.21-.372.47-.532.63-.177.177-.362.368-.155.723.207.355.92 1.518 1.976 2.46 1.358 1.212 2.503 1.588 2.858 1.766.355.177.562.148.77-.09.207-.24.887-1.035 1.124-1.39.237-.355.474-.296.798-.178.325.118 2.06.972 2.413 1.148.354.177.59.266.68.414.088.148.088.856-.208 1.69z"/></svg>';
+    document.body.appendChild(fab);
+  }
+
   /* =========================================================
      6. FADE-UP SCROLL REVEAL (shared across pages)
      ========================================================= */
@@ -1027,6 +1040,7 @@
     if (CURRENT_PAGE !== 'admin') {
       buildHeader();
       buildFooter();
+      buildWhatsAppFab();
     }
     initFadeUps();
 

@@ -1037,6 +1037,36 @@ textarea:focus-visible,
 .booking-sidebar-facts dd{ font-family: var(--font-display); font-size: 1.05rem; color: var(--text-primary); }
 .booking-sidebar-note{ font-size: var(--fs-xs); color: var(--text-muted); text-align: center; margin-top: var(--space-4); margin-bottom: 0; }
 
+/* Floating WhatsApp button */
+.whatsapp-fab{
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  z-index: 480;
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  animation: whatsapp-pulse 2.4s ease-out infinite;
+}
+.whatsapp-fab:hover, .whatsapp-fab:focus-visible{ transform: scale(1.08); box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+.whatsapp-fab svg{ width: 28px; height: 28px; fill: #ffffff; }
+@keyframes whatsapp-pulse{
+  0%{ box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 0 0 0 rgba(37,211,102,0.45); }
+  70%{ box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 0 0 14px rgba(37,211,102,0); }
+  100%{ box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 0 0 0 rgba(37,211,102,0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .whatsapp-fab{ animation: none; }
+}
+@media (max-width: 480px){
+  .whatsapp-fab{ width: 50px; height: 50px; right: var(--space-4); bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px)); }
+  .whatsapp-fab svg{ width: 24px; height: 24px; }
+}
+
 /* Lightbox */
 .lightbox{
   position: fixed; inset: 0; z-index: 900;
