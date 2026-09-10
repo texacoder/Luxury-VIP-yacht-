@@ -51,6 +51,13 @@
     }
     if (urlYacht || urlPackage || urlAddon) saveState();
 
+    // Arriving via a package/add-on link (e.g. "Select Package" on the
+    // Packages page) is a fresh entry into the flow — it should always
+    // start at yacht selection, not silently resume wherever an earlier
+    // visit in this browser tab left off. Without this, leftover session
+    // state from a previous test/booking could skip straight to step 2.
+    if ((urlPackage || urlAddon) && !urlYacht) { state.step = 1; }
+
     // Guard against inconsistent/stale state: if a later step is stored but the
     // prerequisite selections are missing, fall back to the earliest valid step
     // rather than rendering a broken/empty payment or confirmation screen.
