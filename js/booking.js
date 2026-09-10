@@ -118,7 +118,16 @@
         card.addEventListener('click', function () {
           state.yachtId = card.dataset.yachtId;
           saveState();
-          renderStep1();
+          // Show the selection instantly (without a full re-render, which
+          // would recreate this exact card mid-click) so there's a brief,
+          // visible confirmation before jumping straight to step 2 — no
+          // separate "Continue" click needed for the common case.
+          qsa('.booking-yacht-card', yachtGrid).forEach(function (c) {
+            var isThisCard = c === card;
+            c.classList.toggle('is-selected', isThisCard);
+            c.setAttribute('aria-pressed', String(isThisCard));
+          });
+          setTimeout(function () { goToStep(2); }, 250);
         });
       });
 
