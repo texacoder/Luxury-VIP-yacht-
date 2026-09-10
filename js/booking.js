@@ -171,9 +171,24 @@
       }).join('');
       qsa('.booking-package-card', pkgGrid).forEach(function (card) {
         card.addEventListener('click', function () {
+          // Package + add-ons + the details form are all on this one step —
+          // there's no separate "next step" to jump to the way yacht
+          // selection could, since the required details (name, email, date,
+          // etc.) still need to be typed in before this can go anywhere.
+          // The closest equivalent: guide the customer straight to that
+          // form the first time they pick a package, instead of leaving
+          // them to scroll and find it themselves.
+          var isFirstSelection = !state.packageId;
           state.packageId = card.dataset.packageId;
           saveState();
           renderStep2();
+          if (isFirstSelection) {
+            var nameInput = qs('#booking-name');
+            if (nameInput) {
+              nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              setTimeout(function () { nameInput.focus(); }, 400);
+            }
+          }
         });
       });
 
