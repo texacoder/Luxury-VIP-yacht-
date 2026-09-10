@@ -766,6 +766,17 @@
   function qs(sel, ctx) { return (ctx || document).querySelector(sel); }
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
+  // Escapes free-text values (customer-entered booking details, form fields)
+  // before they're concatenated into innerHTML strings elsewhere on the site.
+  // Without this, a name/phone/etc. containing HTML would be parsed as markup
+  // instead of displayed as text.
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  window.VIPYachts.escapeHtml = escapeHtml;
+
   function getYachtById(id) {
     return YACHTS.filter(function (y) { return y.id === id; })[0] || null;
   }

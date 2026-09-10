@@ -409,11 +409,11 @@
       qs('#payment-summary-total').textContent = data.formatAED(calc.total);
 
       var detailsHtml = '';
-      if (state.details.name) detailsHtml += '<div><dt>Name</dt><dd>' + state.details.name + '</dd></div>';
-      if (state.details.phone) detailsHtml += '<div><dt>Phone</dt><dd>' + state.details.phone + '</dd></div>';
-      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + state.details.date + '</dd></div>';
-      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + state.details.time + '</dd></div>';
-      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + state.details.guests + '</dd></div>';
+      if (state.details.name) detailsHtml += '<div><dt>Name</dt><dd>' + data.escapeHtml(state.details.name) + '</dd></div>';
+      if (state.details.phone) detailsHtml += '<div><dt>Phone</dt><dd>' + data.escapeHtml(state.details.phone) + '</dd></div>';
+      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + data.escapeHtml(state.details.date) + '</dd></div>';
+      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + data.escapeHtml(state.details.time) + '</dd></div>';
+      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + data.escapeHtml(state.details.guests) + '</dd></div>';
       qs('#whatsapp-your-details').innerHTML = detailsHtml;
 
       var message = buildWhatsAppMessage();
@@ -443,9 +443,9 @@
       var detailsHtml = '';
       if (yacht) detailsHtml += '<div><dt>Yacht</dt><dd>' + yacht.name + '</dd></div>';
       if (calc.pkg) detailsHtml += '<div><dt>Package</dt><dd>' + calc.pkg.name + '</dd></div>';
-      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + state.details.date + '</dd></div>';
-      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + state.details.time + '</dd></div>';
-      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + state.details.guests + '</dd></div>';
+      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + data.escapeHtml(state.details.date) + '</dd></div>';
+      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + data.escapeHtml(state.details.time) + '</dd></div>';
+      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + data.escapeHtml(state.details.guests) + '</dd></div>';
       detailsHtml += '<div><dt>Total</dt><dd>' + data.formatAED(calc.total) + '</dd></div>';
       qs('#confirmation-details').innerHTML = '<dl class="order-summary-lines">' + detailsHtml + '</dl>';
 
