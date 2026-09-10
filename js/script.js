@@ -714,8 +714,7 @@
     { id: 'birthday-decor', name: 'Birthday Decoration', price: 3000, description: 'Balloons, banner, and table styling for onboard celebrations.' },
     { id: 'dj-system', name: 'DJ System', price: 4000, description: 'Professional sound system with a curated playlist or live DJ on request.' },
     { id: 'photographer', name: 'Photographer', price: 6000, description: 'A dedicated photographer for up to two hours of your charter.' },
-    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' },
-    { id: 'drone-photography', name: 'Drone Photography', price: 7000, description: 'Aerial photos and video of your yacht and group during the charter.' }
+    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' }
   ];
 
   // Booking and payment are handled over WhatsApp, not through the site —

@@ -18,8 +18,7 @@
       'birthday-decor': 'images/exp-default.png',
       'dj-system': 'images/exp-dj.png',
       'photographer': 'images/exp-default.png',
-      'jet-ski': 'images/exp-jetski.png',
-      'drone-photography': 'images/exp-drone.png'
+      'jet-ski': 'images/exp-jetski.png'
     };
 
     grid.innerHTML = data.ADDONS.map(function (addon) {
