@@ -9,16 +9,24 @@
    Script, which only hands back a session token on success. This file
    just stores that token (in localStorage) and sends it along with each
    request for real data.
+
+   Sections (Dashboard / Yachts / Bookings / Customers / Reports) are all
+   rendered client-side from two real data sources: the live YACHTS array
+   (same one the public site uses) and the bookings fetched once from the
+   backend — no extra network calls per section, no per-section backend
+   endpoints needed.
    ========================================================= */
 (function () {
   'use strict';
   window.VIPYachtsPages = window.VIPYachtsPages || {};
 
   var SESSION_KEY = 'vipyachts_admin_session';
+  var SECTION_TITLES = { dashboard: 'Dashboard', yachts: 'Fleet', bookings: 'All Bookings', customers: 'Customers', reports: 'Reports' };
 
   window.VIPYachtsPages.admin = function () {
     var data = window.VIPYachts;
     var qs = window.VIPYachtsUtil.qs;
+    var qsa = window.VIPYachtsUtil.qsa;
 
     var loadingScreen = qs('#admin-loading');
     var loginScreen = qs('#admin-login-screen');
@@ -30,7 +38,10 @@
     var loginSubmitBtn = qs('#admin-login-submit');
     var logoutBtn = qs('#admin-logout-btn');
     var topbarUsername = qs('#admin-topbar-username');
+    var sectionTitle = qs('#admin-section-title');
     var dataError = qs('#admin-data-error');
+
+    var allBookings = []; // populated once per successful load, reused by every section
 
     /* ---------- Session storage ---------- */
     function getStoredSession() {
@@ -93,7 +104,7 @@
         });
     }
 
-    /* ---------- View switching ---------- */
+    /* ---------- View switching (login <-> dashboard shell) ---------- */
     function showLogin() {
       loadingScreen.hidden = true;
       loginScreen.hidden = false;
@@ -104,6 +115,29 @@
       loginScreen.hidden = true;
       adminShell.hidden = false;
     }
+
+    /* ---------- Section switching (Dashboard/Yachts/Bookings/Customers/Reports) ---------- */
+    function switchSection(name) {
+      if (!SECTION_TITLES[name]) name = 'dashboard';
+      qsa('.admin-section').forEach(function (el) {
+        el.hidden = (el.id !== 'admin-section-' + name);
+      });
+      qsa('.admin-nav-link', qs('#admin-nav')).forEach(function (btn) {
+        btn.classList.toggle('is-active', btn.dataset.section === name);
+      });
+      sectionTitle.textContent = SECTION_TITLES[name];
+      if (name === 'yachts') renderYachts();
+      if (name === 'bookings') renderAllBookings();
+      if (name === 'customers') renderCustomers();
+      if (name === 'reports') renderReports();
+    }
+
+    qsa('.admin-nav-link', qs('#admin-nav')).forEach(function (btn) {
+      btn.addEventListener('click', function () { switchSection(btn.dataset.section); });
+    });
+    qsa('[data-goto-section]').forEach(function (btn) {
+      btn.addEventListener('click', function () { switchSection(btn.dataset.gotoSection); });
+    });
 
     /* ---------- Login ---------- */
     function setLoginError(message) {
@@ -172,14 +206,16 @@
       clearSession();
       usernameInput.value = '';
       passwordInput.value = '';
-      // Re-check with the backend rather than assuming a login screen is
-      // needed — if admin credentials haven't been configured yet, this
-      // just lands back on the open dashboard instead of a pointless
-      // login form with nothing to log into.
-      loadDashboard('', { hadToken: false });
+      // Show the login screen immediately rather than re-asking the
+      // backend whether one is needed — if a login was never actually
+      // required yet (no ADMIN_USERNAME/PASSWORD configured), re-checking
+      // just reopens the dashboard straight away, so clicking "Log Out"
+      // visibly did nothing. Logging out should always visibly log out.
+      showLogin();
+      setLoginError('');
     });
 
-    /* ---------- Dashboard data ---------- */
+    /* ---------- Shared helpers ---------- */
     function setDataError(message) {
       if (message) {
         dataError.textContent = message;
@@ -189,27 +225,34 @@
         dataError.hidden = true;
       }
     }
+    function formatTimestamp(raw) {
+      var d = new Date(raw);
+      if (isNaN(d.getTime())) return String(raw);
+      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
+    function escapeHtml(value) {
+      return data.escapeHtml ? data.escapeHtml(value) : String(value);
+    }
+    function bookingTotalNumber(b) {
+      var n = Number(b.total);
+      return isNaN(n) ? 0 : n;
+    }
 
+    /* ============================================================
+       DASHBOARD
+       ============================================================ */
     function renderDashboard(bookings) {
       qs('#stat-total-yachts').textContent = data.YACHTS.length;
       qs('#stat-total-bookings').textContent = bookings.length;
 
-      var revenue = bookings.reduce(function (sum, b) {
-        var n = Number(b.total);
-        return sum + (isNaN(n) ? 0 : n);
-      }, 0);
+      var revenue = bookings.reduce(function (sum, b) { return sum + bookingTotalNumber(b); }, 0);
       qs('#stat-revenue').textContent = data.formatAED(revenue);
 
-      var uniqueCustomers = {};
-      bookings.forEach(function (b) {
-        var key = (b.email || b.phone || '').toString().trim().toLowerCase();
-        if (key) uniqueCustomers[key] = true;
-      });
-      qs('#stat-unique-customers').textContent = Object.keys(uniqueCustomers).length;
+      qs('#stat-unique-customers').textContent = Object.keys(customerKeyMap(bookings)).length;
 
       var body = qs('#admin-bookings-body');
       var empty = qs('#admin-bookings-empty');
-      var recent = bookings.slice(0, 20); // already newest-first from the backend
+      var recent = bookings.slice(0, 8); // dashboard is a preview; full list lives in the Bookings section
 
       if (!recent.length) {
         body.innerHTML = '';
@@ -217,35 +260,261 @@
         return;
       }
       empty.hidden = true;
+      body.innerHTML = recent.map(bookingRowHtml).join('');
+    }
 
-      body.innerHTML = recent.map(function (b) {
-        var totalNum = Number(b.total);
-        var totalTxt = isNaN(totalNum) ? (b.total || '—') : data.formatAED(totalNum);
-        var received = b.timestamp ? formatTimestamp(b.timestamp) : '—';
+    function bookingRowHtml(b, includePhone) {
+      var totalNum = Number(b.total);
+      var totalTxt = isNaN(totalNum) ? (b.total || '—') : data.formatAED(totalNum);
+      var received = b.timestamp ? formatTimestamp(b.timestamp) : '—';
+      return (
+        '<tr>' +
+          '<td>' + escapeHtml(b.reference || '—') + '</td>' +
+          '<td>' + escapeHtml(b.name || '—') + '</td>' +
+          (includePhone ? '<td>' + escapeHtml(b.phone || '—') + '</td>' : '') +
+          '<td>' + escapeHtml(b.yacht || '—') + '</td>' +
+          '<td>' + escapeHtml(b.package || '—') + '</td>' +
+          '<td>' + escapeHtml(b.date || '—') + '</td>' +
+          '<td>' + escapeHtml(totalTxt) + '</td>' +
+          '<td>' + escapeHtml(received) + '</td>' +
+        '</tr>'
+      );
+    }
+
+    function customerKeyMap(bookings) {
+      var map = {};
+      bookings.forEach(function (b) {
+        var key = (b.email || b.phone || '').toString().trim().toLowerCase();
+        if (key) map[key] = true;
+      });
+      return map;
+    }
+
+    /* ============================================================
+       YACHTS — from the live YACHTS array, no network call
+       ============================================================ */
+    var yachtState = { tier: 'all', search: '' };
+
+    function renderYachts() {
+      var base = data.BASE;
+      var filtered = data.YACHTS.filter(function (y) {
+        var tierMatch = yachtState.tier === 'all' || y.tier === yachtState.tier;
+        var searchMatch = !yachtState.search || y.name.toLowerCase().indexOf(yachtState.search) !== -1;
+        return tierMatch && searchMatch;
+      });
+
+      qs('#admin-yacht-count').textContent = filtered.length + (filtered.length === 1 ? ' yacht' : ' yachts');
+
+      qs('#admin-yacht-grid').innerHTML = filtered.map(function (y) {
+        // Reuses the same fallback logic the public fleet page uses — a
+        // missing image path shows "Images will be uploaded soon", and a
+        // path that 404s (a suggested-but-not-yet-added filename) falls
+        // back to the yacht's name — rather than a blank broken-image box.
+        var media = data.yachtCardMediaHtml(y);
+        return (
+          '<article class="admin-yacht-card">' +
+            '<div class="admin-yacht-card-media">' +
+              media +
+              '<span class="badge badge-gold admin-yacht-card-tier">' + escapeHtml(y.tierLabel) + '</span>' +
+            '</div>' +
+            '<div class="admin-yacht-card-body">' +
+              '<h3>' + escapeHtml(y.name) + '</h3>' +
+              '<span class="admin-yacht-card-meta">' + data.formatSpec(y.guests, ' guests') + ' · ' + data.formatSpec(y.cabins, ' cabins') + ' · ' + data.formatSpec(y.length, ' ft') + '</span>' +
+              '<span class="admin-yacht-card-price">' + data.formatYachtPrice(y.pricePerDay) + '</span>' +
+              '<a class="admin-yacht-card-link" href="' + base + 'pages/yacht-detail.html?id=' + y.id + '" target="_blank" rel="noopener">View on site →</a>' +
+            '</div>' +
+          '</article>'
+        );
+      }).join('');
+    }
+
+    qsa('.filter-chip', qs('#admin-yacht-tier-filter')).forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        qsa('.filter-chip', qs('#admin-yacht-tier-filter')).forEach(function (c) { c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+        yachtState.tier = chip.dataset.tier;
+        renderYachts();
+      });
+    });
+    qs('#admin-yacht-search').addEventListener('input', function (e) {
+      yachtState.search = e.target.value.trim().toLowerCase();
+      renderYachts();
+    });
+
+    /* ============================================================
+       ALL BOOKINGS
+       ============================================================ */
+    var bookingsSearch = '';
+
+    function renderAllBookings() {
+      var filtered = !bookingsSearch ? allBookings : allBookings.filter(function (b) {
+        var haystack = [b.reference, b.name, b.yacht, b.email, b.phone].join(' ').toLowerCase();
+        return haystack.indexOf(bookingsSearch) !== -1;
+      });
+
+      qs('#admin-all-bookings-count').textContent = filtered.length + (filtered.length === 1 ? ' booking' : ' bookings') + (bookingsSearch ? ' matching “' + bookingsSearch + '”' : '');
+
+      var body = qs('#admin-all-bookings-body');
+      var empty = qs('#admin-all-bookings-empty');
+      if (!filtered.length) {
+        body.innerHTML = '';
+        empty.hidden = false;
+        empty.textContent = allBookings.length ? 'No bookings match your search.' : 'No bookings logged yet.';
+        return;
+      }
+      empty.hidden = true;
+      body.innerHTML = filtered.map(function (b) { return bookingRowHtml(b, true); }).join('');
+    }
+
+    qs('#admin-bookings-search').addEventListener('input', function (e) {
+      bookingsSearch = e.target.value.trim().toLowerCase();
+      renderAllBookings();
+    });
+
+    /* ============================================================
+       CUSTOMERS — derived from real booking records
+       ============================================================ */
+    var customersSearch = '';
+
+    function buildCustomerList() {
+      var map = {};
+      allBookings.forEach(function (b) {
+        var key = (b.email || b.phone || '').toString().trim().toLowerCase();
+        if (!key) return;
+        if (!map[key]) {
+          map[key] = { name: b.name || '—', email: b.email || '', phone: b.phone || '', count: 0, spend: 0, lastDate: null, lastTimestamp: 0 };
+        }
+        var c = map[key];
+        c.count += 1;
+        c.spend += bookingTotalNumber(b);
+        // Prefer the most-recently-named version in case a customer's name was typed differently across bookings.
+        if (b.name) c.name = b.name;
+        var ts = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+        if (ts >= c.lastTimestamp) { c.lastTimestamp = ts; c.lastDate = b.date || formatTimestamp(b.timestamp); }
+      });
+      return Object.keys(map).map(function (k) { return map[k]; });
+    }
+
+    function renderCustomers() {
+      var customers = buildCustomerList().sort(function (a, b) { return b.spend - a.spend; });
+      var filtered = !customersSearch ? customers : customers.filter(function (c) {
+        return (c.name + ' ' + c.email + ' ' + c.phone).toLowerCase().indexOf(customersSearch) !== -1;
+      });
+
+      qs('#admin-customers-count').textContent = filtered.length + (filtered.length === 1 ? ' customer' : ' customers');
+
+      var body = qs('#admin-customers-body');
+      var empty = qs('#admin-customers-empty');
+      if (!filtered.length) {
+        body.innerHTML = '';
+        empty.hidden = false;
+        empty.textContent = customers.length ? 'No customers match your search.' : 'No customers yet.';
+        return;
+      }
+      empty.hidden = true;
+      body.innerHTML = filtered.map(function (c) {
         return (
           '<tr>' +
-            '<td>' + escapeHtml(b.reference || '—') + '</td>' +
-            '<td>' + escapeHtml(b.name || '—') + '</td>' +
-            '<td>' + escapeHtml(b.yacht || '—') + '</td>' +
-            '<td>' + escapeHtml(b.package || '—') + '</td>' +
-            '<td>' + escapeHtml(b.date || '—') + '</td>' +
-            '<td>' + escapeHtml(totalTxt) + '</td>' +
-            '<td>' + escapeHtml(received) + '</td>' +
+            '<td>' + escapeHtml(c.name) + '</td>' +
+            '<td>' + escapeHtml(c.email || '—') + '</td>' +
+            '<td>' + escapeHtml(c.phone || '—') + '</td>' +
+            '<td>' + c.count + '</td>' +
+            '<td>' + escapeHtml(data.formatAED(c.spend)) + '</td>' +
+            '<td>' + escapeHtml(c.lastDate || '—') + '</td>' +
           '</tr>'
         );
       }).join('');
     }
 
-    function formatTimestamp(raw) {
-      var d = new Date(raw);
-      if (isNaN(d.getTime())) return String(raw);
-      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    qs('#admin-customers-search').addEventListener('input', function (e) {
+      customersSearch = e.target.value.trim().toLowerCase();
+      renderCustomers();
+    });
+
+    /* ============================================================
+       REPORTS — aggregates over the same real booking records
+       ============================================================ */
+    function renderBarGroup(containerId, emptyId, entries, formatValue) {
+      var container = qs('#' + containerId);
+      var empty = qs('#' + emptyId);
+      if (!entries.length) {
+        container.innerHTML = '';
+        empty.hidden = false;
+        return;
+      }
+      empty.hidden = true;
+      var max = Math.max.apply(null, entries.map(function (e) { return e.value; }));
+      container.innerHTML = entries.map(function (e) {
+        var pct = max > 0 ? Math.round((e.value / max) * 100) : 0;
+        return (
+          '<div class="admin-report-bar-row">' +
+            '<span class="admin-report-bar-label" title="' + escapeHtml(e.label) + '">' + escapeHtml(e.label) + '</span>' +
+            '<span class="admin-report-bar-track"><span class="admin-report-bar-fill" style="width:' + pct + '%"></span></span>' +
+            '<span class="admin-report-bar-value">' + escapeHtml(formatValue(e)) + '</span>' +
+          '</div>'
+        );
+      }).join('');
     }
 
-    function escapeHtml(value) {
-      return data.escapeHtml ? data.escapeHtml(value) : String(value);
+    function groupSum(bookings, keyFn) {
+      var map = {};
+      bookings.forEach(function (b) {
+        var key = keyFn(b);
+        if (!key) return;
+        if (!map[key]) map[key] = { count: 0, revenue: 0 };
+        map[key].count += 1;
+        map[key].revenue += bookingTotalNumber(b);
+      });
+      return map;
     }
 
+    function renderReports() {
+      // Revenue by month (grouped by charter date, not the date the booking was logged).
+      var byMonth = {};
+      allBookings.forEach(function (b) {
+        if (!b.date) return;
+        var d = new Date(b.date);
+        if (isNaN(d.getTime())) return;
+        var key = d.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+        byMonth[key] = (byMonth[key] || 0) + bookingTotalNumber(b);
+      });
+      var monthEntries = Object.keys(byMonth)
+        .map(function (k) { return { label: k, value: byMonth[k], sortKey: new Date(k).getTime() }; })
+        .sort(function (a, b) { return a.sortKey - b.sortKey; });
+      renderBarGroup('report-revenue-by-month', 'report-revenue-empty', monthEntries, function (e) { return data.formatAED(e.value); });
+
+      // Bookings by yacht.
+      var byYacht = groupSum(allBookings, function (b) { return b.yacht; });
+      var yachtEntries = Object.keys(byYacht)
+        .map(function (k) { return { label: k, value: byYacht[k].count, revenue: byYacht[k].revenue }; })
+        .sort(function (a, b) { return b.value - a.value; });
+      renderBarGroup('report-by-yacht', 'report-yacht-empty', yachtEntries, function (e) { return e.value + (e.value === 1 ? ' booking' : ' bookings'); });
+
+      // Bookings by package.
+      var byPackage = groupSum(allBookings, function (b) { return b.package; });
+      var packageEntries = Object.keys(byPackage)
+        .map(function (k) { return { label: k, value: byPackage[k].count, revenue: byPackage[k].revenue }; })
+        .sort(function (a, b) { return b.value - a.value; });
+      renderBarGroup('report-by-package', 'report-package-empty', packageEntries, function (e) { return e.value + (e.value === 1 ? ' booking' : ' bookings'); });
+
+      // Top customers by spend.
+      var customers = buildCustomerList().sort(function (a, b) { return b.spend - a.spend; }).slice(0, 5);
+      var topBody = qs('#report-top-customers-body');
+      var topEmpty = qs('#report-customers-empty');
+      if (!customers.length) {
+        topBody.innerHTML = '';
+        topEmpty.hidden = false;
+      } else {
+        topEmpty.hidden = true;
+        topBody.innerHTML = customers.map(function (c) {
+          return '<tr><td>' + escapeHtml(c.name) + '</td><td>' + c.count + '</td><td>' + escapeHtml(data.formatAED(c.spend)) + '</td></tr>';
+        }).join('');
+      }
+    }
+
+    /* ============================================================
+       LOAD — fetch bookings once, then render whichever section is active
+       ============================================================ */
     // Whether a login screen is needed at all is decided by the backend,
     // not this file — action=getBookings only replies with invalid_session
     // once ADMIN_USERNAME/ADMIN_PASSWORD have actually been set in the
@@ -260,8 +529,13 @@
       apiRequest('getBookings', { token: token || '' })
         .then(function (res) {
           if (res.ok) {
+            allBookings = res.bookings || [];
             showDashboard();
-            renderDashboard(res.bookings || []);
+            renderDashboard(allBookings);
+            // Re-render whichever section is currently active so switching
+            // tabs before this first load finished still shows real data.
+            var activeBtn = qs('.admin-nav-link.is-active', qs('#admin-nav'));
+            if (activeBtn && activeBtn.dataset.section !== 'dashboard') switchSection(activeBtn.dataset.section);
             return;
           }
           if (res.error === 'invalid_session') {

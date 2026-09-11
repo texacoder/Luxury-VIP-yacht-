@@ -1607,9 +1607,16 @@ textarea:focus-visible,
 }
 .admin-nav{ display: flex; flex-direction: column; gap: var(--space-1); }
 .admin-nav-link{
+  display: block;
+  width: 100%;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-sm);
   font-size: var(--fs-small);
+  font-family: inherit;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   color: var(--text-secondary);
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
@@ -1694,9 +1701,83 @@ textarea:focus-visible,
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
+  margin-bottom: var(--space-6);
 }
+.admin-panel:last-child{ margin-bottom: 0; }
 .admin-panel-head{ margin-bottom: var(--space-5); }
-.admin-panel-head h2{ font-size: var(--fs-h4); }
+.admin-panel-head--split{ display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.admin-panel-head h2{ font-size: var(--fs-h4); margin-bottom: 0; }
+.admin-panel-note{ font-size: var(--fs-small); color: var(--text-secondary); margin-top: var(--space-2); }
+
+/* Section switching (Dashboard/Yachts/Bookings/Customers/Reports) — no
+   display: rule here on purpose. <section> is already block by default,
+   and adding an explicit display: block would be an author rule that
+   beats the browser's [hidden]{display:none} default (same class of bug
+   fixed for .admin-loading/.admin-login-screen/.admin-shell above), which
+   would make every section render at once regardless of the hidden
+   attribute. Leave this selector alone unless adding [hidden] alongside
+   any new display: value. */
+
+.admin-search-input{
+  width: 100%;
+  padding: 0.8em 1em;
+  margin-bottom: var(--space-4);
+  background: var(--navy);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: var(--fs-small);
+}
+.admin-search-input:focus{ border-color: var(--gold); outline: none; }
+.admin-result-count{ font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4); }
+
+.admin-yacht-toolbar{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.admin-filter-chips{ display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.admin-yacht-toolbar .admin-search-input{ max-width: 280px; margin-bottom: 0; }
+
+.admin-yacht-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+.admin-yacht-card{
+  background: var(--navy);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.admin-yacht-card-media{ aspect-ratio: 4/3; background: var(--navy-light); position: relative; }
+.admin-yacht-card-media img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-yacht-card-tier{
+  position: absolute; top: var(--space-2); left: var(--space-2);
+  font-size: 0.65rem; padding: 0.3em 0.7em;
+}
+.admin-yacht-card-body{ padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); flex: 1; }
+.admin-yacht-card-body h3{ font-size: var(--fs-body); }
+.admin-yacht-card-meta{ font-size: var(--fs-xs); color: var(--text-secondary); }
+.admin-yacht-card-price{ font-family: var(--font-display); color: var(--gold); font-weight: 600; margin-top: auto; }
+.admin-yacht-card-link{ font-size: var(--fs-xs); color: var(--text-muted); }
+.admin-yacht-card-link:hover{ color: var(--gold); }
+
+.admin-report-bars{ display: flex; flex-direction: column; gap: var(--space-3); }
+.admin-report-bar-row{ display: grid; grid-template-columns: 140px 1fr auto; align-items: center; gap: var(--space-3); font-size: var(--fs-small); }
+.admin-report-bar-label{ color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Both are <span> by default (inline) — without display:block here, the
+   width/height percentages below would be silently ignored by the browser
+   (width/height don't apply to non-replaced inline elements), and every
+   bar would render at the same size regardless of its actual value. */
+.admin-report-bar-track{ display: block; height: 10px; background: var(--navy); border-radius: var(--radius-pill); overflow: hidden; }
+.admin-report-bar-fill{ display: block; height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); border-radius: var(--radius-pill); }
+.admin-report-bar-value{ color: var(--gold); font-weight: 600; white-space: nowrap; }
 
 .admin-table-wrap{ overflow-x: auto; }
 .admin-table{ width: 100%; border-collapse: collapse; }
@@ -1724,7 +1805,11 @@ textarea:focus-visible,
   .admin-sidebar{ width: 100%; flex-direction: row; align-items: center; justify-content: space-between; overflow-x: auto; }
   .admin-brand{ flex-shrink: 0; white-space: nowrap; }
   .admin-nav{ flex-direction: row; flex-shrink: 0; }
-  .admin-nav-link{ flex-shrink: 0; white-space: nowrap; }
+  .admin-nav-link{ flex-shrink: 0; width: auto; white-space: nowrap; }
   .admin-main{ padding: var(--space-5); }
   .admin-stats-grid{ grid-template-columns: 1fr; }
+  .admin-panel-head--split{ flex-direction: column; align-items: flex-start; }
+  .admin-yacht-toolbar{ flex-direction: column; align-items: stretch; }
+  .admin-yacht-toolbar .admin-search-input{ max-width: none; }
+  .admin-report-bar-row{ grid-template-columns: 90px 1fr auto; }
 }
