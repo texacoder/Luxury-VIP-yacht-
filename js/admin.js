@@ -86,14 +86,14 @@
     // been idle a while ("cold start"). REQUEST_TIMEOUT_MS is a ceiling so a
     // request that's truly stuck (not just slow) fails with a clear message
     // instead of leaving a button stuck on "Logging in..." forever.
-    var REQUEST_TIMEOUT_MS = 25000;
+    var REQUEST_TIMEOUT_MS = 35000;
 
     // Not sent with mode:'no-cors' like the enquiry logger — every action
     // here needs to read the response, and Apps Script Web App responses
     // are readable cross-origin by default as long as the request stays a
     // "simple" request (form-encoded body, no custom headers), which is
     // what URLSearchParams gives us here.
-    function apiRequest(action, params) {
+    function apiRequestOnce(action, params) {
       var url = data.SHEET_WEBHOOK_URL;
       if (!url) return Promise.reject(new Error('not_configured'));
       var body = new URLSearchParams(Object.assign({ action: action }, params));
@@ -115,6 +115,20 @@
           }
           throw err;
         });
+    }
+
+    // The slow case is almost always a one-off "cold start" on the very
+    // first request after the script has sat idle — the script is warm
+    // again immediately after. So a timeout gets ONE silent retry before
+    // showing the user anything, rather than surfacing an error that a
+    // second attempt would have avoided. Any other kind of failure (bad
+    // network, invalid response) is not retried — retrying those wouldn't
+    // help and would just double the wait before the real error shows.
+    function apiRequest(action, params) {
+      return apiRequestOnce(action, params).catch(function (err) {
+        if (err && err.isTimeout) return apiRequestOnce(action, params);
+        throw err;
+      });
     }
 
     /* ---------- View switching (login <-> dashboard shell) ---------- */
@@ -184,7 +198,7 @@
       // after being idle — reassure rather than leave the button looking
       // frozen with no explanation.
       var slowNoticeTimer = setTimeout(function () {
-        loginSubmitBtn.textContent = 'Still logging in… (this can take a few seconds)';
+        loginSubmitBtn.textContent = 'Still logging in… (Google’s backend can take up to a minute to wake up)';
       }, 4000);
 
       apiRequest('login', { username: username, password: password })
@@ -208,7 +222,7 @@
         })
         .catch(function (err) {
           if (err && err.isTimeout) {
-            setLoginError('The backend didn’t respond in time (' + Math.round(REQUEST_TIMEOUT_MS / 1000) + 's). It may just be slow to wake up — please try again.');
+            setLoginError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now — please try again in a moment.');
           } else {
             setLoginError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
           }
@@ -724,7 +738,7 @@
         .catch(function (err) {
           showDashboard();
           if (err && err.isTimeout) {
-            setDataError('The backend didn’t respond in time (' + Math.round(REQUEST_TIMEOUT_MS / 1000) + 's). It may just be slow to wake up — try reloading in a moment.');
+            setDataError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now — try reloading in a moment.');
           } else {
             setDataError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
           }
@@ -749,7 +763,7 @@
     setTimeout(function () {
       if (!loadingScreen.hidden) {
         var loadingText = loadingScreen.querySelector('span');
-        if (loadingText) loadingText.textContent = 'Still loading… the backend can be slow to wake up.';
+        if (loadingText) loadingText.textContent = 'Still loading… Google’s backend can take up to a minute to wake up.';
       }
     }, 4000);
 
