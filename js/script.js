@@ -722,7 +722,10 @@
     PACKAGES: PACKAGES,
     ADDONS: ADDONS,
     WHATSAPP_NUMBERS: WHATSAPP_NUMBERS,
-    BASE: BASE
+    BASE: BASE,
+    // Same Apps Script Web App used for logging bookings also backs the real
+    // admin login + dashboard data (see google-apps-script/booking-backend.gs).
+    SHEET_WEBHOOK_URL: SHEET_WEBHOOK_URL
   };
 
   /* =========================================================
@@ -812,7 +815,7 @@
   function logBookingToSheet(fields) {
     if (!SHEET_WEBHOOK_URL) return;
     try {
-      var body = new URLSearchParams(Object.assign({ token: SHEET_WEBHOOK_TOKEN }, fields));
+      var body = new URLSearchParams(Object.assign({ action: 'logBooking', token: SHEET_WEBHOOK_TOKEN }, fields));
       // mode: 'no-cors' sidesteps CORS entirely for this write-only call —
       // Apps Script Web Apps don't reliably send the CORS headers needed
       // for the browser to read a response, so this doesn't try to.

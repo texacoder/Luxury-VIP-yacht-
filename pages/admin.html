@@ -5,14 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard — VIP Yachts</title>
 <meta name="description" content="VIP Yachts internal admin dashboard for managing yachts, bookings, customers, and payments.">
+<meta name="robots" content="noindex,nofollow">
 <link rel="icon" type="image/png" href="../images/logo.png">
-<link rel="stylesheet" href="../css/styles.css?v=10">
+<link rel="stylesheet" href="../css/styles.css?v=11">
 <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="admin-body">
 <a href="#admin-main" class="skip-link">Skip to main content</a>
 
-<div class="admin-shell">
+<!-- ===================== LOGIN SCREEN ===================== -->
+<section class="admin-login-screen" id="admin-login-screen">
+  <form class="admin-login-card" id="admin-login-form" novalidate>
+    <a href="../index.html" class="brand admin-brand admin-login-brand" aria-label="VIP Yachts home">
+      <img src="../images/logo.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-fallback',textContent:'VY'}))">
+      <span>VIP Yachts</span>
+    </a>
+    <h1>Admin Login</h1>
+    <p class="admin-login-sub">Sign in to view real bookings and dashboard data.</p>
+
+    <div class="form-row">
+      <label for="admin-username">Username</label>
+      <input type="text" id="admin-username" name="username" autocomplete="username" required>
+    </div>
+    <div class="form-row">
+      <label for="admin-password">Password</label>
+      <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
+    </div>
+
+    <p class="admin-login-error" id="admin-login-error" role="alert" hidden></p>
+
+    <button type="submit" class="btn btn-gold btn-block" id="admin-login-submit">Log In</button>
+  </form>
+</section>
+
+<!-- ===================== DASHBOARD (shown after login) ===================== -->
+<div class="admin-shell" id="admin-shell" hidden>
 
   <aside class="admin-sidebar">
     <a href="../index.html" class="brand admin-brand">
@@ -34,9 +61,12 @@
     <header class="admin-topbar">
       <h1>Dashboard</h1>
       <div class="admin-topbar-user">
-        <span>Admin User</span>
+        <span id="admin-topbar-username">Admin</span>
+        <button type="button" class="btn btn-sm btn-outline" id="admin-logout-btn">Log Out</button>
       </div>
     </header>
+
+    <p class="admin-data-error" id="admin-data-error" role="alert" hidden></p>
 
     <section class="admin-stats-grid">
       <div class="admin-stat-card">
@@ -45,15 +75,15 @@
       </div>
       <div class="admin-stat-card">
         <span class="admin-stat-label">Total Bookings</span>
-        <span class="admin-stat-value">248</span>
+        <span class="admin-stat-value" id="stat-total-bookings">—</span>
       </div>
       <div class="admin-stat-card">
         <span class="admin-stat-label">Revenue</span>
-        <span class="admin-stat-value">AED 1.8M</span>
+        <span class="admin-stat-value" id="stat-revenue">—</span>
       </div>
       <div class="admin-stat-card">
-        <span class="admin-stat-label">Active Users</span>
-        <span class="admin-stat-value">176</span>
+        <span class="admin-stat-label">Unique Customers</span>
+        <span class="admin-stat-value" id="stat-unique-customers">—</span>
       </div>
     </section>
 
@@ -65,21 +95,25 @@
         <table class="admin-table">
           <thead>
             <tr>
+              <th scope="col">Reference</th>
               <th scope="col">Customer</th>
               <th scope="col">Yacht</th>
+              <th scope="col">Package</th>
               <th scope="col">Date</th>
-              <th scope="col">Status</th>
+              <th scope="col">Total</th>
+              <th scope="col">Received</th>
             </tr>
           </thead>
           <tbody id="admin-bookings-body"></tbody>
         </table>
+        <p class="admin-table-empty" id="admin-bookings-empty" hidden>No bookings logged yet.</p>
       </div>
     </section>
 
   </main>
 </div>
 
-<script src="../js/script.js?v=13"></script>
-<script src="../js/admin.js?v=9"></script>
+<script src="../js/script.js?v=14"></script>
+<script src="../js/admin.js?v=10"></script>
 </body>
 </html>
