@@ -711,7 +711,7 @@
   // persistent record instead of just text in a WhatsApp message. Set this
   // after deploying the Apps Script (see setup instructions). Left blank,
   // logging is silently skipped and the site still works exactly as before.
-  var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby1Nx0jLAP7U539kz8EOP5-seR92954bHLS3Q7Jb3-6VE0Fr2nJTiPjML3zCeyn0m4_ZA/exec';
+  var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzt0kIXA6TC6o1khSINsGigbFnECMEAJAnEa3Ls-n3agYd1WKxgNEwc6tH-j4rGIFVXPg/exec';
   // Matches the SHARED_TOKEN constant in the Apps Script — a light deterrent
   // against random internet bots spamming the sheet via a leaked/guessed URL.
   var SHEET_WEBHOOK_TOKEN = 'vy-booking-2026';
