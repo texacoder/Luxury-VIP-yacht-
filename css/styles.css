@@ -1634,6 +1634,14 @@ textarea:focus-visible,
 }
 .admin-table-empty{ padding: var(--space-5) var(--space-3); color: var(--text-secondary); font-size: var(--fs-small); }
 
+.admin-loading{
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--deep-navy);
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+}
+
 /* Admin login screen */
 .admin-login-screen{
   min-height: 100vh;

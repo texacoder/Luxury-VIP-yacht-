@@ -7,14 +7,22 @@
 <meta name="description" content="VIP Yachts internal admin dashboard for managing yachts, bookings, customers, and payments.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" type="image/png" href="../images/logo.png">
-<link rel="stylesheet" href="../css/styles.css?v=11">
+<link rel="stylesheet" href="../css/styles.css?v=12">
 <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="admin-body">
 <a href="#admin-main" class="skip-link">Skip to main content</a>
 
+<!-- ===================== LOADING STATE ===================== -->
+<!-- Shown only for the moment it takes to ask the backend whether a login
+     is required at all — avoids flashing the login form before landing
+     directly on the dashboard when no admin password is set yet. -->
+<div class="admin-loading" id="admin-loading">
+  <span>Loading…</span>
+</div>
+
 <!-- ===================== LOGIN SCREEN ===================== -->
-<section class="admin-login-screen" id="admin-login-screen">
+<section class="admin-login-screen" id="admin-login-screen" hidden>
   <form class="admin-login-card" id="admin-login-form" novalidate>
     <a href="../index.html" class="brand admin-brand admin-login-brand" aria-label="VIP Yachts home">
       <img src="../images/logo.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-fallback',textContent:'VY'}))">
@@ -114,6 +122,6 @@
 </div>
 
 <script src="../js/script.js?v=14"></script>
-<script src="../js/admin.js?v=10"></script>
+<script src="../js/admin.js?v=11"></script>
 </body>
 </html>

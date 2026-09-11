@@ -20,6 +20,7 @@
     var data = window.VIPYachts;
     var qs = window.VIPYachtsUtil.qs;
 
+    var loadingScreen = qs('#admin-loading');
     var loginScreen = qs('#admin-login-screen');
     var adminShell = qs('#admin-shell');
     var loginForm = qs('#admin-login-form');
@@ -72,10 +73,12 @@
 
     /* ---------- View switching ---------- */
     function showLogin() {
+      loadingScreen.hidden = true;
       loginScreen.hidden = false;
       adminShell.hidden = true;
     }
     function showDashboard() {
+      loadingScreen.hidden = true;
       loginScreen.hidden = true;
       adminShell.hidden = false;
     }
@@ -134,10 +137,13 @@
 
     logoutBtn.addEventListener('click', function () {
       clearSession();
-      showLogin();
       usernameInput.value = '';
       passwordInput.value = '';
-      usernameInput.focus();
+      // Re-check with the backend rather than assuming a login screen is
+      // needed — if admin credentials haven't been configured yet, this
+      // just lands back on the open dashboard instead of a pointless
+      // login form with nothing to log into.
+      loadDashboard('', { hadToken: false });
     });
 
     /* ---------- Dashboard data ---------- */
@@ -207,24 +213,43 @@
       return data.escapeHtml ? data.escapeHtml(value) : String(value);
     }
 
-    function loadDashboard(token) {
+    // Whether a login screen is needed at all is decided by the backend,
+    // not this file — action=getBookings only replies with invalid_session
+    // once ADMIN_USERNAME/ADMIN_PASSWORD have actually been set in the
+    // Apps Script's Script Properties. Until then, every visitor lands
+    // straight on the dashboard; the moment those properties are set, the
+    // very next load (or this call, on an expired/missing token) starts
+    // getting invalid_session back and the login screen takes over
+    // automatically — no front-end change needed when that switch flips.
+    function loadDashboard(token, opts) {
+      opts = opts || {};
       setDataError('');
-      apiRequest('getBookings', { token: token })
+      apiRequest('getBookings', { token: token || '' })
         .then(function (res) {
           if (res.ok) {
+            showDashboard();
             renderDashboard(res.bookings || []);
             return;
           }
           if (res.error === 'invalid_session') {
             clearSession();
             showLogin();
-            setLoginError('Your session expired — please log in again.');
+            // Only frame it as an "expired session" if we actually had a
+            // token that got rejected — someone landing here for the
+            // first time after admin login just got turned on shouldn't
+            // see a confusing "expired" message for a session that never
+            // existed.
+            setLoginError(opts.hadToken ? 'Your session expired — please log in again.' : '');
             return;
           }
+          // Some other backend error, unrelated to auth — show the
+          // dashboard shell rather than blocking access behind it.
+          showDashboard();
           setDataError('Couldn’t load live bookings data. Showing what’s available.');
           renderDashboard([]);
         })
         .catch(function () {
+          showDashboard();
           setDataError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
           renderDashboard([]);
         });
@@ -233,16 +258,12 @@
     /* ---------- Entry ---------- */
     function enterDashboard(username) {
       topbarUsername.textContent = username || 'Admin';
-      showDashboard();
       var session = getStoredSession();
-      loadDashboard(session ? session.token : '');
+      loadDashboard(session ? session.token : '', { hadToken: true });
     }
 
     var existingSession = getStoredSession();
-    if (existingSession) {
-      enterDashboard(existingSession.username);
-    } else {
-      showLogin();
-    }
+    if (existingSession) topbarUsername.textContent = existingSession.username || 'Admin';
+    loadDashboard(existingSession ? existingSession.token : '', { hadToken: !!existingSession });
   };
 })();

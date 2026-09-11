@@ -12,12 +12,20 @@
  *   - action=logBooking   -> appends a booking as a new row (existing behavior)
  *   - action=login        -> checks the admin username/password, returns a
  *                            session token if correct
- *   - action=getBookings  -> returns all booking rows as JSON, but only if a
- *                            valid session token is sent
+ *   - action=getBookings  -> returns all booking rows as JSON. Openly
+ *                            readable UNTIL you set ADMIN_USERNAME/
+ *                            ADMIN_PASSWORD below — once both are set,
+ *                            it starts requiring a valid session token.
  *
  * The admin username/password live ONLY in this script's Script Properties —
  * never in any file that ships to the browser. That's what makes the login
  * real: nobody can read the password by viewing the site's source.
+ *
+ * IMPORTANT: until you complete step 4 below, the admin dashboard has NO
+ * login screen and anyone with the URL can view it — this is deliberate,
+ * so you can preview the dashboard before deciding on a password. The
+ * login screen appears automatically the moment both properties are set;
+ * nothing else needs to change.
  *
  * ---------------------------------------------------------------
  * ONE-TIME SETUP
@@ -26,9 +34,10 @@
  * 2. Extensions -> Apps Script. This opens the existing project behind
  *    SHEET_WEBHOOK_URL.
  * 3. Select all the existing code and replace it with this entire file.
- * 4. Set your admin login: in the Apps Script editor, click the gear icon
- *    (Project Settings) on the left, scroll to "Script Properties", and
- *    add two properties:
+ * 4. Whenever you're ready to require a real login (not required right
+ *    away — see IMPORTANT note above): in the Apps Script editor, click
+ *    the gear icon (Project Settings) on the left, scroll to "Script
+ *    Properties", and add two properties:
  *       ADMIN_USERNAME   = whatever you want to log in with
  *       ADMIN_PASSWORD   = a strong password (pick something not used
  *                          anywhere else — this is the only thing standing
@@ -164,16 +173,24 @@ function handleLogin(e) {
 }
 
 /* =========================================================
-   REAL BOOKINGS DATA (requires a valid session token)
+   REAL BOOKINGS DATA
+   Only requires a valid session token once ADMIN_USERNAME/ADMIN_PASSWORD
+   are actually set in Script Properties. Until then, the dashboard is
+   openly readable (no login screen shown) — the moment both properties
+   are set, this starts requiring a real login, with no front-end
+   changes needed to flip that switch.
    ========================================================= */
 function handleGetBookings(e) {
   var props = PropertiesService.getScriptProperties();
-  var sessions = getSessions(props);
-  var token = (e.parameter.token || '').toString();
-  var expiry = sessions[token];
+  var authRequired = !!(props.getProperty('ADMIN_USERNAME') && props.getProperty('ADMIN_PASSWORD'));
 
-  if (!expiry || Date.now() > expiry) {
-    return jsonResponse({ ok: false, error: 'invalid_session' });
+  if (authRequired) {
+    var sessions = getSessions(props);
+    var token = (e.parameter.token || '').toString();
+    var expiry = sessions[token];
+    if (!expiry || Date.now() > expiry) {
+      return jsonResponse({ ok: false, error: 'invalid_session' });
+    }
   }
 
   var sheet = getSheet();
@@ -192,7 +209,7 @@ function handleGetBookings(e) {
     bookings.reverse();
   }
 
-  return jsonResponse({ ok: true, bookings: bookings });
+  return jsonResponse({ ok: true, bookings: bookings, authRequired: authRequired });
 }
 
 /* =========================================================
