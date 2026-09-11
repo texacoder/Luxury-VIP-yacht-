@@ -228,8 +228,8 @@
       crew: 3,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-mayyas-75-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-mayyas-75-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-mayyas-75-hero.jpg',
+      gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-interior.jpg'],
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins — Master and Twin — each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master & Twin cabins, each en-suite', 'Main salon with bar area', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
@@ -253,8 +253,8 @@
       crew: 5,
       speedKnots: 18,
       year: null,
-      image: 'images/yacht-majesty-88-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-majesty-88-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-majesty-88-hero.jpg',
+      gallery: ['images/yacht-majesty-88-exterior.jpg', 'images/yacht-majesty-88-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
@@ -278,8 +278,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-majesty-59-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-majesty-59-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-majesty-59-exterior.jpg', // no dedicated hero photo was supplied for this yacht — using the exterior shot as the card/hero image instead
+      gallery: ['images/yacht-majesty-59-exterior.jpg', 'images/yacht-majesty-59-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is a 59-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 59 accommodates up to 25 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. The Master cabin comes with an en-suite bathroom. A main salon with dining area and a spacious flybridge featuring its own dining area round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master cabin, en-suite', 'Main salon with dining area', 'Spacious flybridge with dining area', 'Jetski included', 'Water sports available'],
@@ -303,8 +303,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-jasmine-55-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-jasmine-55-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-jasmine-55-hero.jpg',
+      gallery: ['images/yacht-jasmine-55-exterior.jpg', 'images/yacht-jasmine-55-interior.jpg'],
       description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Main salon', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
@@ -564,8 +564,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: 'images/yacht-sanlorenzo-sx88-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-sanlorenzo-sx88-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-sanlorenzo-sx88-hero.jpg',
+      gallery: ['images/yacht-sanlorenzo-sx88-exterior.jpg', 'images/yacht-sanlorenzo-sx88-interior.jpg'],
       description: 'Experience unmatched luxury aboard the Sanlorenzo SX88, a masterpiece of Italian yacht design with expansive indoor and outdoor living spaces.',
       overview: 'The SX88 boasts a spacious salon with panoramic views, a fully equipped galley, and beautifully designed cabins accommodating up to eight guests in ultimate comfort. The vast aft deck and swim platform provide the perfect setting for sunbathing or diving into Dubai\'s crystal-clear waters, while advanced onboard technology ensures a seamless cruising experience.',
       features: ['Panoramic-view salon', 'Fully equipped galley', 'Vast aft deck & swim platform', 'Advanced onboard technology', 'Accommodates up to 8 guests'],
@@ -589,8 +589,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: 'images/yacht-fynesse-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-fynesse-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-fynesse-hero.jpg',
+      gallery: ['images/yacht-fynesse-exterior.jpg', 'images/yacht-fynesse-interior.jpg'],
       description: 'Fynesse is a classic tri-deck superyacht offering a spacious sundeck jacuzzi, wraparound lounge seating, and an elegant formal dining room, cruising against Dubai\'s iconic skyline.',
       overview: 'Fynesse features a sundeck jacuzzi with shaded lounge seating, an upper-deck lounge bar with wraparound seating, and a main-deck formal dining room seating large groups in style. Cabins are finished with classic furnishings for a refined charter experience.',
       features: ['Sundeck jacuzzi with shade canopy', 'Upper-deck lounge bar', 'Formal dining room', 'Wraparound outdoor seating', 'Classic tri-deck styling'],
@@ -614,8 +614,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: 'images/yacht-matrix-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-matrix-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-matrix-hero.jpg',
+      gallery: ['images/yacht-matrix-exterior.jpg', 'images/yacht-matrix-interior.jpg'],
       description: 'Matrix is a striking black-hulled sport yacht cruising Dubai\'s waters, featuring a sleek flybridge, an open aft deck dining area, and a bright, contemporary main salon.',
       overview: 'Matrix pairs an aggressive black hull with an open flybridge helm and lounge seating, a teak-decked aft cockpit set for alfresco dining, and a light-filled main salon with wraparound seating. Cabins offer twin and double configurations with en-suite bathrooms.',
       features: ['Flybridge helm & lounge seating', 'Teak aft cockpit dining', 'Contemporary main salon', 'Twin & double cabins', 'Striking black hull'],
@@ -639,8 +639,8 @@
       crew: 10, // per source brochure: capable of carrying up to 10 crew
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: 'images/yacht-encore-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-encore-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-encore-hero.jpg',
+      gallery: ['images/yacht-encore-exterior.jpg', 'images/yacht-encore-interior.jpg'],
       description: 'Encore is a 140ft tri-deck superyacht with a fully private owner\'s deck, a dedicated sky lounge, and timeless styling with beautiful furnishings throughout.',
       overview: 'Encore\'s 100% owner\'s deck offers a fully private salon and forward jacuzzi pool deck, isolated from cameras for total privacy. Five cabins accommodate up to 12 guests overnight (1 owner, 2 VIP, 2 double), while the prized sky lounge offers a relaxed space for cocktails and entertaining. She can carry up to 10 crew and up to 30 guests for day charters, with 7-star hospitality service throughout.',
       features: ['100% private owner\'s deck with forward jacuzzi', 'Dedicated sky lounge', '5 cabins: 1 owner, 2 VIP, 2 double', 'Formal dining room', '7-star hospitality service', 'Carries up to 10 crew'],
@@ -665,8 +665,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: 'images/yacht-notika-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-notika-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
+      image: 'images/yacht-notika-hero.jpg',
+      gallery: ['images/yacht-notika-exterior.jpg', 'images/yacht-notika-interior.jpg'],
       description: 'Notika is a sleek sport yacht offering a spacious sundeck lounge, an open flybridge dining and bar area, and a comfortable main salon set up for entertaining.',
       overview: 'Notika\'s sundeck lounge and flybridge dining/bar area give guests multiple spaces to relax and entertain, while the main salon and formal dining area provide comfortable indoor space with sea views. Cabins offer double and twin configurations with en-suite bathrooms.',
       features: ['Sundeck lounge seating', 'Flybridge dining and bar', 'Main salon with sea views', 'Formal dining area', 'Double & twin cabins'],
