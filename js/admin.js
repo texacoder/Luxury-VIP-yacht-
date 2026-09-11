@@ -57,6 +57,13 @@
     }
 
     /* ---------- Backend calls ---------- */
+    // Google Apps Script Web Apps can be genuinely slow to respond — a few
+    // seconds is normal, especially the first request after the script has
+    // been idle a while ("cold start"). REQUEST_TIMEOUT_MS is a ceiling so a
+    // request that's truly stuck (not just slow) fails with a clear message
+    // instead of leaving a button stuck on "Logging in..." forever.
+    var REQUEST_TIMEOUT_MS = 25000;
+
     // Not sent with mode:'no-cors' like the booking logger — login and
     // getBookings both need to read the response, and Apps Script Web
     // App responses are readable cross-origin by default as long as the
@@ -66,9 +73,24 @@
       var url = data.SHEET_WEBHOOK_URL;
       if (!url) return Promise.reject(new Error('not_configured'));
       var body = new URLSearchParams(Object.assign({ action: action }, params));
-      return fetch(url, { method: 'POST', body: body }).then(function (res) {
-        return res.json();
-      });
+
+      var controller = ('AbortController' in window) ? new AbortController() : null;
+      var timeoutId = controller ? setTimeout(function () { controller.abort(); }, REQUEST_TIMEOUT_MS) : null;
+
+      return fetch(url, { method: 'POST', body: body, signal: controller ? controller.signal : undefined })
+        .then(function (res) {
+          if (timeoutId) clearTimeout(timeoutId);
+          return res.json();
+        })
+        .catch(function (err) {
+          if (timeoutId) clearTimeout(timeoutId);
+          if (err && err.name === 'AbortError') {
+            var timeoutErr = new Error('timeout');
+            timeoutErr.isTimeout = true;
+            throw timeoutErr;
+          }
+          throw err;
+        });
     }
 
     /* ---------- View switching ---------- */
@@ -106,6 +128,12 @@
       setLoginError('');
       loginSubmitBtn.disabled = true;
       loginSubmitBtn.textContent = 'Logging in…';
+      // Apps Script can genuinely take several seconds, especially right
+      // after being idle — reassure rather than leave the button looking
+      // frozen with no explanation.
+      var slowNoticeTimer = setTimeout(function () {
+        loginSubmitBtn.textContent = 'Still logging in… (this can take a few seconds)';
+      }, 4000);
 
       apiRequest('login', { username: username, password: password })
         .then(function (res) {
@@ -126,10 +154,15 @@
             setLoginError('Something went wrong logging in. Please try again.');
           }
         })
-        .catch(function () {
-          setLoginError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
+        .catch(function (err) {
+          if (err && err.isTimeout) {
+            setLoginError('The backend didn’t respond in time (' + Math.round(REQUEST_TIMEOUT_MS / 1000) + 's). It may just be slow to wake up — please try again.');
+          } else {
+            setLoginError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
+          }
         })
         .then(function () {
+          clearTimeout(slowNoticeTimer);
           loginSubmitBtn.disabled = false;
           loginSubmitBtn.textContent = 'Log In';
         });
@@ -248,9 +281,13 @@
           setDataError('Couldn’t load live bookings data. Showing what’s available.');
           renderDashboard([]);
         })
-        .catch(function () {
+        .catch(function (err) {
           showDashboard();
-          setDataError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
+          if (err && err.isTimeout) {
+            setDataError('The backend didn’t respond in time (' + Math.round(REQUEST_TIMEOUT_MS / 1000) + 's). It may just be slow to wake up — try reloading in a moment.');
+          } else {
+            setDataError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
+          }
           renderDashboard([]);
         });
     }
@@ -264,6 +301,18 @@
 
     var existingSession = getStoredSession();
     if (existingSession) topbarUsername.textContent = existingSession.username || 'Admin';
+
+    // Reassure on a slow first load too — same reasoning as the login
+    // button notice above. Checks loadingScreen.hidden rather than
+    // clearing itself, since by the time this fires the page may have
+    // already moved on to the login screen or dashboard.
+    setTimeout(function () {
+      if (!loadingScreen.hidden) {
+        var loadingText = loadingScreen.querySelector('span');
+        if (loadingText) loadingText.textContent = 'Still loading… the backend can be slow to wake up.';
+      }
+    }, 4000);
+
     loadDashboard(existingSession ? existingSession.token : '', { hadToken: !!existingSession });
   };
 })();
