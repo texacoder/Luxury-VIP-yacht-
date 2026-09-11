@@ -1,8 +1,17 @@
 /* =========================================================
    ADMIN DASHBOARD MODULE
-   Real login + real bookings data, backed by the Apps Script Web App
-   at data.SHEET_WEBHOOK_URL (see google-apps-script/booking-backend.gs
-   for the server-side code and one-time setup instructions).
+   Real login + real enquiry data, backed by the Apps Script Web App at
+   data.SHEET_WEBHOOK_URL (see google-apps-script/booking-backend.gs for
+   the server-side code and one-time setup instructions).
+
+   IMPORTANT CONCEPT: every charter request submitted through the site's
+   booking flow is an ENQUIRY, not a confirmed sale — the site hands off
+   to WhatsApp and nothing on it collects payment or confirms anything.
+   Every enquiry starts as { status: 'enquiry', paymentStatus: 'unpaid' }.
+   The admin marks each one Confirmed/Cancelled and Paid/Unpaid (+ Online
+   or At Marina once paid) from the Enquiries section — that's what makes
+   "Revenue" and "Confirmed" on the dashboard real numbers instead of
+   just a count of everyone who ever asked.
 
    The admin username/password never live in this file or anywhere else
    that ships to the browser — they're checked server-side by the Apps
@@ -10,18 +19,21 @@
    just stores that token (in localStorage) and sends it along with each
    request for real data.
 
-   Sections (Dashboard / Yachts / Bookings / Customers / Reports) are all
+   Sections (Dashboard / Yachts / Enquiries / Customers / Reports) are all
    rendered client-side from two real data sources: the live YACHTS array
-   (same one the public site uses) and the bookings fetched once from the
-   backend — no extra network calls per section, no per-section backend
-   endpoints needed.
+   (same one the public site uses) and the enquiries fetched once from the
+   backend — no extra network calls per section.
    ========================================================= */
 (function () {
   'use strict';
   window.VIPYachtsPages = window.VIPYachtsPages || {};
 
   var SESSION_KEY = 'vipyachts_admin_session';
-  var SECTION_TITLES = { dashboard: 'Dashboard', yachts: 'Fleet', bookings: 'All Bookings', customers: 'Customers', reports: 'Reports' };
+  var SECTION_TITLES = { dashboard: 'Dashboard', yachts: 'Fleet', enquiries: 'All Enquiries', customers: 'Customers', reports: 'Reports' };
+
+  var STATUS_LABELS = { enquiry: 'Enquiry', confirmed: 'Confirmed', cancelled: 'Cancelled' };
+  var PAYMENT_STATUS_LABELS = { unpaid: 'Unpaid', paid: 'Paid' };
+  var PAYMENT_METHOD_LABELS = { online: 'Online', marina: 'At Marina' };
 
   window.VIPYachtsPages.admin = function () {
     var data = window.VIPYachts;
@@ -41,7 +53,8 @@
     var sectionTitle = qs('#admin-section-title');
     var dataError = qs('#admin-data-error');
 
-    var allBookings = []; // populated once per successful load, reused by every section
+    var allEnquiries = []; // populated once per successful load, reused by every section
+    var currentToken = ''; // needed by the per-row status save handler
 
     /* ---------- Session storage ---------- */
     function getStoredSession() {
@@ -75,11 +88,11 @@
     // instead of leaving a button stuck on "Logging in..." forever.
     var REQUEST_TIMEOUT_MS = 25000;
 
-    // Not sent with mode:'no-cors' like the booking logger — login and
-    // getBookings both need to read the response, and Apps Script Web
-    // App responses are readable cross-origin by default as long as the
-    // request stays a "simple" request (form-encoded body, no custom
-    // headers), which is what URLSearchParams gives us here.
+    // Not sent with mode:'no-cors' like the enquiry logger — every action
+    // here needs to read the response, and Apps Script Web App responses
+    // are readable cross-origin by default as long as the request stays a
+    // "simple" request (form-encoded body, no custom headers), which is
+    // what URLSearchParams gives us here.
     function apiRequest(action, params) {
       var url = data.SHEET_WEBHOOK_URL;
       if (!url) return Promise.reject(new Error('not_configured'));
@@ -116,7 +129,7 @@
       adminShell.hidden = false;
     }
 
-    /* ---------- Section switching (Dashboard/Yachts/Bookings/Customers/Reports) ---------- */
+    /* ---------- Section switching (Dashboard/Yachts/Enquiries/Customers/Reports) ---------- */
     function switchSection(name) {
       if (!SECTION_TITLES[name]) name = 'dashboard';
       qsa('.admin-section').forEach(function (el) {
@@ -126,8 +139,13 @@
         btn.classList.toggle('is-active', btn.dataset.section === name);
       });
       sectionTitle.textContent = SECTION_TITLES[name];
+      // Re-render on every switch rather than once at load — an edit made
+      // in Enquiries (status/payment) changes what Dashboard/Customers/
+      // Reports should show, and this is the only place that re-render
+      // would happen from.
+      if (name === 'dashboard') renderDashboard(allEnquiries);
       if (name === 'yachts') renderYachts();
-      if (name === 'bookings') renderAllBookings();
+      if (name === 'enquiries') renderEnquiries();
       if (name === 'customers') renderCustomers();
       if (name === 'reports') renderReports();
     }
@@ -238,21 +256,52 @@
       return isNaN(n) ? 0 : n;
     }
 
+    // Every enquiry defaults to Enquiry/Unpaid until the admin sets it
+    // otherwise — a blank/missing column (including every enquiry logged
+    // before this feature existed) reads as that default, not an error.
+    function getStatus(b) { return STATUS_LABELS[b.status] ? b.status : 'enquiry'; }
+    function getPaymentStatus(b) { return PAYMENT_STATUS_LABELS[b.paymentStatus] ? b.paymentStatus : 'unpaid'; }
+    function getPaymentMethod(b) { return PAYMENT_METHOD_LABELS[b.paymentMethod] ? b.paymentMethod : ''; }
+
+    function statusBadgeHtml(b) {
+      var status = getStatus(b);
+      var paymentStatus = getPaymentStatus(b);
+      if (status === 'cancelled') return '<span class="badge badge-danger">Cancelled</span>';
+      if (paymentStatus === 'paid') {
+        var method = getPaymentMethod(b);
+        return '<span class="badge badge-success">Paid' + (method ? ' · ' + PAYMENT_METHOD_LABELS[method] : '') + '</span>';
+      }
+      if (status === 'confirmed') return '<span class="badge badge-gold">Confirmed</span>';
+      return '<span class="badge badge-muted">Enquiry</span>';
+    }
+
     /* ============================================================
        DASHBOARD
        ============================================================ */
-    function renderDashboard(bookings) {
+    function renderDashboard(enquiries) {
       qs('#stat-total-yachts').textContent = data.YACHTS.length;
-      qs('#stat-total-bookings').textContent = bookings.length;
+      qs('#stat-total-enquiries').textContent = enquiries.length;
 
-      var revenue = bookings.reduce(function (sum, b) { return sum + bookingTotalNumber(b); }, 0);
-      qs('#stat-revenue').textContent = data.formatAED(revenue);
+      var confirmedCount = enquiries.filter(function (b) { return getStatus(b) === 'confirmed'; }).length;
+      qs('#stat-confirmed').textContent = confirmedCount;
 
-      qs('#stat-unique-customers').textContent = Object.keys(customerKeyMap(bookings)).length;
+      var paidRevenue = enquiries.reduce(function (sum, b) {
+        return sum + (getPaymentStatus(b) === 'paid' ? bookingTotalNumber(b) : 0);
+      }, 0);
+      qs('#stat-revenue-paid').textContent = data.formatAED(paidRevenue);
 
-      var body = qs('#admin-bookings-body');
-      var empty = qs('#admin-bookings-empty');
-      var recent = bookings.slice(0, 8); // dashboard is a preview; full list lives in the Bookings section
+      // "Enquiry value" is the live pipeline — everything not written off
+      // as cancelled, whether or not it's converted yet.
+      var enquiryValue = enquiries.reduce(function (sum, b) {
+        return sum + (getStatus(b) !== 'cancelled' ? bookingTotalNumber(b) : 0);
+      }, 0);
+      qs('#stat-enquiry-value').textContent = data.formatAED(enquiryValue);
+
+      qs('#stat-unique-customers').textContent = Object.keys(customerKeyMap(enquiries)).length;
+
+      var body = qs('#admin-recent-enquiries-body');
+      var empty = qs('#admin-recent-enquiries-empty');
+      var recent = enquiries.slice(0, 8); // dashboard is a preview; full list lives in the Enquiries section
 
       if (!recent.length) {
         body.innerHTML = '';
@@ -260,10 +309,10 @@
         return;
       }
       empty.hidden = true;
-      body.innerHTML = recent.map(bookingRowHtml).join('');
+      body.innerHTML = recent.map(function (b) { return enquiryRowHtml(b, false, true); }).join('');
     }
 
-    function bookingRowHtml(b, includePhone) {
+    function enquiryRowHtml(b, includePhone, includeBadgeOnly) {
       var totalNum = Number(b.total);
       var totalTxt = isNaN(totalNum) ? (b.total || '—') : data.formatAED(totalNum);
       var received = b.timestamp ? formatTimestamp(b.timestamp) : '—';
@@ -277,13 +326,14 @@
           '<td>' + escapeHtml(b.date || '—') + '</td>' +
           '<td>' + escapeHtml(totalTxt) + '</td>' +
           '<td>' + escapeHtml(received) + '</td>' +
+          (includeBadgeOnly ? '<td>' + statusBadgeHtml(b) + '</td>' : '') +
         '</tr>'
       );
     }
 
-    function customerKeyMap(bookings) {
+    function customerKeyMap(enquiries) {
       var map = {};
-      bookings.forEach(function (b) {
+      enquiries.forEach(function (b) {
         var key = (b.email || b.phone || '').toString().trim().toLowerCase();
         if (key) map[key] = true;
       });
@@ -342,52 +392,167 @@
     });
 
     /* ============================================================
-       ALL BOOKINGS
+       ENQUIRIES — full list + the status/payment editing controls
+       that make the rest of the dashboard's numbers real
        ============================================================ */
-    var bookingsSearch = '';
+    var enquiriesSearch = '';
 
-    function renderAllBookings() {
-      var filtered = !bookingsSearch ? allBookings : allBookings.filter(function (b) {
+    function renderEnquiries() {
+      var filtered = !enquiriesSearch ? allEnquiries : allEnquiries.filter(function (b) {
         var haystack = [b.reference, b.name, b.yacht, b.email, b.phone].join(' ').toLowerCase();
-        return haystack.indexOf(bookingsSearch) !== -1;
+        return haystack.indexOf(enquiriesSearch) !== -1;
       });
 
-      qs('#admin-all-bookings-count').textContent = filtered.length + (filtered.length === 1 ? ' booking' : ' bookings') + (bookingsSearch ? ' matching “' + bookingsSearch + '”' : '');
+      qs('#admin-enquiries-count').textContent = filtered.length + (filtered.length === 1 ? ' enquiry' : ' enquiries') + (enquiriesSearch ? ' matching “' + enquiriesSearch + '”' : '');
 
-      var body = qs('#admin-all-bookings-body');
-      var empty = qs('#admin-all-bookings-empty');
+      var body = qs('#admin-enquiries-body');
+      var empty = qs('#admin-enquiries-empty');
       if (!filtered.length) {
         body.innerHTML = '';
         empty.hidden = false;
-        empty.textContent = allBookings.length ? 'No bookings match your search.' : 'No bookings logged yet.';
+        empty.textContent = allEnquiries.length ? 'No enquiries match your search.' : 'No enquiries logged yet.';
         return;
       }
       empty.hidden = true;
-      body.innerHTML = filtered.map(function (b) { return bookingRowHtml(b, true); }).join('');
+      body.innerHTML = filtered.map(enquiryEditableRowHtml).join('');
+      wireEnquiryRowControls(body);
     }
 
-    qs('#admin-bookings-search').addEventListener('input', function (e) {
-      bookingsSearch = e.target.value.trim().toLowerCase();
-      renderAllBookings();
+    function optionsHtml(labelMap, selected) {
+      return Object.keys(labelMap).map(function (val) {
+        return '<option value="' + val + '"' + (val === selected ? ' selected' : '') + '>' + labelMap[val] + '</option>';
+      }).join('');
+    }
+
+    function enquiryEditableRowHtml(b) {
+      var totalNum = Number(b.total);
+      var totalTxt = isNaN(totalNum) ? (b.total || '—') : data.formatAED(totalNum);
+      var received = b.timestamp ? formatTimestamp(b.timestamp) : '—';
+      var status = getStatus(b);
+      var paymentStatus = getPaymentStatus(b);
+      var paymentMethod = getPaymentMethod(b);
+      var methodDisabled = paymentStatus !== 'paid';
+      var reference = escapeHtml(b.reference || '');
+
+      return (
+        '<tr data-reference="' + reference + '">' +
+          '<td>' + (b.reference || '—') + '</td>' +
+          '<td>' + escapeHtml(b.name || '—') + '</td>' +
+          '<td>' + escapeHtml(b.phone || '—') + '</td>' +
+          '<td>' + escapeHtml(b.yacht || '—') + '</td>' +
+          '<td>' + escapeHtml(b.package || '—') + '</td>' +
+          '<td>' + escapeHtml(b.date || '—') + '</td>' +
+          '<td>' + escapeHtml(totalTxt) + '</td>' +
+          '<td>' + escapeHtml(received) + '</td>' +
+          '<td><select class="admin-row-select" data-field="status">' + optionsHtml(STATUS_LABELS, status) + '</select></td>' +
+          '<td><select class="admin-row-select" data-field="paymentStatus">' + optionsHtml(PAYMENT_STATUS_LABELS, paymentStatus) + '</select></td>' +
+          '<td><select class="admin-row-select" data-field="paymentMethod"' + (methodDisabled ? ' disabled' : '') + '>' +
+            '<option value="">— Select —</option>' + optionsHtml(PAYMENT_METHOD_LABELS, paymentMethod) +
+          '</select></td>' +
+          '<td class="admin-row-save-state" aria-live="polite"></td>' +
+        '</tr>'
+      );
+    }
+
+    function wireEnquiryRowControls(tbody) {
+      qsa('tr', tbody).forEach(function (row) {
+        var reference = row.dataset.reference;
+        var statusSelect = qs('[data-field="status"]', row);
+        var paymentSelect = qs('[data-field="paymentStatus"]', row);
+        var methodSelect = qs('[data-field="paymentMethod"]', row);
+        var saveState = qs('.admin-row-save-state', row);
+
+        paymentSelect.addEventListener('change', function () {
+          var isPaid = paymentSelect.value === 'paid';
+          methodSelect.disabled = !isPaid;
+          if (!isPaid) methodSelect.value = '';
+          saveRow();
+        });
+        statusSelect.addEventListener('change', saveRow);
+        methodSelect.addEventListener('change', saveRow);
+
+        function saveRow() {
+          var entry = allEnquiries.filter(function (b) { return b.reference === reference; })[0];
+          if (!entry) return;
+
+          var newStatus = statusSelect.value;
+          var newPaymentStatus = paymentSelect.value;
+          var newPaymentMethod = newPaymentStatus === 'paid' ? methodSelect.value : '';
+
+          // Optimistic: remember the previous values so a failed save can
+          // put the row back exactly as it was, then apply the new ones
+          // immediately so the row and every derived section (Dashboard,
+          // Customers, Reports) reflect it right away.
+          var previous = { status: entry.status, paymentStatus: entry.paymentStatus, paymentMethod: entry.paymentMethod };
+          entry.status = newStatus;
+          entry.paymentStatus = newPaymentStatus;
+          entry.paymentMethod = newPaymentMethod;
+
+          setRowSaving(true);
+          apiRequest('updateEnquiryStatus', {
+            token: currentToken,
+            reference: reference,
+            status: newStatus,
+            paymentStatus: newPaymentStatus,
+            paymentMethod: newPaymentMethod
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.error || 'save_failed');
+              saveState.textContent = 'Saved';
+              saveState.className = 'admin-row-save-state is-success';
+              setTimeout(function () { saveState.textContent = ''; }, 2000);
+            })
+            .catch(function () {
+              // Roll back — both the in-memory record and the controls —
+              // so the row never silently shows a state that isn't
+              // actually saved on the backend.
+              entry.status = previous.status;
+              entry.paymentStatus = previous.paymentStatus;
+              entry.paymentMethod = previous.paymentMethod;
+              statusSelect.value = getStatus(entry);
+              paymentSelect.value = getPaymentStatus(entry);
+              methodSelect.value = getPaymentMethod(entry);
+              methodSelect.disabled = getPaymentStatus(entry) !== 'paid';
+              saveState.textContent = 'Couldn’t save — try again';
+              saveState.className = 'admin-row-save-state is-error';
+            })
+            .then(function () { setRowSaving(false); });
+        }
+
+        function setRowSaving(saving) {
+          statusSelect.disabled = saving;
+          paymentSelect.disabled = saving;
+          methodSelect.disabled = saving || paymentSelect.value !== 'paid';
+          if (saving) {
+            saveState.textContent = 'Saving…';
+            saveState.className = 'admin-row-save-state is-saving';
+          }
+        }
+      });
+    }
+
+    qs('#admin-enquiries-search').addEventListener('input', function (e) {
+      enquiriesSearch = e.target.value.trim().toLowerCase();
+      renderEnquiries();
     });
 
     /* ============================================================
-       CUSTOMERS — derived from real booking records
+       CUSTOMERS — derived from real enquiry records
        ============================================================ */
     var customersSearch = '';
 
     function buildCustomerList() {
       var map = {};
-      allBookings.forEach(function (b) {
+      allEnquiries.forEach(function (b) {
         var key = (b.email || b.phone || '').toString().trim().toLowerCase();
         if (!key) return;
         if (!map[key]) {
-          map[key] = { name: b.name || '—', email: b.email || '', phone: b.phone || '', count: 0, spend: 0, lastDate: null, lastTimestamp: 0 };
+          map[key] = { name: b.name || '—', email: b.email || '', phone: b.phone || '', count: 0, paidSpend: 0, lastDate: null, lastTimestamp: 0 };
         }
         var c = map[key];
         c.count += 1;
-        c.spend += bookingTotalNumber(b);
-        // Prefer the most-recently-named version in case a customer's name was typed differently across bookings.
+        if (getPaymentStatus(b) === 'paid') c.paidSpend += bookingTotalNumber(b);
+        // Prefer the most-recently-named version in case a customer's name was typed differently across enquiries.
         if (b.name) c.name = b.name;
         var ts = b.timestamp ? new Date(b.timestamp).getTime() : 0;
         if (ts >= c.lastTimestamp) { c.lastTimestamp = ts; c.lastDate = b.date || formatTimestamp(b.timestamp); }
@@ -396,7 +561,7 @@
     }
 
     function renderCustomers() {
-      var customers = buildCustomerList().sort(function (a, b) { return b.spend - a.spend; });
+      var customers = buildCustomerList().sort(function (a, b) { return b.paidSpend - a.paidSpend; });
       var filtered = !customersSearch ? customers : customers.filter(function (c) {
         return (c.name + ' ' + c.email + ' ' + c.phone).toLowerCase().indexOf(customersSearch) !== -1;
       });
@@ -419,7 +584,7 @@
             '<td>' + escapeHtml(c.email || '—') + '</td>' +
             '<td>' + escapeHtml(c.phone || '—') + '</td>' +
             '<td>' + c.count + '</td>' +
-            '<td>' + escapeHtml(data.formatAED(c.spend)) + '</td>' +
+            '<td>' + escapeHtml(data.formatAED(c.paidSpend)) + '</td>' +
             '<td>' + escapeHtml(c.lastDate || '—') + '</td>' +
           '</tr>'
         );
@@ -432,7 +597,7 @@
     });
 
     /* ============================================================
-       REPORTS — aggregates over the same real booking records
+       REPORTS — aggregates over the same real enquiry records
        ============================================================ */
     function renderBarGroup(containerId, emptyId, entries, formatValue) {
       var container = qs('#' + containerId);
@@ -456,23 +621,22 @@
       }).join('');
     }
 
-    function groupSum(bookings, keyFn) {
+    function groupCount(enquiries, keyFn) {
       var map = {};
-      bookings.forEach(function (b) {
+      enquiries.forEach(function (b) {
         var key = keyFn(b);
         if (!key) return;
-        if (!map[key]) map[key] = { count: 0, revenue: 0 };
-        map[key].count += 1;
-        map[key].revenue += bookingTotalNumber(b);
+        map[key] = (map[key] || 0) + 1;
       });
       return map;
     }
 
     function renderReports() {
-      // Revenue by month (grouped by charter date, not the date the booking was logged).
+      // Paid revenue by month (grouped by charter date, not the date the
+      // enquiry was logged) — only enquiries actually marked Paid.
       var byMonth = {};
-      allBookings.forEach(function (b) {
-        if (!b.date) return;
+      allEnquiries.forEach(function (b) {
+        if (!b.date || getPaymentStatus(b) !== 'paid') return;
         var d = new Date(b.date);
         if (isNaN(d.getTime())) return;
         var key = d.toLocaleString('en-US', { month: 'short', year: 'numeric' });
@@ -483,22 +647,23 @@
         .sort(function (a, b) { return a.sortKey - b.sortKey; });
       renderBarGroup('report-revenue-by-month', 'report-revenue-empty', monthEntries, function (e) { return data.formatAED(e.value); });
 
-      // Bookings by yacht.
-      var byYacht = groupSum(allBookings, function (b) { return b.yacht; });
+      // Enquiry volume by yacht/package — every enquiry counts here
+      // (demand signal), regardless of whether it converted.
+      var byYacht = groupCount(allEnquiries, function (b) { return b.yacht; });
       var yachtEntries = Object.keys(byYacht)
-        .map(function (k) { return { label: k, value: byYacht[k].count, revenue: byYacht[k].revenue }; })
+        .map(function (k) { return { label: k, value: byYacht[k] }; })
         .sort(function (a, b) { return b.value - a.value; });
-      renderBarGroup('report-by-yacht', 'report-yacht-empty', yachtEntries, function (e) { return e.value + (e.value === 1 ? ' booking' : ' bookings'); });
+      renderBarGroup('report-by-yacht', 'report-yacht-empty', yachtEntries, function (e) { return e.value + (e.value === 1 ? ' enquiry' : ' enquiries'); });
 
-      // Bookings by package.
-      var byPackage = groupSum(allBookings, function (b) { return b.package; });
+      var byPackage = groupCount(allEnquiries, function (b) { return b.package; });
       var packageEntries = Object.keys(byPackage)
-        .map(function (k) { return { label: k, value: byPackage[k].count, revenue: byPackage[k].revenue }; })
+        .map(function (k) { return { label: k, value: byPackage[k] }; })
         .sort(function (a, b) { return b.value - a.value; });
-      renderBarGroup('report-by-package', 'report-package-empty', packageEntries, function (e) { return e.value + (e.value === 1 ? ' booking' : ' bookings'); });
+      renderBarGroup('report-by-package', 'report-package-empty', packageEntries, function (e) { return e.value + (e.value === 1 ? ' enquiry' : ' enquiries'); });
 
-      // Top customers by spend.
-      var customers = buildCustomerList().sort(function (a, b) { return b.spend - a.spend; }).slice(0, 5);
+      // Top customers by paid spend.
+      var customers = buildCustomerList().filter(function (c) { return c.paidSpend > 0; })
+        .sort(function (a, b) { return b.paidSpend - a.paidSpend; }).slice(0, 5);
       var topBody = qs('#report-top-customers-body');
       var topEmpty = qs('#report-customers-empty');
       if (!customers.length) {
@@ -507,13 +672,13 @@
       } else {
         topEmpty.hidden = true;
         topBody.innerHTML = customers.map(function (c) {
-          return '<tr><td>' + escapeHtml(c.name) + '</td><td>' + c.count + '</td><td>' + escapeHtml(data.formatAED(c.spend)) + '</td></tr>';
+          return '<tr><td>' + escapeHtml(c.name) + '</td><td>' + c.count + '</td><td>' + escapeHtml(data.formatAED(c.paidSpend)) + '</td></tr>';
         }).join('');
       }
     }
 
     /* ============================================================
-       LOAD — fetch bookings once, then render whichever section is active
+       LOAD — fetch enquiries once, then render whichever section is active
        ============================================================ */
     // Whether a login screen is needed at all is decided by the backend,
     // not this file — action=getBookings only replies with invalid_session
@@ -529,9 +694,10 @@
       apiRequest('getBookings', { token: token || '' })
         .then(function (res) {
           if (res.ok) {
-            allBookings = res.bookings || [];
+            currentToken = token || '';
+            allEnquiries = res.bookings || [];
             showDashboard();
-            renderDashboard(allBookings);
+            renderDashboard(allEnquiries);
             // Re-render whichever section is currently active so switching
             // tabs before this first load finished still shows real data.
             var activeBtn = qs('.admin-nav-link.is-active', qs('#admin-nav'));
@@ -552,7 +718,7 @@
           // Some other backend error, unrelated to auth — show the
           // dashboard shell rather than blocking access behind it.
           showDashboard();
-          setDataError('Couldn’t load live bookings data. Showing what’s available.');
+          setDataError('Couldn’t load live enquiry data. Showing what’s available.');
           renderDashboard([]);
         })
         .catch(function (err) {

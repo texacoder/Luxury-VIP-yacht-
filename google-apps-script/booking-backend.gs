@@ -8,14 +8,27 @@
  * it lives in a Google Apps Script project attached to your bookings Google
  * Sheet, and has to be pasted in and deployed by hand (one-time setup).
  *
- * It does three things, routed by an `action` field on every request:
- *   - action=logBooking   -> appends a booking as a new row (existing behavior)
- *   - action=login        -> checks the admin username/password, returns a
- *                            session token if correct
- *   - action=getBookings  -> returns all booking rows as JSON. Openly
- *                            readable UNTIL you set ADMIN_USERNAME/
- *                            ADMIN_PASSWORD below — once both are set,
- *                            it starts requiring a valid session token.
+ * It does four things, routed by an `action` field on every request:
+ *   - action=logBooking          -> appends a new enquiry as a row (existing
+ *                                   behavior — every charter request from the
+ *                                   site lands here as an ENQUIRY, not a
+ *                                   confirmed sale; nothing on the site itself
+ *                                   collects payment or confirms a booking)
+ *   - action=login                -> checks the admin username/password,
+ *                                    returns a session token if correct
+ *   - action=getBookings          -> returns all enquiry rows as JSON. Openly
+ *                                    readable UNTIL you set ADMIN_USERNAME/
+ *                                    ADMIN_PASSWORD below — once both are
+ *                                    set, it starts requiring a valid
+ *                                    session token. Same open/protected
+ *                                    switch applies to updateEnquiryStatus.
+ *   - action=updateEnquiryStatus  -> lets the admin mark one enquiry (by its
+ *                                    reference) as Confirmed/Cancelled and
+ *                                    Paid/Unpaid (+ Online/At Marina once
+ *                                    paid) — this is what actually makes the
+ *                                    admin dashboard's numbers real, since
+ *                                    every enquiry starts as unconfirmed and
+ *                                    unpaid until someone marks it otherwise.
  *
  * The admin username/password live ONLY in this script's Script Properties —
  * never in any file that ships to the browser. That's what makes the login
@@ -62,7 +75,11 @@
  * fields by header name (not by fixed column position), so it won't break
  * if you've already got columns in a particular order. Any booking field
  * that doesn't have a matching header yet gets its own new column
- * automatically the first time it's logged.
+ * automatically the first time it's logged — this includes three columns
+ * the admin dashboard adds itself the first time you mark an enquiry's
+ * status: "status" (enquiry/confirmed/cancelled), "paymentStatus"
+ * (unpaid/paid), and "paymentMethod" (online/marina, blank until paid).
+ * You don't need to add these columns by hand.
  * =========================================================
  */
 
@@ -93,10 +110,23 @@ function doPost(e) {
     if (action === 'logBooking') return handleLogBooking(e);
     if (action === 'login') return handleLogin(e);
     if (action === 'getBookings') return handleGetBookings(e);
+    if (action === 'updateEnquiryStatus') return handleUpdateEnquiryStatus(e);
     return jsonResponse({ ok: false, error: 'unknown_action' });
   } catch (err) {
     return jsonResponse({ ok: false, error: 'server_error', message: String(err) });
   }
+}
+
+// Shared by getBookings and updateEnquiryStatus: both are openly usable
+// until ADMIN_USERNAME/ADMIN_PASSWORD are set, then both start requiring a
+// valid session — same switch, so read and write access change together.
+function isSessionValid(e, props) {
+  var authRequired = !!(props.getProperty('ADMIN_USERNAME') && props.getProperty('ADMIN_PASSWORD'));
+  if (!authRequired) return true;
+  var sessions = getSessions(props);
+  var token = (e.parameter.token || '').toString();
+  var expiry = sessions[token];
+  return !!expiry && Date.now() <= expiry;
 }
 
 /* =========================================================
@@ -173,7 +203,7 @@ function handleLogin(e) {
 }
 
 /* =========================================================
-   REAL BOOKINGS DATA
+   REAL ENQUIRY DATA
    Only requires a valid session token once ADMIN_USERNAME/ADMIN_PASSWORD
    are actually set in Script Properties. Until then, the dashboard is
    openly readable (no login screen shown) — the moment both properties
@@ -184,13 +214,8 @@ function handleGetBookings(e) {
   var props = PropertiesService.getScriptProperties();
   var authRequired = !!(props.getProperty('ADMIN_USERNAME') && props.getProperty('ADMIN_PASSWORD'));
 
-  if (authRequired) {
-    var sessions = getSessions(props);
-    var token = (e.parameter.token || '').toString();
-    var expiry = sessions[token];
-    if (!expiry || Date.now() > expiry) {
-      return jsonResponse({ ok: false, error: 'invalid_session' });
-    }
+  if (!isSessionValid(e, props)) {
+    return jsonResponse({ ok: false, error: 'invalid_session' });
   }
 
   var sheet = getSheet();
@@ -210,6 +235,73 @@ function handleGetBookings(e) {
   }
 
   return jsonResponse({ ok: true, bookings: bookings, authRequired: authRequired });
+}
+
+/* =========================================================
+   UPDATE ONE ENQUIRY'S STATUS/PAYMENT (admin-only write)
+   Finds the row by its `reference` value and sets its status,
+   paymentStatus, and (only when paid) paymentMethod columns, adding
+   those columns automatically the first time this is called if the
+   sheet doesn't have them yet.
+   ========================================================= */
+var VALID_STATUSES = ['enquiry', 'confirmed', 'cancelled'];
+var VALID_PAYMENT_STATUSES = ['unpaid', 'paid'];
+var VALID_PAYMENT_METHODS = ['online', 'marina'];
+
+function handleUpdateEnquiryStatus(e) {
+  var props = PropertiesService.getScriptProperties();
+  if (!isSessionValid(e, props)) {
+    return jsonResponse({ ok: false, error: 'invalid_session' });
+  }
+
+  var reference = (e.parameter.reference || '').toString();
+  if (!reference) return jsonResponse({ ok: false, error: 'missing_reference' });
+
+  var status = (e.parameter.status || 'enquiry').toString();
+  var paymentStatus = (e.parameter.paymentStatus || 'unpaid').toString();
+  // Payment method only means something once actually paid — force it
+  // blank otherwise so it can't show a stale "Online"/"At Marina" next to
+  // an enquiry that got flipped back to unpaid.
+  var paymentMethod = paymentStatus === 'paid' ? (e.parameter.paymentMethod || '').toString() : '';
+
+  if (VALID_STATUSES.indexOf(status) === -1) return jsonResponse({ ok: false, error: 'invalid_status' });
+  if (VALID_PAYMENT_STATUSES.indexOf(paymentStatus) === -1) return jsonResponse({ ok: false, error: 'invalid_payment_status' });
+  if (paymentMethod && VALID_PAYMENT_METHODS.indexOf(paymentMethod) === -1) return jsonResponse({ ok: false, error: 'invalid_payment_method' });
+
+  var sheet = getSheet();
+  var headers = getHeaders(sheet);
+  var refCol = headers.indexOf('reference');
+  if (refCol === -1) return jsonResponse({ ok: false, error: 'no_reference_column' });
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 2) return jsonResponse({ ok: false, error: 'not_found' });
+
+  var refValues = sheet.getRange(2, refCol + 1, lastRow - 1, 1).getValues();
+  var rowIndex = -1;
+  for (var i = 0; i < refValues.length; i++) {
+    if (String(refValues[i][0]) === reference) { rowIndex = i + 2; break; } // +2: 1-based rows, skip header
+  }
+  if (rowIndex === -1) return jsonResponse({ ok: false, error: 'not_found' });
+
+  setCell(sheet, headers, rowIndex, 'status', status);
+  setCell(sheet, headers, rowIndex, 'paymentStatus', paymentStatus);
+  setCell(sheet, headers, rowIndex, 'paymentMethod', paymentMethod);
+
+  return jsonResponse({ ok: true });
+}
+
+// Writes one cell by header name, creating that column (appended to the
+// right) the first time it's needed. Mutates `headers` in place so
+// multiple setCell calls in the same request stay in sync with each
+// other about which columns already exist.
+function setCell(sheet, headers, rowIndex, headerName, value) {
+  var colIndex = headers.indexOf(headerName);
+  if (colIndex === -1) {
+    sheet.getRange(1, sheet.getLastColumn() + 1).setValue(headerName);
+    colIndex = sheet.getLastColumn() - 1;
+    headers.push(headerName);
+  }
+  sheet.getRange(rowIndex, colIndex + 1).setValue(value);
 }
 
 /* =========================================================

@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard — VIP Yachts</title>
-<meta name="description" content="VIP Yachts internal admin dashboard for managing yachts, bookings, customers, and reports.">
+<meta name="description" content="VIP Yachts internal admin dashboard for managing yachts, enquiries, customers, and reports.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" type="image/png" href="../images/logo.png">
-<link rel="stylesheet" href="../css/styles.css?v=15">
+<link rel="stylesheet" href="../css/styles.css?v=16">
 <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="admin-body">
@@ -29,7 +29,7 @@
       <span>VIP Yachts</span>
     </a>
     <h1>Admin Login</h1>
-    <p class="admin-login-sub">Sign in to view real bookings and dashboard data.</p>
+    <p class="admin-login-sub">Sign in to view real enquiries and dashboard data.</p>
 
     <div class="form-row">
       <label for="admin-username">Username</label>
@@ -57,7 +57,7 @@
     <nav class="admin-nav" aria-label="Admin navigation" id="admin-nav">
       <button type="button" class="admin-nav-link is-active" data-section="dashboard">Dashboard</button>
       <button type="button" class="admin-nav-link" data-section="yachts">Yachts</button>
-      <button type="button" class="admin-nav-link" data-section="bookings">Bookings</button>
+      <button type="button" class="admin-nav-link" data-section="enquiries">Enquiries</button>
       <button type="button" class="admin-nav-link" data-section="customers">Customers</button>
       <button type="button" class="admin-nav-link" data-section="reports">Reports</button>
     </nav>
@@ -82,12 +82,20 @@
           <span class="admin-stat-value" id="stat-total-yachts">—</span>
         </div>
         <div class="admin-stat-card">
-          <span class="admin-stat-label">Total Bookings</span>
-          <span class="admin-stat-value" id="stat-total-bookings">—</span>
+          <span class="admin-stat-label">Total Enquiries</span>
+          <span class="admin-stat-value" id="stat-total-enquiries">—</span>
         </div>
         <div class="admin-stat-card">
-          <span class="admin-stat-label">Revenue</span>
-          <span class="admin-stat-value" id="stat-revenue">—</span>
+          <span class="admin-stat-label">Confirmed</span>
+          <span class="admin-stat-value" id="stat-confirmed">—</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Revenue (Paid)</span>
+          <span class="admin-stat-value" id="stat-revenue-paid">—</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-label">Enquiry Value</span>
+          <span class="admin-stat-value" id="stat-enquiry-value">—</span>
         </div>
         <div class="admin-stat-card">
           <span class="admin-stat-label">Unique Customers</span>
@@ -97,8 +105,8 @@
 
       <section class="admin-panel">
         <div class="admin-panel-head admin-panel-head--split">
-          <h2>Recent Bookings</h2>
-          <button type="button" class="btn btn-sm btn-outline" data-goto-section="bookings">View All Bookings</button>
+          <h2>Recent Enquiries</h2>
+          <button type="button" class="btn btn-sm btn-outline" data-goto-section="enquiries">View All Enquiries</button>
         </div>
         <div class="admin-table-wrap">
           <table class="admin-table">
@@ -111,11 +119,12 @@
                 <th scope="col">Date</th>
                 <th scope="col">Total</th>
                 <th scope="col">Received</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
-            <tbody id="admin-bookings-body"></tbody>
+            <tbody id="admin-recent-enquiries-body"></tbody>
           </table>
-          <p class="admin-table-empty" id="admin-bookings-empty" hidden>No bookings logged yet.</p>
+          <p class="admin-table-empty" id="admin-recent-enquiries-empty" hidden>No enquiries logged yet.</p>
         </div>
       </section>
     </section>
@@ -140,14 +149,15 @@
       </section>
     </section>
 
-    <!-- ============ BOOKINGS SECTION ============ -->
-    <section class="admin-section" id="admin-section-bookings" hidden>
+    <!-- ============ ENQUIRIES SECTION ============ -->
+    <section class="admin-section" id="admin-section-enquiries" hidden>
       <section class="admin-panel">
         <div class="admin-panel-head">
-          <h2>All Bookings</h2>
+          <h2>All Enquiries</h2>
+          <p class="admin-panel-note">Every charter request sent from the site arrives here as an enquiry — nothing is a confirmed, paid booking until you mark it so below. Changes save automatically.</p>
         </div>
-        <input type="search" class="admin-search-input" id="admin-bookings-search" placeholder="Search by reference, customer, or yacht…">
-        <p class="admin-result-count" id="admin-all-bookings-count"></p>
+        <input type="search" class="admin-search-input" id="admin-enquiries-search" placeholder="Search by reference, customer, or yacht…">
+        <p class="admin-result-count" id="admin-enquiries-count"></p>
         <div class="admin-table-wrap">
           <table class="admin-table">
             <thead>
@@ -160,11 +170,15 @@
                 <th scope="col">Date</th>
                 <th scope="col">Total</th>
                 <th scope="col">Received</th>
+                <th scope="col">Status</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Method</th>
+                <th scope="col"></th>
               </tr>
             </thead>
-            <tbody id="admin-all-bookings-body"></tbody>
+            <tbody id="admin-enquiries-body"></tbody>
           </table>
-          <p class="admin-table-empty" id="admin-all-bookings-empty" hidden>No bookings logged yet.</p>
+          <p class="admin-table-empty" id="admin-enquiries-empty" hidden>No enquiries logged yet.</p>
         </div>
       </section>
     </section>
@@ -174,7 +188,7 @@
       <section class="admin-panel">
         <div class="admin-panel-head">
           <h2>Customers</h2>
-          <p class="admin-panel-note">Built from booking records — one row per unique email or phone number.</p>
+          <p class="admin-panel-note">Built from enquiry records — one row per unique email or phone number. Spend counts only what's marked Paid.</p>
         </div>
         <input type="search" class="admin-search-input" id="admin-customers-search" placeholder="Search customers by name, email, or phone…">
         <p class="admin-result-count" id="admin-customers-count"></p>
@@ -185,9 +199,9 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
-                <th scope="col">Bookings</th>
-                <th scope="col">Total Spend</th>
-                <th scope="col">Last Booking</th>
+                <th scope="col">Enquiries</th>
+                <th scope="col">Paid Spend</th>
+                <th scope="col">Last Enquiry</th>
               </tr>
             </thead>
             <tbody id="admin-customers-body"></tbody>
@@ -201,33 +215,33 @@
     <section class="admin-section" id="admin-section-reports" hidden>
       <section class="admin-panel">
         <div class="admin-panel-head">
-          <h2>Revenue by Month</h2>
-          <p class="admin-panel-note">Grouped by charter date.</p>
+          <h2>Paid Revenue by Month</h2>
+          <p class="admin-panel-note">Grouped by charter date. Only counts enquiries marked Paid.</p>
         </div>
         <div class="admin-report-bars" id="report-revenue-by-month"></div>
-        <p class="admin-table-empty" id="report-revenue-empty" hidden>Not enough data yet.</p>
+        <p class="admin-table-empty" id="report-revenue-empty" hidden>No paid enquiries yet.</p>
       </section>
 
       <section class="admin-panel">
-        <div class="admin-panel-head"><h2>Bookings by Yacht</h2></div>
+        <div class="admin-panel-head"><h2>Enquiries by Yacht</h2></div>
         <div class="admin-report-bars" id="report-by-yacht"></div>
         <p class="admin-table-empty" id="report-yacht-empty" hidden>Not enough data yet.</p>
       </section>
 
       <section class="admin-panel">
-        <div class="admin-panel-head"><h2>Bookings by Package</h2></div>
+        <div class="admin-panel-head"><h2>Enquiries by Package</h2></div>
         <div class="admin-report-bars" id="report-by-package"></div>
         <p class="admin-table-empty" id="report-package-empty" hidden>Not enough data yet.</p>
       </section>
 
       <section class="admin-panel">
-        <div class="admin-panel-head"><h2>Top Customers by Spend</h2></div>
+        <div class="admin-panel-head"><h2>Top Customers by Paid Spend</h2></div>
         <div class="admin-table-wrap">
           <table class="admin-table">
-            <thead><tr><th scope="col">Customer</th><th scope="col">Bookings</th><th scope="col">Total Spend</th></tr></thead>
+            <thead><tr><th scope="col">Customer</th><th scope="col">Enquiries</th><th scope="col">Paid Spend</th></tr></thead>
             <tbody id="report-top-customers-body"></tbody>
           </table>
-          <p class="admin-table-empty" id="report-customers-empty" hidden>Not enough data yet.</p>
+          <p class="admin-table-empty" id="report-customers-empty" hidden>No paid enquiries yet.</p>
         </div>
       </section>
     </section>
@@ -236,6 +250,6 @@
 </div>
 
 <script src="../js/script.js?v=14"></script>
-<script src="../js/admin.js?v=13"></script>
+<script src="../js/admin.js?v=14"></script>
 </body>
 </html>
