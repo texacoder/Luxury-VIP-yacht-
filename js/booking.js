@@ -76,6 +76,10 @@
       state.step = n;
       saveState();
       renderStep();
+      // Step panels are just toggled via `hidden` on the same page, so the
+      // browser keeps whatever scroll position the previous step was at —
+      // without this, a shorter next step can render mostly below the fold.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderStep() {
