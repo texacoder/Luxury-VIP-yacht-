@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Your Charter — VIP Yachts</title>
-<meta name="description" content="Book your VIP Yachts charter in four simple steps: choose your yacht, customize your trip, complete payment, and receive your confirmation.">
-<link rel="stylesheet" href="../css/styles.css">
+<meta name="description" content="Book your VIP Yachts charter in four simple steps: choose your yacht, customize your trip, confirm your order, and continue on WhatsApp to arrange payment.">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="stylesheet" href="../css/styles.css?v=15">
+<noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -18,7 +20,7 @@
       <ol class="booking-progress" id="booking-progress" aria-label="Booking progress">
         <li class="progress-step" data-step="1"><span class="progress-num">1</span><span class="progress-label">Yacht</span></li>
         <li class="progress-step" data-step="2"><span class="progress-num">2</span><span class="progress-label">Customize</span></li>
-        <li class="progress-step" data-step="3"><span class="progress-num">3</span><span class="progress-label">Payment</span></li>
+        <li class="progress-step" data-step="3"><span class="progress-num">3</span><span class="progress-label">WhatsApp</span></li>
         <li class="progress-step" data-step="4"><span class="progress-num">4</span><span class="progress-label">Confirmation</span></li>
       </ol>
 
@@ -123,88 +125,35 @@
 
         <div class="booking-step-actions">
           <button class="btn btn-outline" id="step2-back">Back</button>
-          <button class="btn btn-gold" id="step2-next">Continue to Payment</button>
+          <button class="btn btn-gold" id="step2-next">Review & Continue</button>
         </div>
       </section>
 
-      <!-- ============ STEP 3: PAYMENT ============ -->
+      <!-- ============ STEP 3: CONFIRM & WHATSAPP ============ -->
       <section class="booking-step" id="step-3" data-step-panel="3" hidden>
         <div class="booking-step-head">
-          <h1>Payment</h1>
-          <p>Review your total and complete payment to confirm your booking.</p>
+          <h1>Confirm & Send via WhatsApp</h1>
+          <p>Review your order, then send it to our team on WhatsApp — we'll confirm availability and arrange payment with you there.</p>
         </div>
 
         <div class="payment-grid">
           <div class="payment-main">
-
-            <h2 class="customize-subhead">Payment Method</h2>
-            <div class="payment-method-select" role="radiogroup" aria-label="Payment method">
-              <button class="payment-method-btn is-active" data-method="card" role="radio" aria-checked="true">Credit / Debit Card</button>
-              <button class="payment-method-btn" data-method="cash" role="radio" aria-checked="false">Pay at Marina</button>
-            </div>
-
-            <div id="card-payment-block">
-              <h2 class="customize-subhead">Card Information</h2>
-              <div class="card-preview" id="card-preview">
-                <div class="card-preview-chip"></div>
-                <div class="card-preview-number" id="card-preview-number">•••• •••• •••• ••••</div>
-                <div class="card-preview-bottom">
-                  <div>
-                    <span class="card-preview-label">Card Holder</span>
-                    <span class="card-preview-value" id="card-preview-name">FULL NAME</span>
-                  </div>
-                  <div>
-                    <span class="card-preview-label">Expires</span>
-                    <span class="card-preview-value" id="card-preview-expiry">MM/YY</span>
-                  </div>
-                </div>
-              </div>
-
-              <form id="card-form" novalidate>
-                <div class="form-row">
-                  <label for="card-number">Card Number</label>
-                  <input type="text" id="card-number" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" required>
-                  <span class="form-error" id="error-card-number" role="alert"></span>
-                </div>
-                <div class="form-row">
-                  <label for="card-name">Name on Card</label>
-                  <input type="text" id="card-name" required>
-                  <span class="form-error" id="error-card-name" role="alert"></span>
-                </div>
-                <div class="form-row-inline">
-                  <div class="form-row">
-                    <label for="card-expiry">Expiry (MM/YY)</label>
-                    <input type="text" id="card-expiry" maxlength="5" placeholder="MM/YY" required>
-                    <span class="form-error" id="error-card-expiry" role="alert"></span>
-                  </div>
-                  <div class="form-row">
-                    <label for="card-cvv">CVV</label>
-                    <input type="text" id="card-cvv" inputmode="numeric" maxlength="4" placeholder="123" required>
-                    <span class="form-error" id="error-card-cvv" role="alert"></span>
-                  </div>
-                </div>
-              </form>
-              <!-- Stripe integration point: replace mock card form submission below with
-                   a real Stripe Elements + PaymentIntent flow when connecting a live processor. -->
-              <p class="payment-disclaimer">This is a demo checkout. No real payment is processed and no card details are stored — VIP Yachts does not currently charge cards through this website.</p>
-            </div>
-
-            <div id="cash-payment-block" hidden>
-              <p class="payment-disclaimer">You've chosen to pay at Dubai Marina Yacht Club. Your booking will be held and confirmed once payment is received on the day of your charter.</p>
-            </div>
-
+            <h2 class="customize-subhead">Your Details</h2>
+            <dl class="order-summary-lines" id="whatsapp-your-details"></dl>
+            <p class="payment-disclaimer">Booking and payment for VIP Yachts charters are completed directly with our team over WhatsApp — no card details are collected on this site.</p>
           </div>
 
           <aside class="order-summary">
             <div class="order-summary-inner">
-              <h2>Payment Details</h2>
+              <h2>Order Summary</h2>
               <dl class="order-summary-lines" id="payment-summary-lines"></dl>
               <hr class="divider">
               <div class="order-summary-total">
                 <span>Total</span>
                 <span id="payment-summary-total">AED 0</span>
               </div>
-              <button class="btn btn-gold btn-block pay-now-btn" id="pay-now-btn">Pay Now</button>
+              <a class="btn btn-gold btn-block" id="whatsapp-btn-primary" target="_blank" rel="noopener">Continue on WhatsApp</a>
+              <a class="btn btn-outline btn-block" id="whatsapp-btn-secondary" target="_blank" rel="noopener">Try Alternate Number</a>
             </div>
           </aside>
         </div>
@@ -219,8 +168,8 @@
       <section class="booking-step" id="step-4" data-step-panel="4" hidden>
         <div class="confirmation-panel">
           <div class="confirmation-check">✓</div>
-          <h1>Your Booking Is Confirmed!</h1>
-          <p>Thank you for choosing VIP Yachts. We'll contact you shortly with final details.</p>
+          <h1>Your Order Is Ready for WhatsApp</h1>
+          <p>We've opened WhatsApp with your order details pre-filled — send the message to our team to confirm your booking and arrange payment.</p>
 
           <div class="booking-reference">
             <span class="booking-reference-label">Booking Reference</span>
@@ -229,15 +178,18 @@
 
           <!-- Booking status tracker -->
           <ol class="status-tracker" id="status-tracker">
-            <li class="status-step is-complete"><span class="status-icon">✓</span><span>Pending</span><small>Your request is received</small></li>
-            <li class="status-step is-complete"><span class="status-icon">✓</span><span>Confirmed</span><small>Booking is approved</small></li>
-            <li class="status-step" id="status-paid"><span class="status-icon">2</span><span>Paid</span><small>Payment received</small></li>
-            <li class="status-step" id="status-completed"><span class="status-icon">3</span><span>Completed</span><small>Trip is finished</small></li>
+            <li class="status-step is-complete"><span class="status-icon">✓</span><span>Request Ready</span><small>Your order details are ready</small></li>
+            <li class="status-step is-complete" id="status-sent"><span class="status-icon">✓</span><span>Sent via WhatsApp</span><small>Message opened in WhatsApp</small></li>
+            <li class="status-step" id="status-confirmed"><span class="status-icon">3</span><span>Confirmed</span><small>Our team confirms availability</small></li>
+            <li class="status-step" id="status-paid"><span class="status-icon">4</span><span>Paid</span><small>Payment arranged via WhatsApp</small></li>
           </ol>
 
           <div class="confirmation-details" id="confirmation-details"></div>
 
-          <a href="../index.html" class="btn btn-gold">Back to Home</a>
+          <div class="confirmation-actions">
+            <a href="#" class="btn btn-gold" id="confirmation-whatsapp-link" target="_blank" rel="noopener">Reopen WhatsApp Chat</a>
+            <a href="../index.html" class="btn btn-outline">Back to Home</a>
+          </div>
         </div>
       </section>
 
@@ -248,7 +200,7 @@
   </section>
 </main>
 
-<script src="../js/script.js"></script>
-<script src="../js/booking.js"></script>
+<script src="../js/script.js?v=14"></script>
+<script src="../js/booking.js?v=14"></script>
 </body>
 </html>

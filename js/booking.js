@@ -15,7 +15,6 @@
     var util = window.VIPYachtsUtil;
     var qs = util.qs;
     var qsa = util.qsa;
-    var base = data.BASE;
 
     /* ---------- State ---------- */
     var state = loadState();
@@ -31,9 +30,8 @@
         packageId: null,
         addonIds: [],
         details: { name: '', email: '', phone: '', date: '', time: '', guests: '', special: '' },
-        paymentMethod: 'card',
         reference: null,
-        paidStatus: 'pending'
+        loggedToSheet: false
       };
     }
     function saveState() {
@@ -53,6 +51,13 @@
     }
     if (urlYacht || urlPackage || urlAddon) saveState();
 
+    // Arriving via a package/add-on link (e.g. "Select Package" on the
+    // Packages page) is a fresh entry into the flow — it should always
+    // start at yacht selection, not silently resume wherever an earlier
+    // visit in this browser tab left off. Without this, leftover session
+    // state from a previous test/booking could skip straight to step 2.
+    if ((urlPackage || urlAddon) && !urlYacht) { state.step = 1; }
+
     // Guard against inconsistent/stale state: if a later step is stored but the
     // prerequisite selections are missing, fall back to the earliest valid step
     // rather than rendering a broken/empty payment or confirmation screen.
@@ -71,6 +76,10 @@
       state.step = n;
       saveState();
       renderStep();
+      // Step panels are just toggled via `hidden` on the same page, so the
+      // browser keeps whatever scroll position the previous step was at —
+      // without this, a shorter next step can render mostly below the fold.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderStep() {
@@ -104,13 +113,13 @@
         return (
           '<button class="booking-yacht-card' + (selected ? ' is-selected' : '') + '" data-yacht-id="' + yacht.id + '" aria-pressed="' + selected + '">' +
             '<div class="booking-yacht-media">' +
-              '<img src="' + base + yacht.image + '" alt="' + yacht.name + '" onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + yacht.name + '\'}))">' +
+              data.yachtCardMediaHtml(yacht) +
             '</div>' +
             '<div class="booking-yacht-body">' +
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
-              '<p>' + yacht.guests + ' Guests · ' + yacht.cabins + ' Cabins</p>' +
-              '<span class="booking-yacht-price">' + data.formatAED(yacht.pricePerDay) + ' / day</span>' +
+              '<p>' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
+              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
             '</div>' +
           '</button>'
         );
@@ -120,7 +129,16 @@
         card.addEventListener('click', function () {
           state.yachtId = card.dataset.yachtId;
           saveState();
-          renderStep1();
+          // Show the selection instantly (without a full re-render, which
+          // would recreate this exact card mid-click) so there's a brief,
+          // visible confirmation before jumping straight to step 2 — no
+          // separate "Continue" click needed for the common case.
+          qsa('.booking-yacht-card', yachtGrid).forEach(function (c) {
+            var isThisCard = c === card;
+            c.classList.toggle('is-selected', isThisCard);
+            c.setAttribute('aria-pressed', String(isThisCard));
+          });
+          setTimeout(function () { goToStep(2); }, 250);
         });
       });
 
@@ -164,9 +182,24 @@
       }).join('');
       qsa('.booking-package-card', pkgGrid).forEach(function (card) {
         card.addEventListener('click', function () {
+          // Package + add-ons + the details form are all on this one step —
+          // there's no separate "next step" to jump to the way yacht
+          // selection could, since the required details (name, email, date,
+          // etc.) still need to be typed in before this can go anywhere.
+          // The closest equivalent: guide the customer straight to that
+          // form the first time they pick a package, instead of leaving
+          // them to scroll and find it themselves.
+          var isFirstSelection = !state.packageId;
           state.packageId = card.dataset.packageId;
           saveState();
           renderStep2();
+          if (isFirstSelection) {
+            var nameInput = qs('#booking-name');
+            if (nameInput) {
+              nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              setTimeout(function () { nameInput.focus(); }, 400);
+            }
+          }
         });
       });
 
@@ -282,7 +315,10 @@
 
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       if (!guests) { setErr('guests', 'Please enter your guest count.'); }
-      else if (yacht && Number(guests) > yacht.guests) { setErr('guests', 'This yacht holds up to ' + yacht.guests + ' guests.'); }
+      // Some yachts don't have a confirmed capacity yet (yacht.guests is null) —
+      // skip the max-guest check rather than comparing against null, which
+      // JS coerces to 0 and would block every booking for that yacht.
+      else if (yacht && yacht.guests != null && Number(guests) > yacht.guests) { setErr('guests', 'This yacht holds up to ' + yacht.guests + ' guests.'); }
       else { setErr('guests', ''); }
 
       return valid && !!state.packageId;
@@ -299,106 +335,106 @@
     });
 
     /* ============================================================
-       STEP 3 — PAYMENT
+       STEP 3 — CONFIRM & WHATSAPP
+       Booking and payment happen over WhatsApp, not on this site.
+       This step assembles the order into a pre-filled WhatsApp
+       message and hands off to one of two numbers (a fallback in
+       case one is unreachable).
        ============================================================ */
-    var paymentBtns = qsa('.payment-method-btn');
-    var cardBlock = qs('#card-payment-block');
-    var cashBlock = qs('#cash-payment-block');
-    var payNowBtn = qs('#pay-now-btn');
+    function buildWhatsAppMessage() {
+      var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
+      var calc = calcTotal();
+      var addonNames = state.addonIds.map(function (id) {
+        var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
+        return addon ? addon.name : null;
+      }).filter(Boolean);
+
+      var lines = ['Hi VIP Yachts! I\'d like to book a charter.', ''];
+      if (state.reference) lines.push('Booking Reference: ' + state.reference);
+      if (yacht) lines.push('Yacht: ' + yacht.name);
+      if (calc.pkg) lines.push('Package: ' + calc.pkg.name + ' (' + calc.pkg.hours + 'h)');
+      if (addonNames.length) lines.push('Add-ons: ' + addonNames.join(', '));
+      if (state.details.date) lines.push('Date: ' + state.details.date);
+      if (state.details.time) lines.push('Time: ' + state.details.time);
+      if (state.details.guests) lines.push('Guests: ' + state.details.guests);
+      lines.push('');
+      if (state.details.name) lines.push('Name: ' + state.details.name);
+      if (state.details.phone) lines.push('Phone: ' + state.details.phone);
+      if (state.details.email) lines.push('Email: ' + state.details.email);
+      if (state.details.special) lines.push('Special Request: ' + state.details.special);
+      lines.push('');
+      lines.push('Estimated Total: ' + data.formatAED(calc.total));
+
+      return lines.join('\n');
+    }
 
     function renderStep3() {
+      // Generate the reference as soon as the customer reaches this step
+      // (not on click) so it's actually included in the WhatsApp message
+      // they send, not just shown after the fact on the confirmation step.
+      if (!state.reference) {
+        state.reference = data.generateBookingReference();
+        saveState();
+      }
+
       var calc = calcTotal();
-      var lines = qs('#payment-summary-lines');
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       var pkg = calc.pkg;
+
+      // Log once per booking, not on every re-render (e.g. clicking back
+      // then forward again shouldn't create duplicate sheet rows).
+      if (!state.loggedToSheet) {
+        var addonNamesForLog = state.addonIds.map(function (id) {
+          var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
+          return addon ? addon.name : null;
+        }).filter(Boolean);
+        data.logBookingToSheet({
+          reference: state.reference,
+          yacht: yacht ? yacht.name : '',
+          package: pkg ? pkg.name : '',
+          addons: addonNamesForLog.join(', '),
+          date: state.details.date,
+          time: state.details.time,
+          guests: state.details.guests,
+          name: state.details.name,
+          phone: state.details.phone,
+          email: state.details.email,
+          special: state.details.special,
+          total: calc.total
+        });
+        state.loggedToSheet = true;
+        saveState();
+      }
 
       var linesHtml = '';
       if (yacht && pkg) linesHtml += '<div><dt>' + yacht.name + ' — ' + pkg.name + '</dt><dd>' + data.formatAED(calc.pkgPrice) + '</dd></div>';
       if (calc.addonTotal > 0) linesHtml += '<div><dt>Add-ons</dt><dd>' + data.formatAED(calc.addonTotal) + '</dd></div>';
-      lines.innerHTML = linesHtml;
+      qs('#payment-summary-lines').innerHTML = linesHtml;
       qs('#payment-summary-total').textContent = data.formatAED(calc.total);
 
-      paymentBtns.forEach(function (btn) {
-        var active = btn.dataset.method === state.paymentMethod;
-        btn.classList.toggle('is-active', active);
-        btn.setAttribute('aria-checked', String(active));
-      });
-      cardBlock.hidden = state.paymentMethod !== 'card';
-      cashBlock.hidden = state.paymentMethod !== 'cash';
-      payNowBtn.textContent = state.paymentMethod === 'card' ? 'Pay Now' : 'Confirm Booking';
+      var detailsHtml = '';
+      if (state.details.name) detailsHtml += '<div><dt>Name</dt><dd>' + data.escapeHtml(state.details.name) + '</dd></div>';
+      if (state.details.phone) detailsHtml += '<div><dt>Phone</dt><dd>' + data.escapeHtml(state.details.phone) + '</dd></div>';
+      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + data.escapeHtml(state.details.date) + '</dd></div>';
+      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + data.escapeHtml(state.details.time) + '</dd></div>';
+      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + data.escapeHtml(state.details.guests) + '</dd></div>';
+      qs('#whatsapp-your-details').innerHTML = detailsHtml;
 
-      updateCardPreview();
-    }
-
-    paymentBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        state.paymentMethod = btn.dataset.method;
-        saveState();
-        renderStep3();
-      });
-    });
-
-    /* Live card preview */
-    var cardNumberInput = qs('#card-number');
-    var cardNameInput = qs('#card-name');
-    var cardExpiryInput = qs('#card-expiry');
-    var cardCvvInput = qs('#card-cvv');
-
-    function formatCardNumber(value) {
-      var digits = value.replace(/\D/g, '').slice(0, 16);
-      return digits.replace(/(.{4})/g, '$1 ').trim();
-    }
-    function formatExpiry(value) {
-      var digits = value.replace(/\D/g, '').slice(0, 4);
-      if (digits.length >= 3) return digits.slice(0, 2) + '/' + digits.slice(2);
-      return digits;
-    }
-    function updateCardPreview() {
-      var num = cardNumberInput.value.replace(/\D/g, '');
-      var masked = (num || '').padEnd(16, '•').replace(/(.{4})/g, '$1 ').trim();
-      qs('#card-preview-number').textContent = num ? masked : '•••• •••• •••• ••••';
-      qs('#card-preview-name').textContent = cardNameInput.value.trim().toUpperCase() || 'FULL NAME';
-      qs('#card-preview-expiry').textContent = cardExpiryInput.value || 'MM/YY';
-    }
-    cardNumberInput.addEventListener('input', function () {
-      cardNumberInput.value = formatCardNumber(cardNumberInput.value);
-      updateCardPreview();
-    });
-    cardExpiryInput.addEventListener('input', function () {
-      cardExpiryInput.value = formatExpiry(cardExpiryInput.value);
-      updateCardPreview();
-    });
-    cardNameInput.addEventListener('input', updateCardPreview);
-    cardCvvInput.addEventListener('input', function () {
-      cardCvvInput.value = cardCvvInput.value.replace(/\D/g, '').slice(0, 4);
-    });
-
-    function validateCardForm() {
-      var valid = true;
-      function setErr(field, msg) {
-        var errEl = qs('#error-card-' + field);
-        var input = qs('#card-' + field);
-        if (msg) { errEl.textContent = msg; input.setAttribute('aria-invalid', 'true'); valid = false; }
-        else { errEl.textContent = ''; input.removeAttribute('aria-invalid'); }
-      }
-      var num = cardNumberInput.value.replace(/\D/g, '');
-      setErr('number', num.length === 16 ? '' : 'Enter a valid 16-digit card number.');
-      setErr('name', cardNameInput.value.trim() ? '' : 'Enter the name on the card.');
-      var expiryPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
-      setErr('expiry', expiryPattern.test(cardExpiryInput.value) ? '' : 'Enter expiry as MM/YY.');
-      setErr('cvv', cardCvvInput.value.length >= 3 ? '' : 'Enter a valid CVV.');
-      return valid;
+      var message = buildWhatsAppMessage();
+      var numbers = data.WHATSAPP_NUMBERS;
+      qs('#whatsapp-btn-primary').href = data.whatsappLink(numbers[0].digits, message);
+      qs('#whatsapp-btn-secondary').href = data.whatsappLink(numbers[1].digits, message);
     }
 
     qs('#step3-back').addEventListener('click', function () { goToStep(2); });
 
-    payNowBtn.addEventListener('click', function () {
-      if (state.paymentMethod === 'card' && !validateCardForm()) return;
-      state.reference = data.generateBookingReference();
-      state.paidStatus = state.paymentMethod === 'card' ? 'paid' : 'pending-payment';
-      saveState();
+    function handleWhatsAppContinue() {
+      // Reference is already generated in renderStep3, before this element's
+      // href was built, so it's guaranteed to be in the message being sent.
       goToStep(4);
-    });
+    }
+    qs('#whatsapp-btn-primary').addEventListener('click', handleWhatsAppContinue);
+    qs('#whatsapp-btn-secondary').addEventListener('click', handleWhatsAppContinue);
 
     /* ============================================================
        STEP 4 — CONFIRMATION
@@ -411,18 +447,13 @@
       var detailsHtml = '';
       if (yacht) detailsHtml += '<div><dt>Yacht</dt><dd>' + yacht.name + '</dd></div>';
       if (calc.pkg) detailsHtml += '<div><dt>Package</dt><dd>' + calc.pkg.name + '</dd></div>';
-      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + state.details.date + '</dd></div>';
-      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + state.details.time + '</dd></div>';
-      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + state.details.guests + '</dd></div>';
+      if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + data.escapeHtml(state.details.date) + '</dd></div>';
+      if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + data.escapeHtml(state.details.time) + '</dd></div>';
+      if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + data.escapeHtml(state.details.guests) + '</dd></div>';
       detailsHtml += '<div><dt>Total</dt><dd>' + data.formatAED(calc.total) + '</dd></div>';
       qs('#confirmation-details').innerHTML = '<dl class="order-summary-lines">' + detailsHtml + '</dl>';
 
-      var paidStep = qs('#status-paid');
-      var completedStep = qs('#status-completed');
-      if (state.paidStatus === 'paid') {
-        paidStep.classList.add('is-complete');
-        paidStep.querySelector('.status-icon').textContent = '✓';
-      }
+      qs('#confirmation-whatsapp-link').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, buildWhatsAppMessage());
     }
 
     /* ---------- Initial render ---------- */

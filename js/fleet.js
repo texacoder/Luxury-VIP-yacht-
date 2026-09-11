@@ -49,8 +49,7 @@
       return (
         '<article class="yacht-card fade-up is-visible">' +
           '<div class="yacht-card-media">' +
-            '<img src="' + base + yacht.image + '" alt="' + yacht.name + ' underway" ' +
-              'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + yacht.name + '\'}))">' +
+            data.yachtCardMediaHtml(yacht, ' underway') +
             '<span class="badge badge-gold yacht-card-tier">' + yacht.tierLabel + '</span>' +
             '<button class="yacht-card-fav" aria-label="Save ' + yacht.name + ' to favourites" aria-pressed="false" data-fav="' + yacht.id + '">&hearts;</button>' +
           '</div>' +
@@ -58,12 +57,12 @@
             '<h3>' + yacht.name + '</h3>' +
             '<p class="yacht-card-tagline">' + yacht.tagline + '</p>' +
             '<div class="yacht-card-meta">' +
-              '<span>' + yacht.guests + ' Guests</span>' +
-              '<span>' + yacht.cabins + ' Cabins</span>' +
-              '<span>' + yacht.length + ' ft</span>' +
+              '<span>' + data.formatSpec(yacht.guests, ' Guests') + '</span>' +
+              '<span>' + data.formatSpec(yacht.cabins, ' Cabins') + '</span>' +
+              '<span>' + data.formatSpec(yacht.length, ' ft') + '</span>' +
             '</div>' +
             '<div class="yacht-card-footer">' +
-              '<span class="yacht-card-price">' + data.formatAED(yacht.pricePerDay) + '<small> / day</small></span>' +
+              '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
               '<a href="' + base + 'pages/yacht-detail.html?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
             '</div>' +
           '</div>' +

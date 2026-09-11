@@ -11,13 +11,14 @@
     var base = data.BASE;
     var grid = qs('#addon-grid');
 
+    // birthday-decor and photographer have no dedicated photo asset yet — map
+    // them to the generic default image instead of a filename that 404s.
     var imageMap = {
       'bbq-meal': 'images/exp-bbq.png',
-      'birthday-decor': 'images/exp-birthday.png',
+      'birthday-decor': 'images/exp-default.png',
       'dj-system': 'images/exp-dj.png',
-      'photographer': 'images/exp-photo.png',
-      'jet-ski': 'images/exp-jetski.png',
-      'drone-photography': 'images/exp-drone.png'
+      'photographer': 'images/exp-default.png',
+      'jet-ski': 'images/exp-jetski.png'
     };
 
     grid.innerHTML = data.ADDONS.map(function (addon) {

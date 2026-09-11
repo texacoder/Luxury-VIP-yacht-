@@ -57,7 +57,6 @@
         'images/yacht-enterprise-48-sundeck-seating.jpg',
         'images/yacht-enterprise-48-master-cabin.jpg'
       ],
-      video: '',
       description: 'Crafted with genuine skill, Enterprise is a 48-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and an unforgettable luxury escapade at sea.',
       overview: 'Enterprise accommodates up to 15 guests for day charters and also boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. A main salon anchors the interior, with jetski and a variety of water sports available for guest enjoyment.',
       features: ['Main salon', 'Jetski included', 'Water sports available', 'Bimini-shaded flybridge', 'Sundeck seating', 'Onboard crew of 2'],
@@ -98,7 +97,6 @@
         'images/yacht-grand-82-bedroom-2.jpg',
         'images/yacht-grand-82-bathroom.jpg'
       ],
-      video: '',
       description: 'An 82-foot luxury yacht with capacity for 35 guests, featuring a premium jacuzzi with water temperature control and a special-edition upper deck with bar counter and seating.',
       overview: 'Grand 82 pairs a spacious sun bed forward with a premium jacuzzi offering water temperature control. The upper deck bar counter and teak-decked sitting area suit large groups, while a premium finished back table with swimming hydraulic jumper and a fully stocked inside bar counter round out the entertaining spaces. Four bedrooms and four washrooms accommodate overnight and large day-charter groups alike, with a bright, brand-new saloon furnished throughout in luxury quality brands.',
       features: ['Premium jacuzzi with temperature control', 'Spacious bow sun bed', 'Upper deck bar counter & seating', 'Swimming hydraulic jumper', 'Fully stocked bar counter', '4 bedrooms, 4 washrooms', 'Ambiance lighting & premium sound system'],
@@ -134,7 +132,6 @@
         'images/yacht-big-daddy-90-twin-room.jpg',
         'images/yacht-big-daddy-90-flybridge.jpg'
       ],
-      video: '',
       description: 'The Big Daddy Premium Yacht is a 90-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Big Daddy 90 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon with dining area and bar, spacious flybridge, and spacious bathtub round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Spacious flybridge', 'Spacious bathtub', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Live BBQ & international cuisine on request'],
@@ -171,7 +168,6 @@
         'images/yacht-majesty-101-master-cabin.jpg',
         'images/yacht-majesty-101-flybridge.jpg'
       ],
-      video: '',
       description: 'The Majesty Premium Yacht is a 101-ft / 31-meter masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 101 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
@@ -209,7 +205,6 @@
         'images/yacht-schaefer-480-flybridge-top.jpg',
         'images/yacht-schaefer-480-upper-deck.jpg'
       ],
-      video: '',
       description: 'Schaefer 480 offers a comfortable, well-appointed charter for smaller groups, with a shaded flybridge, cream leather saloon, and two guest cabins below deck.',
       overview: 'Estimated specifications based on vessel size and configuration shown. Schaefer 480 carries a two-cabin layout — a wood-paneled master cabin and a twin-bed second cabin — with a cream leather saloon, marble-topped galley, and dinette. The bow sundeck and aft lounge provide ample outdoor seating, and the shaded flybridge tops off the layout with additional open-air space.',
       features: ['Two-cabin layout (master + twin)', 'Cream leather saloon', 'Marble-topped galley & dinette', 'Shaded flybridge', 'Bow sundeck', 'Aft lounge seating'],
@@ -233,19 +228,8 @@
       crew: 3,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-mayyas-75-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-mayyas-75-exterior-1.jpg',
-        'images/yacht-mayyas-75-exterior-2.jpg',
-        'images/yacht-mayyas-75-main-salon-1.jpg',
-        'images/yacht-mayyas-75-main-salon-2.jpg',
-        'images/yacht-mayyas-75-twin-room.jpg',
-        'images/yacht-mayyas-75-master-cabin.jpg',
-        'images/yacht-mayyas-75-flybridge-1.jpg',
-        'images/yacht-mayyas-75-flybridge-2.jpg',
-        'images/yacht-mayyas-75-bow.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
-      video: '',
+      image: 'images/yacht-mayyas-75-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-mayyas-75-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins — Master and Twin — each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master & Twin cabins, each en-suite', 'Main salon with bar area', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
@@ -269,24 +253,8 @@
       crew: 5,
       speedKnots: 18,
       year: null,
-      image: 'images/yacht-majesty-88-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-majesty-88-exterior-1.jpg',
-        'images/yacht-majesty-88-exterior-2.jpg',
-        'images/yacht-majesty-88-main-salon.jpg',
-        'images/yacht-majesty-88-dining-bar-1.jpg',
-        'images/yacht-majesty-88-dining-bar-2.jpg',
-        'images/yacht-majesty-88-sunbed.jpg',
-        'images/yacht-majesty-88-jacuzzi.jpg',
-        'images/yacht-majesty-88-helm.jpg',
-        'images/yacht-majesty-88-lower-deck-hallway.jpg',
-        'images/yacht-majesty-88-master-cabin.jpg',
-        'images/yacht-majesty-88-master-bath.jpg',
-        'images/yacht-majesty-88-double-room.jpg',
-        'images/yacht-majesty-88-twin-room.jpg',
-        'images/yacht-majesty-88-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
-      video: '',
+      image: 'images/yacht-majesty-88-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-majesty-88-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
@@ -310,18 +278,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-majesty-59-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-majesty-59-exterior-1.jpg',
-        'images/yacht-majesty-59-exterior-2.jpg',
-        'images/yacht-majesty-59-main-salon-1.jpg',
-        'images/yacht-majesty-59-main-salon-2.jpg',
-        'images/yacht-majesty-59-main-salon-3.jpg',
-        'images/yacht-majesty-59-master-cabin-1.jpg',
-        'images/yacht-majesty-59-master-cabin-2.jpg',
-        'images/yacht-majesty-59-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
-      video: '',
+      image: 'images/yacht-majesty-59-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-majesty-59-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is a 59-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Majesty 59 accommodates up to 25 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. The Master cabin comes with an en-suite bathroom. A main salon with dining area and a spacious flybridge featuring its own dining area round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master cabin, en-suite', 'Main salon with dining area', 'Spacious flybridge with dining area', 'Jetski included', 'Water sports available'],
@@ -345,17 +303,8 @@
       crew: 2,
       speedKnots: null,
       year: null,
-      image: 'images/yacht-jasmine-55-hero.jpg', // TODO: no image asset delivered yet — placeholder path
-      gallery: [
-        'images/yacht-jasmine-55-exterior-1.jpg',
-        'images/yacht-jasmine-55-exterior-2.jpg',
-        'images/yacht-jasmine-55-main-saloon-1.jpg',
-        'images/yacht-jasmine-55-main-saloon-2.jpg',
-        'images/yacht-jasmine-55-bedroom-1.jpg',
-        'images/yacht-jasmine-55-bedroom-2.jpg',
-        'images/yacht-jasmine-55-flybridge.jpg'
-      ], // TODO: none of these image files exist in /images yet — brochure only, no photo assets supplied
-      video: '',
+      image: 'images/yacht-jasmine-55-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-jasmine-55-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Main salon', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
@@ -398,7 +347,6 @@
         'images/yacht-carmen-140-flybridge.jpg',
         'images/yacht-carmen-140-upper-lounge.jpg'
       ],
-      video: '',
       description: 'A 140-ft mega yacht offering a huge, elegantly designed saloon and capacity for 80 guests, delivering a grand-scale luxury escapade at sea.',
       overview: 'Carmen accommodates up to 80 guests for day charters, with 5 guest cabins including a master bedroom with panoramic mid-sea views. A wraparound main saloon anchors the interior, complemented by a formal dining area, stocked bar counter, and multi-helm bridge. The middle-deck jacuzzi and open flybridge lounge offer additional entertaining space, with a second upper-deck lounge for large groups.',
       features: ['5 guest cabins', 'Master bedroom with panoramic sea views', 'Huge main saloon', 'Formal dining area', 'Stocked bar counter', 'Middle-deck jacuzzi', 'Open flybridge lounge', 'Second upper-deck lounge'],
@@ -439,7 +387,6 @@
         'images/yacht-aarna-90-staircase.jpg',
         'images/yacht-aarna-90-master-cabin.jpg'
       ],
-      video: '',
       description: 'A 91-ft Sunseeker built in 2009 and refit in 2023, Aarna pairs a striking dark hull with warm, classic wood interiors for an elegant charter experience.',
       overview: 'Aarna accommodates up to 8 guests in 4 cabins (2 double, 2 twin), supported by a crew of 5. Twin MTU 12 V2000 M93 engines power her, and the deck spaces are set up for gourmet alfresco dining, with a built-in grill and a well-stocked bar.',
       features: ['4 cabins (2 double, 2 twin)', 'Crew of 5', 'Onboard grill', 'Alfresco dining areas', 'Stocked bar', 'Twin MTU engines', '2023 refit'],
@@ -480,7 +427,6 @@
         'images/yacht-notorious-2023-guest-cabin-1.jpg',
         'images/yacht-notorious-2023-guest-cabin-2.jpg'
       ],
-      video: '',
       description: 'Notorious is a sleek black-hulled cruiser set against the Dubai skyline, offering an open flybridge, aft lounge seating, and warm wood-finished interiors.',
       overview: 'Notorious offers an open flybridge with a wet bar and dining area, an aft cockpit lounge with alfresco dining, and a bright main salon with a formal dining table. Cabins are finished in polished wood with en-suite bathrooms.',
       features: ['Open flybridge with bar', 'Aft cockpit lounge', 'Alfresco dining', 'Formal dining table', 'Jetski/watersports platform'],
@@ -514,7 +460,6 @@
         'images/yacht-princess-x95-interior-collage-3.jpg',
         'images/yacht-princess-x95-exterior-side.jpg'
       ],
-      video: '',
       description: 'Charter the ultimate in style, space and innovation aboard this 2023 Princess X95, delivering an exceptional cruising experience with expansive volumes, refined design, and effortless comfort.',
       overview: 'The Princess X95 welcomes up to 12 guests for day charters and sleeps 10, with generous indoor and outdoor areas for relaxation and entertaining. The main deck saloon is filled with natural light through floor-to-ceiling windows, flowing into the aft cockpit lounge, while the flybridge offers multiple seating and sunbathing zones for alfresco dining and sunset cruises.',
       features: ['Floor-to-ceiling saloon windows', 'Aft cockpit lounge', 'Flybridge dining and sunbathing zones', 'Contemporary interiors', 'Sleeps 10 overnight'],
@@ -552,7 +497,6 @@
         'images/yacht-thunder-49m-guest-cabin-2.jpg',
         'images/yacht-thunder-49m-pool-deck.jpg'
       ],
-      video: '',
       description: 'THUNDER is a 49m superyacht built in Australia by Oceanfast, with striking looks and interior spaces designed by Roberto Cavalli and Jon Bannenberg, and a magnificent heated pool on the foredeck.',
       overview: 'Thunder reaches a top speed of 40.0 knots, cruises at 30.0 knots, and has a maximum cruising range of 1000nm at 18.0 knots, with power from MTU CODAG engines. Her onboard facilities are rivalled only by her striking Roberto Cavalli and Jon Bannenberg-designed interiors, headlined by a heated pool on the foredeck.',
       features: ['Heated foredeck pool', 'Roberto Cavalli & Jon Bannenberg interior design', 'MTU CODAG engines', '40-knot top speed', 'Gross tonnage 445 GT'],
@@ -596,7 +540,6 @@
         'images/yacht-khalili-flybridge-bar.jpg',
         'images/yacht-khalili-flybridge-dining.jpg'
       ],
-      video: '',
       description: 'Khalili is a refined superyacht offering spacious lounge interiors, a fully stocked entertainment lounge with games and a large screen, and multiple outdoor deck areas for dining and relaxing.',
       overview: 'Khalili features an expansive main salon with wraparound seating and formal dining, plus a lower-deck entertainment lounge complete with a large screen, chess and backgammon tables, and a full bar spread. Outdoor deck space includes a shaded aft lounge, an open sundeck bar, and multiple dining and seating areas with skyline and sea views.',
       features: ['Entertainment lounge with large screen', 'Chess and backgammon tables', 'Full bar spread', 'Multiple outdoor dining areas', 'Twin and double cabins'],
@@ -621,9 +564,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: '', // TODO: image not yet added — pending brochure asset upload
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
-      video: '',
+      image: 'images/yacht-sanlorenzo-sx88-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-sanlorenzo-sx88-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Experience unmatched luxury aboard the Sanlorenzo SX88, a masterpiece of Italian yacht design with expansive indoor and outdoor living spaces.',
       overview: 'The SX88 boasts a spacious salon with panoramic views, a fully equipped galley, and beautifully designed cabins accommodating up to eight guests in ultimate comfort. The vast aft deck and swim platform provide the perfect setting for sunbathing or diving into Dubai\'s crystal-clear waters, while advanced onboard technology ensures a seamless cruising experience.',
       features: ['Panoramic-view salon', 'Fully equipped galley', 'Vast aft deck & swim platform', 'Advanced onboard technology', 'Accommodates up to 8 guests'],
@@ -647,9 +589,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: '', // TODO: image not yet added — pending brochure asset upload
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
-      video: '',
+      image: 'images/yacht-fynesse-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-fynesse-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Fynesse is a classic tri-deck superyacht offering a spacious sundeck jacuzzi, wraparound lounge seating, and an elegant formal dining room, cruising against Dubai\'s iconic skyline.',
       overview: 'Fynesse features a sundeck jacuzzi with shaded lounge seating, an upper-deck lounge bar with wraparound seating, and a main-deck formal dining room seating large groups in style. Cabins are finished with classic furnishings for a refined charter experience.',
       features: ['Sundeck jacuzzi with shade canopy', 'Upper-deck lounge bar', 'Formal dining room', 'Wraparound outdoor seating', 'Classic tri-deck styling'],
@@ -673,9 +614,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: '', // TODO: image not yet added — pending brochure asset upload
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
-      video: '',
+      image: 'images/yacht-matrix-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-matrix-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Matrix is a striking black-hulled sport yacht cruising Dubai\'s waters, featuring a sleek flybridge, an open aft deck dining area, and a bright, contemporary main salon.',
       overview: 'Matrix pairs an aggressive black hull with an open flybridge helm and lounge seating, a teak-decked aft cockpit set for alfresco dining, and a light-filled main salon with wraparound seating. Cabins offer twin and double configurations with en-suite bathrooms.',
       features: ['Flybridge helm & lounge seating', 'Teak aft cockpit dining', 'Contemporary main salon', 'Twin & double cabins', 'Striking black hull'],
@@ -699,9 +639,8 @@
       crew: 10, // per source brochure: capable of carrying up to 10 crew
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: '', // TODO: image not yet added — pending brochure asset upload
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
-      video: '',
+      image: 'images/yacht-encore-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-encore-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Encore is a 140ft tri-deck superyacht with a fully private owner\'s deck, a dedicated sky lounge, and timeless styling with beautiful furnishings throughout.',
       overview: 'Encore\'s 100% owner\'s deck offers a fully private salon and forward jacuzzi pool deck, isolated from cameras for total privacy. Five cabins accommodate up to 12 guests overnight (1 owner, 2 VIP, 2 double), while the prized sky lounge offers a relaxed space for cocktails and entertaining. She can carry up to 10 crew and up to 30 guests for day charters, with 7-star hospitality service throughout.',
       features: ['100% private owner\'s deck with forward jacuzzi', 'Dedicated sky lounge', '5 cabins: 1 owner, 2 VIP, 2 double', 'Formal dining room', '7-star hospitality service', 'Carries up to 10 crew'],
@@ -726,9 +665,8 @@
       crew: null, // TODO: not stated in source brochure — needs client input
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
-      image: '', // TODO: image not yet added — pending brochure asset upload
-      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload
-      video: '',
+      image: 'images/yacht-notika-hero.jpg', // TODO: file not yet added — suggested filename from the asset PDF; add the photo to /images with this exact name to activate it
+      gallery: [], // TODO: gallery images not yet added — pending brochure asset upload. Suggested naming once available: images/yacht-notika-<description>.jpg (e.g. -exterior-1, -salon, -master-cabin), matching the convention used by yachts above.
       description: 'Notika is a sleek sport yacht offering a spacious sundeck lounge, an open flybridge dining and bar area, and a comfortable main salon set up for entertaining.',
       overview: 'Notika\'s sundeck lounge and flybridge dining/bar area give guests multiple spaces to relax and entertain, while the main salon and formal dining area provide comfortable indoor space with sea views. Cabins offer double and twin configurations with en-suite bathrooms.',
       features: ['Sundeck lounge seating', 'Flybridge dining and bar', 'Main salon with sea views', 'Formal dining area', 'Double & twin cabins'],
@@ -756,16 +694,38 @@
     { id: 'birthday-decor', name: 'Birthday Decoration', price: 3000, description: 'Balloons, banner, and table styling for onboard celebrations.' },
     { id: 'dj-system', name: 'DJ System', price: 4000, description: 'Professional sound system with a curated playlist or live DJ on request.' },
     { id: 'photographer', name: 'Photographer', price: 6000, description: 'A dedicated photographer for up to two hours of your charter.' },
-    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' },
-    { id: 'drone-photography', name: 'Drone Photography', price: 7000, description: 'Aerial photos and video of your yacht and group during the charter.' }
+    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' }
   ];
+
+  // Booking and payment are handled over WhatsApp, not through the site —
+  // two numbers so there's a fallback if one is unreachable. Digits-only
+  // form is what wa.me links require; the display form is for showing to
+  // guests (tel: links, footer, contact page).
+  var WHATSAPP_NUMBERS = [
+    { digits: '971544033888', display: '+971 54 403 3888' },
+    { digits: '971545763101', display: '+971 54 576 3101' }
+  ];
+
+  // Google Apps Script Web App URL that logs each booking as a row in a
+  // Google Sheet — this is what makes the booking reference a real,
+  // persistent record instead of just text in a WhatsApp message. Set this
+  // after deploying the Apps Script (see setup instructions). Left blank,
+  // logging is silently skipped and the site still works exactly as before.
+  var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby1Nx0jLAP7U539kz8EOP5-seR92954bHLS3Q7Jb3-6VE0Fr2nJTiPjML3zCeyn0m4_ZA/exec';
+  // Matches the SHARED_TOKEN constant in the Apps Script — a light deterrent
+  // against random internet bots spamming the sheet via a leaked/guessed URL.
+  var SHEET_WEBHOOK_TOKEN = 'vy-booking-2026';
 
   // Expose to other scripts on the page (booking flow, admin, etc.)
   window.VIPYachts = {
     YACHTS: YACHTS,
     PACKAGES: PACKAGES,
     ADDONS: ADDONS,
-    BASE: BASE
+    WHATSAPP_NUMBERS: WHATSAPP_NUMBERS,
+    BASE: BASE,
+    // Same Apps Script Web App used for logging bookings also backs the real
+    // admin login + dashboard data (see google-apps-script/booking-backend.gs).
+    SHEET_WEBHOOK_URL: SHEET_WEBHOOK_URL
   };
 
   /* =========================================================
@@ -776,8 +736,28 @@
   }
   window.VIPYachts.formatAED = formatAED;
 
+  // Several yachts in the fleet don't have a confirmed day rate yet (see TODOs
+  // in the YACHTS list above). Rendering "AED 0 / day" for those would look
+  // like a pricing bug, so every price display should go through this instead
+  // of calling formatAED directly on a yacht's pricePerDay.
+  function formatYachtPrice(amount) {
+    return amount ? formatAED(amount) + ' / day' : 'Price on Request';
+  }
+  window.VIPYachts.formatYachtPrice = formatYachtPrice;
+
   function qs(sel, ctx) { return (ctx || document).querySelector(sel); }
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  // Escapes free-text values (customer-entered booking details, form fields)
+  // before they're concatenated into innerHTML strings elsewhere on the site.
+  // Without this, a name/phone/etc. containing HTML would be parsed as markup
+  // instead of displayed as text.
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  window.VIPYachts.escapeHtml = escapeHtml;
 
   function getYachtById(id) {
     return YACHTS.filter(function (y) { return y.id === id; })[0] || null;
@@ -798,6 +778,51 @@
     return ref;
   }
   window.VIPYachts.generateBookingReference = generateBookingReference;
+
+  // A yacht with no image/gallery yet (image: '') has genuinely never had a
+  // photo supplied — that's different from a real photo file 404ing, so it
+  // gets its own honest placeholder instead of an <img> tag that's certain
+  // to fail. Yachts that DO have a path still go through <img>+onerror, in
+  // case that specific file is ever temporarily unavailable.
+  function yachtCardMediaHtml(yacht, altSuffix) {
+    if (!yacht.image) {
+      return '<div class="img-fallback">Images will be uploaded soon</div>';
+    }
+    var alt = yacht.name + (altSuffix || '');
+    var escapedName = yacht.name.replace(/'/g, "\\'");
+    return '<img src="' + BASE + yacht.image + '" alt="' + alt + '" ' +
+      'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + escapedName + '\'}))">';
+  }
+  window.VIPYachts.yachtCardMediaHtml = yachtCardMediaHtml;
+
+  // Several yachts have unconfirmed specs (see TODOs in the YACHTS list above)
+  // — rendering those fields directly would print the literal word "null".
+  function formatSpec(value, suffix) {
+    return (value === null || value === undefined || value === '') ? '—' : value + (suffix || '');
+  }
+  window.VIPYachts.formatSpec = formatSpec;
+
+  function whatsappLink(digits, message) {
+    return 'https://wa.me/' + digits + (message ? '?text=' + encodeURIComponent(message) : '');
+  }
+  window.VIPYachts.whatsappLink = whatsappLink;
+
+  // Fire-and-forget: logs a booking to the Google Sheet backing
+  // SHEET_WEBHOOK_URL. Never blocks or breaks the booking flow — if the URL
+  // isn't configured, or the request fails for any reason (offline, sheet
+  // misconfigured, etc.), the WhatsApp handoff (the actual source of truth)
+  // still works exactly the same either way.
+  function logBookingToSheet(fields) {
+    if (!SHEET_WEBHOOK_URL) return;
+    try {
+      var body = new URLSearchParams(Object.assign({ action: 'logBooking', token: SHEET_WEBHOOK_TOKEN }, fields));
+      // mode: 'no-cors' sidesteps CORS entirely for this write-only call —
+      // Apps Script Web Apps don't reliably send the CORS headers needed
+      // for the browser to read a response, so this doesn't try to.
+      fetch(SHEET_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: body }).catch(function () {});
+    } catch (e) { /* logging is best-effort only */ }
+  }
+  window.VIPYachts.logBookingToSheet = logBookingToSheet;
 
   /* =========================================================
      5. HEADER + FOOTER TEMPLATES
@@ -820,8 +845,12 @@
       return '<a href="' + href + '" class="' + active.trim() + '"' + ariaCurrent + '>' + item.label + '</a>';
     }).join('');
 
-    var mobileLinksHtml = navItems.map(function (item) {
-      return '<a href="' + BASE + item.href + '">' + item.label + '</a>';
+    var mobileLinksHtml = navItems.map(function (item, i) {
+      var href = BASE + item.href;
+      var active = CURRENT_PAGE === item.key ? ' is-active' : '';
+      var ariaCurrent = CURRENT_PAGE === item.key ? ' aria-current="page"' : '';
+      var delay = ' style="transition-delay:' + (i * 0.04) + 's"';
+      return '<a href="' + href + '" class="' + active.trim() + '"' + ariaCurrent + delay + '>' + item.label + '</a>';
     }).join('');
 
     var header = document.createElement('header');
@@ -850,7 +879,7 @@
     mobileNav.setAttribute('role', 'dialog');
     mobileNav.setAttribute('aria-modal', 'true');
     mobileNav.setAttribute('aria-label', 'Mobile navigation');
-    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking.html" class="btn btn-gold">Book Now</a>';
+    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking.html" class="btn btn-gold" style="transition-delay:' + (navItems.length * 0.04) + 's">Book Now</a>';
 
     document.body.insertBefore(mobileNav, document.body.firstChild);
     document.body.insertBefore(header, document.body.firstChild);
@@ -911,7 +940,7 @@
             '<div class="footer-social">' +
               '<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Instagram">IG</a>' +
               '<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Facebook">FB</a>' +
-              '<a href="https://wa.me/971500000000" target="_blank" rel="noopener" aria-label="Message VIP Yachts on WhatsApp">WA</a>' +
+              '<a href="' + whatsappLink(WHATSAPP_NUMBERS[0].digits) + '" target="_blank" rel="noopener" aria-label="Message VIP Yachts on WhatsApp">WA</a>' +
             '</div>' +
           '</div>' +
           '<div class="footer-col">' +
@@ -936,7 +965,7 @@
             '<h4>Dubai Marina Yacht Club</h4>' +
             '<address>' +
               '<span>Marina Walk, Dubai Marina, Dubai, UAE</span>' +
-              '<span><a href="tel:+97145551234">+971 4 555 1234</a></span>' +
+              '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a> / <a href="tel:+' + WHATSAPP_NUMBERS[1].digits + '">' + WHATSAPP_NUMBERS[1].display + '</a></span>' +
               '<span><a href="mailto:charter@vipyachts.ae">charter@vipyachts.ae</a></span>' +
               '<span>Daily, 8:00 AM – 10:00 PM</span>' +
             '</address>' +
@@ -952,6 +981,19 @@
         '</div>' +
       '</div>';
     document.body.appendChild(footer);
+  }
+
+  function buildWhatsAppFab() {
+    var greeting = 'Hi VIP Yachts! I have a question about chartering a yacht.';
+    var fab = document.createElement('a');
+    fab.className = 'whatsapp-fab';
+    fab.href = whatsappLink(WHATSAPP_NUMBERS[0].digits, greeting);
+    fab.target = '_blank';
+    fab.rel = 'noopener';
+    fab.setAttribute('aria-label', 'Chat with VIP Yachts on WhatsApp');
+    fab.innerHTML =
+      '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.7 4.61 1.908 6.482L4 29l7.716-1.878A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm6.98 16.87c-.297.836-1.47 1.53-2.408 1.73-.64.136-1.475.245-4.29-.922-3.602-1.492-5.92-5.14-6.1-5.38-.177-.24-1.457-1.94-1.457-3.7 0-1.76.92-2.62 1.246-2.98.326-.36.71-.45.947-.45.237 0 .474.002.68.012.218.01.51-.083.798.608.297.71.998 2.454 1.086 2.633.088.18.147.39.03.63-.118.24-.177.39-.353.6-.177.21-.372.47-.532.63-.177.177-.362.368-.155.723.207.355.92 1.518 1.976 2.46 1.358 1.212 2.503 1.588 2.858 1.766.355.177.562.148.77-.09.207-.24.887-1.035 1.124-1.39.237-.355.474-.296.798-.178.325.118 2.06.972 2.413 1.148.354.177.59.266.68.414.088.148.088.856-.208 1.69z"/></svg>';
+    document.body.appendChild(fab);
   }
 
   /* =========================================================
@@ -991,6 +1033,7 @@
     if (CURRENT_PAGE !== 'admin') {
       buildHeader();
       buildFooter();
+      buildWhatsAppFab();
     }
     initFadeUps();
 

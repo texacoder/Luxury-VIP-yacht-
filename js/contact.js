@@ -1,15 +1,27 @@
 /* =========================================================
-   CONTACT PAGE MODULE — form validation + success state
+   CONTACT PAGE MODULE — form validation + WhatsApp handoff
+   There's no email backend wired up yet, so this form sends
+   nowhere on its own. The success state is only shown once a
+   WhatsApp chat with the message actually opens — never faked.
    ========================================================= */
 (function () {
   'use strict';
   window.VIPYachtsPages = window.VIPYachtsPages || {};
 
+  var SUBJECT_LABELS = {
+    booking: 'Booking Question',
+    custom: 'Custom Charter Request',
+    feedback: 'Feedback',
+    other: 'Other'
+  };
+
   window.VIPYachtsPages.contact = function () {
+    var data = window.VIPYachts;
     var qs = window.VIPYachtsUtil.qs;
     var form = qs('#contact-form');
     var success = qs('#contact-success');
     var resetBtn = qs('#contact-reset-btn');
+    var submitError = qs('#contact-submit-error');
 
     function setError(fieldId, message) {
       var errorEl = qs('#error-' + fieldId);
@@ -57,15 +69,53 @@
         if (firstError) firstError.focus();
         return;
       }
-      form.hidden = true;
-      success.hidden = false;
-      success.focus && success.setAttribute('tabindex', '-1');
+
+      submitError.hidden = true;
+      submitError.innerHTML = '';
+
+      var name = qs('#contact-name').value.trim();
+      var email = qs('#contact-email').value.trim();
+      var phone = qs('#contact-phone').value.trim();
+      var subject = qs('#contact-subject').value;
+      var message = qs('#contact-message').value.trim();
+
+      var waMessage = [
+        'Hi VIP Yachts! I have a question.',
+        '',
+        'Subject: ' + (SUBJECT_LABELS[subject] || subject),
+        'Name: ' + name,
+        'Email: ' + email,
+        'Phone: ' + phone,
+        '',
+        message
+      ].join('\n');
+      var url = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, waMessage);
+
+      // window.open() always returns null when 'noopener' is passed as a
+      // window feature — by spec, not as a signal of the popup being
+      // blocked — so that can't be used to detect a blocked popup. Open
+      // without it, then sever window.opener manually on the returned
+      // reference for the same security effect while still getting a
+      // real reference to check.
+      var opened = window.open(url, '_blank');
+      if (opened) opened.opener = null;
+
+      if (opened) {
+        form.hidden = true;
+        success.hidden = false;
+        success.setAttribute('tabindex', '-1');
+        success.focus();
+      } else {
+        submitError.hidden = false;
+        submitError.innerHTML = 'Your browser blocked the popup. <a href="' + url + '" target="_blank" rel="noopener">Tap here to open WhatsApp</a> and send your message directly.';
+      }
     });
 
     resetBtn.addEventListener('click', function () {
       form.reset();
       form.hidden = false;
       success.hidden = true;
+      submitError.hidden = true;
       ['name', 'email', 'phone', 'subject', 'message'].forEach(function (f) { setError(f, ''); });
       qs('#contact-name').focus();
     });
