@@ -1584,6 +1584,7 @@ textarea:focus-visible,
    ========================================================= */
 .admin-body{ background: var(--deep-navy); }
 .admin-shell{ display: flex; min-height: 100vh; }
+.admin-shell[hidden]{ display: none; }
 
 .admin-sidebar{
   width: 240px;
@@ -1641,6 +1642,7 @@ textarea:focus-visible,
   color: var(--text-secondary);
   font-size: var(--fs-small);
 }
+.admin-loading[hidden]{ display: none; }
 
 /* Admin login screen */
 .admin-login-screen{
@@ -1649,6 +1651,7 @@ textarea:focus-visible,
   padding: var(--space-5);
   background: var(--deep-navy);
 }
+.admin-login-screen[hidden]{ display: none; }
 .admin-login-card{
   width: 100%; max-width: 360px;
   background: var(--navy-light);
@@ -1719,7 +1722,9 @@ textarea:focus-visible,
 @media (max-width: 768px){
   .admin-shell{ flex-direction: column; }
   .admin-sidebar{ width: 100%; flex-direction: row; align-items: center; justify-content: space-between; overflow-x: auto; }
-  .admin-nav{ flex-direction: row; }
+  .admin-brand{ flex-shrink: 0; white-space: nowrap; }
+  .admin-nav{ flex-direction: row; flex-shrink: 0; }
+  .admin-nav-link{ flex-shrink: 0; white-space: nowrap; }
   .admin-main{ padding: var(--space-5); }
   .admin-stats-grid{ grid-template-columns: 1fr; }
 }
