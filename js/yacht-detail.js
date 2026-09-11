@@ -64,19 +64,6 @@
     qs('#yacht-description').textContent = yacht.description;
     qs('#yacht-overview').textContent = yacht.overview;
 
-    /* ---------- Video tour ---------- */
-    var videoEl = qs('#yacht-video');
-    var videoSrc = qs('#yacht-video-src');
-    var videoFallback = qs('#yacht-video-fallback');
-    videoEl.poster = yacht.image ? base + yacht.image : '';
-    videoSrc.src = base + yacht.video;
-    videoEl.load();
-    videoEl.addEventListener('error', function () {
-      videoEl.style.display = 'none';
-      videoFallback.style.display = 'flex';
-    });
-    videoFallback.style.display = 'none';
-
     /* ---------- Gallery + Lightbox ---------- */
     var galleryImages = yacht.gallery && yacht.gallery.length ? yacht.gallery : (yacht.image ? [yacht.image] : []);
     var galleryEl = qs('#yacht-gallery');

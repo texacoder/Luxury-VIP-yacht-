@@ -963,16 +963,6 @@ textarea:focus-visible,
 .detail-block h2{ margin-bottom: var(--space-4); }
 .detail-block p{ margin-bottom: var(--space-3); }
 
-.video-frame{
-  position: relative;
-  aspect-ratio: 16/9;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--navy-light);
-}
-.video-frame video{ width: 100%; height: 100%; object-fit: cover; }
-.video-fallback{ position: absolute; inset: 0; display: none; }
-
 .detail-gallery{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
