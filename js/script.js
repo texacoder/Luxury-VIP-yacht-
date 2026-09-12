@@ -936,7 +936,7 @@
               '<img src="' + BASE + 'images/logo.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VY\'}))">' +
               '<span>VIP Yachts</span>' +
             '</a>' +
-            '<p>Premium yacht charters from Dubai Marina Yacht Club, built around effortless service and an unforgettable time on the water.</p>' +
+            '<p>Premium yacht charters from Dubai Marina and Dubai Harbour, built around effortless service and an unforgettable time on the water.</p>' +
             '<div class="footer-social">' +
               '<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Instagram">IG</a>' +
               '<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="VIP Yachts on Facebook">FB</a>' +
@@ -962,9 +962,9 @@
             '</ul>' +
           '</div>' +
           '<div class="footer-col">' +
-            '<h4>Dubai Marina Yacht Club</h4>' +
+            '<h4>Dubai Marina & Dubai Harbour</h4>' +
             '<address>' +
-              '<span>Marina Walk, Dubai Marina, Dubai, UAE</span>' +
+              '<span>Dubai Marina & Dubai Harbour, Dubai, UAE</span>' +
               '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a> / <a href="tel:+' + WHATSAPP_NUMBERS[1].digits + '">' + WHATSAPP_NUMBERS[1].display + '</a></span>' +
               '<span><a href="mailto:charter@vipyachts.ae">charter@vipyachts.ae</a></span>' +
               '<span>Daily, 8:00 AM – 10:00 PM</span>' +
