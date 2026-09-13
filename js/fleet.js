@@ -36,12 +36,6 @@
       }
       emptyState.hidden = true;
       grid.innerHTML = filtered.map(renderCard).join('');
-      qsa('[data-fav]', grid).forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var pressed = btn.getAttribute('aria-pressed') === 'true';
-          btn.setAttribute('aria-pressed', String(!pressed));
-        });
-      });
     }
 
     function renderCard(yacht) {
@@ -51,7 +45,6 @@
           '<div class="yacht-card-media">' +
             data.yachtCardMediaHtml(yacht, ' underway') +
             '<span class="badge badge-gold yacht-card-tier">' + yacht.tierLabel + '</span>' +
-            '<button class="yacht-card-fav" aria-label="Save ' + yacht.name + ' to favourites" aria-pressed="false" data-fav="' + yacht.id + '">&hearts;</button>' +
           '</div>' +
           '<div class="yacht-card-body">' +
             '<h3>' + yacht.name + '</h3>' +

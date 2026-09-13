@@ -13,7 +13,6 @@
     var data = window.VIPYachts;
     var util = window.VIPYachtsUtil;
     var qs = util.qs;
-    var qsa = util.qsa;
 
     /* ---------- Hero video fallback detection ---------- */
     var video = qs('#hero-video');
@@ -41,7 +40,6 @@
     if (previewGrid) {
       var preview = data.YACHTS.slice(0, 4);
       previewGrid.innerHTML = preview.map(renderYachtCard).join('');
-      wireFavButtons(previewGrid);
     }
 
     /* ---------- Packages preview ---------- */
@@ -57,7 +55,6 @@
           '<div class="yacht-card-media">' +
             data.yachtCardMediaHtml(yacht, ' underway') +
             '<span class="badge badge-gold yacht-card-tier">' + yacht.tierLabel + '</span>' +
-            '<button class="yacht-card-fav" aria-label="Save ' + yacht.name + ' to favourites" aria-pressed="false" data-fav="' + yacht.id + '">&hearts;</button>' +
           '</div>' +
           '<div class="yacht-card-body">' +
             '<h3>' + yacht.name + '</h3>' +
@@ -92,13 +89,5 @@
       );
     }
 
-    function wireFavButtons(container) {
-      qsa('[data-fav]', container).forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var pressed = btn.getAttribute('aria-pressed') === 'true';
-          btn.setAttribute('aria-pressed', String(!pressed));
-        });
-      });
-    }
   };
 })();

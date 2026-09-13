@@ -656,17 +656,6 @@ textarea:focus-visible,
 .yacht-card-tier{
   position: absolute; top: var(--space-3); left: var(--space-3);
 }
-.yacht-card-fav{
-  position: absolute; top: var(--space-3); right: var(--space-3);
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: rgba(10,21,32,0.55);
-  backdrop-filter: blur(4px);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--white);
-  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
-}
-.yacht-card-fav:hover, .yacht-card-fav[aria-pressed="true"]{ color: var(--gold); }
 .yacht-card-body{ padding: var(--space-5); }
 .yacht-card-body h3{ margin-bottom: 2px; }
 .yacht-card-tagline{ font-size: var(--fs-small); color: var(--text-muted); margin-bottom: var(--space-3); }
