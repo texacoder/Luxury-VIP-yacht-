@@ -38,6 +38,15 @@
       try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
     }
 
+    // Local calendar date as YYYY-MM-DD (not toISOString, which shifts to
+    // UTC and can land on the wrong day depending on the visitor's timezone).
+    function todayIsoDate() {
+      var d = new Date();
+      var m = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      return d.getFullYear() + '-' + m + '-' + day;
+    }
+
     /* ---------- URL param pre-fill (from fleet cards / yacht-detail / packages / experiences) ---------- */
     var params = new URLSearchParams(window.location.search);
     var urlYacht = params.get('yacht');
@@ -233,6 +242,7 @@
       qs('#booking-name').value = state.details.name || '';
       qs('#booking-email').value = state.details.email || '';
       qs('#booking-phone').value = state.details.phone || '';
+      qs('#booking-date').min = todayIsoDate();
       qs('#booking-date').value = state.details.date || '';
       qs('#booking-time').value = state.details.time || '';
       qs('#booking-guests').value = state.details.guests || '';
@@ -310,7 +320,12 @@
       var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       setErr('email', !email ? 'Please enter your email.' : (!emailPattern.test(email) ? 'Please enter a valid email.' : ''));
       setErr('phone', phone ? '' : 'Please enter a phone number.');
-      setErr('date', dateVal ? '' : 'Please choose a date.');
+      // Belt-and-suspenders alongside the input's min attribute — some
+      // browsers don't enforce min on <input type="date">, and a value can
+      // always be set directly via devtools regardless of the attribute.
+      if (!dateVal) setErr('date', 'Please choose a date.');
+      else if (dateVal < todayIsoDate()) setErr('date', 'Please choose a date that hasn’t already passed.');
+      else setErr('date', '');
       setErr('time', timeVal ? '' : 'Please choose a time.');
 
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;

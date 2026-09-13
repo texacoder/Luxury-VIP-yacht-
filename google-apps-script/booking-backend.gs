@@ -147,6 +147,10 @@ function handleLogBooking(e) {
   delete fields.token;
   fields.timestamp = new Date().toISOString();
 
+  // Every field here is free text typed by whoever called this endpoint —
+  // sanitize before it ever reaches the sheet, not after.
+  Object.keys(fields).forEach(function (k) { fields[k] = sanitizeForSheet(fields[k]); });
+
   var row = headers.map(function (h) { return fields[h] !== undefined ? fields[h] : ''; });
 
   // Any field the client sent that doesn't have a column yet gets one,
@@ -159,6 +163,20 @@ function handleLogBooking(e) {
 
   sheet.appendRow(row);
   return jsonResponse({ ok: true });
+}
+
+// Google Sheets treats a cell value starting with =, +, -, or @ as a live
+// formula, not text — even when set programmatically, not just typed in
+// the UI. Every field here comes straight from a public web request with
+// no login required (that's by design, so real customers can submit a
+// booking), so a value like "=HYPERLINK(...)" or "=IMPORTXML(...)" typed
+// or POSTed into any field would run as a formula the moment this sheet
+// is opened. Prefixing with a leading apostrophe forces Sheets to treat
+// it as plain text instead, exactly as if a person had typed the
+// apostrophe themselves to escape a formula-looking entry.
+function sanitizeForSheet(value) {
+  var str = String(value);
+  return /^[=+\-@]/.test(str) ? "'" + str : str;
 }
 
 /* =========================================================

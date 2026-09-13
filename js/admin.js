@@ -450,7 +450,7 @@
 
       return (
         '<tr data-reference="' + reference + '">' +
-          '<td>' + (b.reference || '—') + '</td>' +
+          '<td>' + (reference || '—') + '</td>' +
           '<td>' + escapeHtml(b.name || '—') + '</td>' +
           '<td>' + escapeHtml(b.phone || '—') + '</td>' +
           '<td>' + escapeHtml(b.yacht || '—') + '</td>' +
