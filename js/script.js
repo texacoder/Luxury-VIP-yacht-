@@ -133,7 +133,7 @@
         'images/yacht-big-daddy-90-flybridge.jpg'
       ],
       description: 'The Big Daddy Premium Yacht is a 90-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Big Daddy 90 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon with dining area and bar, spacious flybridge, and spacious bathtub round out the experience, alongside jetski and a variety of water sports.',
+      overview: 'Big Daddy 90 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon with dining area and bar, spacious flybridge, and spacious bathtub round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Spacious flybridge', 'Spacious bathtub', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Live BBQ & international cuisine on request'],
       decks: [
         { name: 'Flybridge', detail: 'Artificial turf lounge, helm station, and open skyline views.' },
@@ -169,7 +169,7 @@
         'images/yacht-majesty-101-flybridge.jpg'
       ],
       description: 'The Majesty Premium Yacht is a 101-ft / 31-meter masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Majesty 101 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
+      overview: 'Majesty 101 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
       decks: [
         { name: 'Flybridge', detail: 'Dedicated dining area, bar, and sunbeds with panoramic views.' },
@@ -206,7 +206,7 @@
         'images/yacht-schaefer-480-upper-deck.jpg'
       ],
       description: 'Schaefer 480 offers a comfortable, well-appointed charter for smaller groups, with a shaded flybridge, cream leather saloon, and two guest cabins below deck.',
-      overview: 'Estimated specifications based on vessel size and configuration shown. Schaefer 480 carries a two-cabin layout — a wood-paneled master cabin and a twin-bed second cabin — with a cream leather saloon, marble-topped galley, and dinette. The bow sundeck and aft lounge provide ample outdoor seating, and the shaded flybridge tops off the layout with additional open-air space.',
+      overview: 'Estimated specifications based on vessel size and configuration shown. Schaefer 480 carries a two-cabin layout (a wood-paneled master cabin and a twin-bed second cabin) with a cream leather saloon, marble-topped galley, and dinette. The bow sundeck and aft lounge provide ample outdoor seating, and the shaded flybridge tops off the layout with additional open-air space.',
       features: ['Two-cabin layout (master + twin)', 'Cream leather saloon', 'Marble-topped galley & dinette', 'Shaded flybridge', 'Bow sundeck', 'Aft lounge seating'],
       decks: [
         { name: 'Flybridge', detail: 'Shaded open-air seating above the main deck.' },
@@ -231,7 +231,7 @@
       image: 'images/yacht-mayyas-75-hero.jpg',
       gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-exterior-2.jpg', 'images/yacht-mayyas-75-interior.jpg'],
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins — Master and Twin — each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
+      overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins, including Master and Twin, each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master & Twin cabins, each en-suite', 'Main salon with bar area', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating with dining table and skyline views.' },
@@ -256,7 +256,7 @@
       image: 'images/yacht-majesty-88-hero.jpg',
       gallery: ['images/yacht-majesty-88-exterior.jpg', 'images/yacht-majesty-88-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
+      overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
       decks: [
         { name: 'Flybridge', detail: 'Dedicated dining area, bar, and sunbeds with panoramic views.' },
@@ -306,7 +306,7 @@
       image: 'images/yacht-jasmine-55-hero.jpg',
       gallery: ['images/yacht-jasmine-55-exterior.jpg', 'images/yacht-jasmine-55-interior.jpg'],
       description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins — Master, VIP, Double, and Twin — each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
+      overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Main salon', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating with helm station and skyline views.' },
@@ -684,7 +684,7 @@
      ========================================================= */
   var PACKAGES = [
     { id: 'sunset-cruise', name: 'Sunset Cruise', hours: 2, price: 15000, popular: false, description: 'A short, golden-hour cruise along the Marina skyline. Ideal for couples or a quick celebration.' },
-    { id: 'half-day', name: 'Half Day', hours: 4, price: 30000, popular: false, description: 'Four hours on the water — enough time to swim, anchor up for lunch, and cruise the coastline at a relaxed pace.' },
+    { id: 'half-day', name: 'Half Day', hours: 4, price: 30000, popular: false, description: 'Four hours on the water, enough time to swim, anchor up for lunch, and cruise the coastline at a relaxed pace.' },
     { id: 'full-day', name: 'Full Day', hours: 8, price: 55000, popular: true, description: 'A full day at sea with time to explore further out, anchor for extended swimming, and enjoy an unhurried onboard lunch.' },
     { id: 'overnight', name: 'Overnight', hours: 24, price: 90000, popular: false, description: 'A full 24 hours onboard, including an overnight anchorage, for guests who want the complete live-aboard experience.' }
   ];

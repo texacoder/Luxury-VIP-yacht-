@@ -1475,6 +1475,8 @@ textarea:focus-visible,
   color: var(--gold);
   margin-top: var(--space-4);
 }
+.order-summary-inner .btn-block{ margin-top: var(--space-4); }
+.order-summary-inner .btn-block + .btn-block{ margin-top: var(--space-3); }
 
 /* Step 3: payment */
 .payment-grid{

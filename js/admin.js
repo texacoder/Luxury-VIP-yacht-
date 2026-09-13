@@ -215,14 +215,14 @@
             var mins = Math.ceil((res.retryAfterMs || 0) / 60000);
             setLoginError('Too many failed attempts. Try again in about ' + mins + ' minute' + (mins === 1 ? '' : 's') + '.');
           } else if (res.error === 'admin_not_configured') {
-            setLoginError('Admin login isn’t set up on the backend yet. Add ADMIN_USERNAME and ADMIN_PASSWORD in the Apps Script’s Script Properties — see google-apps-script/booking-backend.gs.');
+            setLoginError('Admin login isn’t set up on the backend yet. Add ADMIN_USERNAME and ADMIN_PASSWORD in the Apps Script’s Script Properties. See google-apps-script/booking-backend.gs for setup instructions.');
           } else {
             setLoginError('Something went wrong logging in. Please try again.');
           }
         })
         .catch(function (err) {
           if (err && err.isTimeout) {
-            setLoginError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now — please try again in a moment.');
+            setLoginError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now. Please try again in a moment.');
           } else {
             setLoginError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
           }
@@ -527,7 +527,7 @@
               paymentSelect.value = getPaymentStatus(entry);
               methodSelect.value = getPaymentMethod(entry);
               methodSelect.disabled = getPaymentStatus(entry) !== 'paid';
-              saveState.textContent = 'Couldn’t save — try again';
+              saveState.textContent = 'Couldn’t save. Try again';
               saveState.className = 'admin-row-save-state is-error';
             })
             .then(function () { setRowSaving(false); });
@@ -726,7 +726,7 @@
             // first time after admin login just got turned on shouldn't
             // see a confusing "expired" message for a session that never
             // existed.
-            setLoginError(opts.hadToken ? 'Your session expired — please log in again.' : '');
+            setLoginError(opts.hadToken ? 'Your session expired. Please log in again.' : '');
             return;
           }
           // Some other backend error, unrelated to auth — show the
@@ -738,7 +738,7 @@
         .catch(function (err) {
           showDashboard();
           if (err && err.isTimeout) {
-            setDataError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now — try reloading in a moment.');
+            setDataError('The backend didn’t respond even after retrying (~' + Math.round(REQUEST_TIMEOUT_MS * 2 / 1000) + 's). It may be slow to wake up right now. Try reloading in a moment.');
           } else {
             setDataError('Couldn’t reach the admin backend. Make sure the updated Apps Script from google-apps-script/booking-backend.gs has been deployed.');
           }
