@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /pages/admin.html
 Allow: /
 
-Sitemap: https://www.vipyachts.ae/sitemap.xml
+Sitemap: https://vipyachtscharter.com/sitemap.xml
