@@ -229,7 +229,7 @@
       speedKnots: null,
       year: null,
       image: 'images/yacht-mayyas-75-hero.jpg',
-      gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-interior.jpg'],
+      gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-exterior-2.jpg', 'images/yacht-mayyas-75-interior.jpg'],
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
       overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins — Master and Twin — each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master & Twin cabins, each en-suite', 'Main salon with bar area', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
