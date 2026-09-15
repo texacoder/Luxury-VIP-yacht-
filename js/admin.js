@@ -46,6 +46,7 @@
     var loginForm = qs('#admin-login-form');
     var usernameInput = qs('#admin-username');
     var passwordInput = qs('#admin-password');
+    var passwordToggle = qs('#admin-password-toggle');
     var loginError = qs('#admin-login-error');
     var loginSubmitBtn = qs('#admin-login-submit');
     var logoutBtn = qs('#admin-logout-btn');
@@ -172,6 +173,19 @@
     });
 
     /* ---------- Login ---------- */
+    if (passwordToggle) {
+      var eyeIcon = qs('.icon-eye', passwordToggle);
+      var eyeOffIcon = qs('.icon-eye-off', passwordToggle);
+      passwordToggle.addEventListener('click', function () {
+        var showing = passwordInput.type === 'text';
+        passwordInput.type = showing ? 'password' : 'text';
+        passwordToggle.setAttribute('aria-pressed', String(!showing));
+        passwordToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+        eyeIcon.hidden = !showing;
+        eyeOffIcon.hidden = showing;
+      });
+    }
+
     function setLoginError(message) {
       if (message) {
         loginError.textContent = message;
@@ -238,6 +252,13 @@
       clearSession();
       usernameInput.value = '';
       passwordInput.value = '';
+      passwordInput.type = 'password'; // reset in case it was left toggled visible
+      if (passwordToggle) {
+        passwordToggle.setAttribute('aria-pressed', 'false');
+        passwordToggle.setAttribute('aria-label', 'Show password');
+        qs('.icon-eye', passwordToggle).hidden = false;
+        qs('.icon-eye-off', passwordToggle).hidden = true;
+      }
       // Show the login screen immediately rather than re-asking the
       // backend whether one is needed — if a login was never actually
       // required yet (no ADMIN_USERNAME/PASSWORD configured), re-checking

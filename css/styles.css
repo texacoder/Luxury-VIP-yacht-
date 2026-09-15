@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* -------------------- 1. FONTS -------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* -------------------- 2. DESIGN TOKENS -------------------- */
 :root{
@@ -28,8 +28,8 @@
   --danger:         #d16a5a;
 
   /* Typography */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Jost', 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
 
   /* Type scale */
   --fs-h1: clamp(2.4rem, 5vw, 4rem);
@@ -1646,32 +1646,91 @@ textarea:focus-visible,
 
 /* Admin login screen */
 .admin-login-screen{
+  position: relative;
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-5);
-  background: var(--deep-navy);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(201,162,75,0.10), transparent 60%),
+    var(--deep-navy);
+  overflow: hidden;
 }
 .admin-login-screen[hidden]{ display: none; }
+.admin-login-glow{
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 520px; height: 520px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(201,162,75,0.16) 0%, rgba(201,162,75,0) 70%);
+  pointer-events: none;
+}
 .admin-login-card{
-  width: 100%; max-width: 360px;
-  background: var(--navy-light);
-  border: 1px solid var(--border-subtle);
+  position: relative;
+  width: 100%; max-width: 380px;
+  background: linear-gradient(180deg, var(--navy-light), var(--navy));
+  border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,162,75,0.06);
   padding: var(--space-7) var(--space-6);
   text-align: center;
 }
-.admin-login-brand{ justify-content: center; margin-bottom: var(--space-5); }
+.admin-login-badge{
+  width: 52px; height: 52px;
+  margin: 0 auto var(--space-4);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(201,162,75,0.12);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+}
+.admin-login-badge svg{ width: 24px; height: 24px; }
+.admin-login-brand{ justify-content: center; margin-bottom: var(--space-4); }
 .admin-login-card h1{ font-size: var(--fs-h4); margin-bottom: var(--space-2); }
 .admin-login-sub{ font-size: var(--fs-small); color: var(--text-secondary); margin-bottom: var(--space-6); }
-.admin-login-card .form-row{ text-align: left; }
+.admin-login-card .form-row{ text-align: left; margin-bottom: var(--space-4); }
+.admin-login-card .form-row:last-of-type{ margin-bottom: 0; }
 .admin-login-error{
   font-size: var(--fs-small);
   color: var(--danger);
   background: rgba(220,80,80,0.1);
+  border: 1px solid rgba(220,80,80,0.3);
   border-radius: var(--radius-md);
   padding: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin-top: var(--space-5);
 }
+.admin-login-card .btn-block{ margin-top: var(--space-6); }
+.admin-login-footnote{
+  margin-top: var(--space-4);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* Icon-prefixed inputs (login form) */
+.input-icon-field{ position: relative; display: flex; align-items: center; }
+.input-icon-field .input-icon{
+  position: absolute; left: 1em;
+  width: 17px; height: 17px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.input-icon-field input{ width: 100%; padding-left: 2.6em; }
+.input-icon-field input:focus ~ .input-icon{ color: var(--gold); }
+.password-toggle{
+  position: absolute; right: 0.4em;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.password-toggle svg{ width: 18px; height: 18px; }
+/* Inline <svg hidden> doesn't reliably pick up the UA [hidden]{display:none}
+   rule the way plain HTML elements do — force it explicitly so only one of
+   the eye / eye-off icons ever renders at a time. */
+.password-toggle svg[hidden]{ display: none; }
+.password-toggle:hover{ color: var(--gold); background: rgba(201,162,75,0.1); }
+#admin-password{ padding-right: 2.6em; }
 
 .admin-stats-grid{
   display: grid;
