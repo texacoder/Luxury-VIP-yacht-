@@ -535,6 +535,11 @@ textarea:focus-visible,
   align-items: center;
   overflow: hidden;
   color: var(--white);
+  /* .hero-stats sits absolutely-positioned at the bottom of this box —
+     without reserving room for it here, centered content (especially the
+     CTA button) can end up underneath it on short viewports, which is
+     common on mobile once the browser's address bar is factored in. */
+  padding-bottom: 130px;
 }
 .hero-media{
   position: absolute;
@@ -812,10 +817,19 @@ textarea:focus-visible,
   .mosaic-grid{ grid-template-rows: repeat(2, 170px); }
   .steps-grid{ grid-template-columns: 1fr; }
   .hero-stats-grid{ gap: var(--space-6); flex-wrap: wrap; }
+
+  /* Stack the stats bar below the hero content instead of overlaying it
+     absolutely. On mobile, 100vh includes space the browser's address
+     bar is still occupying, so the actually-visible viewport is shorter
+     than the CSS thinks — centered content can end up underneath the
+     stats bar. Letting everything flow normally removes that race
+     entirely, on any viewport height. */
+  .hero{ min-height: 0; display: block; padding-bottom: 0; }
+  .hero-inner{ padding-top: calc(var(--header-height) + var(--space-7)); padding-bottom: var(--space-8); }
+  .hero-stats{ position: static; }
 }
 
 @media (max-width: 480px){
-  .hero{ min-height: 92vh; }
   .hero-content h1{ font-size: 2rem; }
   .hero-stats-grid{ justify-content: space-between; gap: var(--space-4); }
   .hero-stat-num{ font-size: 1.25rem; }
