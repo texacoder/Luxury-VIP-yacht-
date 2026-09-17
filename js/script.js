@@ -371,10 +371,15 @@
       washrooms: null, // TODO: not yet provided — needs client input
       length: 100,
       crew: null, // TODO: not yet provided — needs client input
-      image: '', // TODO: client says photos are coming soon
-      gallery: [],
+      image: 'images/yacht-benetti-100-hero.jpg',
+      gallery: [
+        'images/yacht-benetti-100-salon.jpg',
+        'images/yacht-benetti-100-aft-deck.jpg',
+        'images/yacht-benetti-100-bathroom.jpg',
+        'images/yacht-benetti-100-galley.jpg'
+      ], // TODO: client says more photos are coming
       description: 'Benetti 100 is a recent addition to the VIP Yachts fleet.',
-      overview: 'Full specifications and photos for Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
+      overview: 'Full specifications for Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
       features: ['Full feature list coming soon'],
       decks: [
         { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
