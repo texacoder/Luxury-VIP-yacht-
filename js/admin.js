@@ -382,11 +382,11 @@
 
     function renderYachts() {
       var base = data.BASE;
-      var filtered = data.YACHTS.filter(function (y) {
+      var filtered = data.sortYachtsByLength(data.YACHTS.filter(function (y) {
         var tierMatch = yachtState.tier === 'all' || y.tier === yachtState.tier;
         var searchMatch = !yachtState.search || y.name.toLowerCase().indexOf(yachtState.search) !== -1;
         return tierMatch && searchMatch;
-      });
+      }));
 
       qs('#admin-yacht-count').textContent = filtered.length + (filtered.length === 1 ? ' yacht' : ' yachts');
 

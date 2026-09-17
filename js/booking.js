@@ -116,7 +116,7 @@
     var step1Tier = 'all';
 
     function renderStep1() {
-      var filtered = step1Tier === 'all' ? data.YACHTS : data.YACHTS.filter(function (y) { return y.tier === step1Tier; });
+      var filtered = data.sortYachtsByLength(step1Tier === 'all' ? data.YACHTS : data.YACHTS.filter(function (y) { return y.tier === step1Tier; }));
       yachtGrid.innerHTML = filtered.map(function (yacht) {
         var selected = state.yachtId === yacht.id;
         return (

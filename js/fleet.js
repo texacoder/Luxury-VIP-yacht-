@@ -21,11 +21,11 @@
     var state = { tier: 'all', minGuests: 0 };
 
     function render() {
-      var filtered = data.YACHTS.filter(function (y) {
+      var filtered = data.sortYachtsByLength(data.YACHTS.filter(function (y) {
         var tierMatch = state.tier === 'all' || y.tier === state.tier;
         var guestMatch = y.guests >= state.minGuests;
         return tierMatch && guestMatch;
-      });
+      }));
 
       resultCount.textContent = filtered.length + (filtered.length === 1 ? ' yacht available' : ' yachts available');
 

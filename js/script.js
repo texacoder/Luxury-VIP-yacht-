@@ -819,6 +819,23 @@
   }
   window.VIPYachts.formatSpec = formatSpec;
 
+  // Yacht listings (fleet, booking, admin) show smallest-to-largest by
+  // length within each tier — Classic yachts before Premium, and within
+  // each tier the shortest boat first. A yacht with no confirmed length
+  // yet sorts to the end of its tier rather than implying it's the
+  // smallest. Returns a new sorted array; never mutates the input.
+  function sortYachtsByLength(yachts) {
+    function tierRank(tier) { return tier === 'classic' ? 0 : 1; }
+    return yachts.slice().sort(function (a, b) {
+      var tierDiff = tierRank(a.tier) - tierRank(b.tier);
+      if (tierDiff !== 0) return tierDiff;
+      var la = (a.length === null || a.length === undefined) ? Infinity : a.length;
+      var lb = (b.length === null || b.length === undefined) ? Infinity : b.length;
+      return la - lb;
+    });
+  }
+  window.VIPYachts.sortYachtsByLength = sortYachtsByLength;
+
   function whatsappLink(digits, message) {
     return 'https://wa.me/' + digits + (message ? '?text=' + encodeURIComponent(message) : '');
   }
