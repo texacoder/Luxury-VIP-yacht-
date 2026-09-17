@@ -183,7 +183,7 @@
       tierLabel: 'Classic Tier',
       name: 'Schaefer 480',
       tagline: 'A Comfortable Introduction to Yachting',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 600,
       guests: 12,
       cabins: 2,
       washrooms: 1,
@@ -295,7 +295,7 @@
       tierLabel: 'Classic Tier',
       name: 'Jasmine',
       tagline: 'Experience the Grandeur',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 700,
       guests: 22,
       cabins: 4,
       washrooms: 4,
