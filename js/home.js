@@ -35,10 +35,20 @@
       });
     }
 
-    /* ---------- Fleet preview (smallest 4 by length, same sort as the fleet page) ---------- */
+    /* ---------- Fleet preview (smallest + largest from each tier, so both
+       Classic and Premium show their size range at a glance) ---------- */
     var previewGrid = qs('#fleet-preview-grid');
     if (previewGrid) {
-      var preview = data.sortYachtsByLength(data.YACHTS).slice(0, 4);
+      var byTier = { classic: [], premium: [] };
+      data.sortYachtsByLength(data.YACHTS).forEach(function (y) {
+        if (y.length !== null && y.length !== undefined && byTier[y.tier]) byTier[y.tier].push(y);
+      });
+      var preview = [];
+      ['classic', 'premium'].forEach(function (tier) {
+        var list = byTier[tier];
+        if (list.length) preview.push(list[0]);
+        if (list.length > 1) preview.push(list[list.length - 1]);
+      });
       previewGrid.innerHTML = preview.map(renderYachtCard).join('');
     }
 
