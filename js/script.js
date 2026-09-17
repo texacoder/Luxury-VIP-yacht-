@@ -376,8 +376,13 @@
         'images/yacht-benetti-100-salon.jpg',
         'images/yacht-benetti-100-aft-deck.jpg',
         'images/yacht-benetti-100-bathroom.jpg',
-        'images/yacht-benetti-100-galley.jpg'
-      ], // TODO: client says more photos are coming
+        'images/yacht-benetti-100-galley.jpg',
+        'images/yacht-benetti-100-stern.jpg',
+        'images/yacht-benetti-100-salon-panorama.jpg',
+        'images/yacht-benetti-100-master-cabin.jpg',
+        'images/yacht-benetti-100-exterior-1.jpg',
+        'images/yacht-benetti-100-bow.jpg'
+      ],
       description: 'Benetti 100 is a recent addition to the VIP Yachts fleet.',
       overview: 'Full specifications for Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
       features: ['Full feature list coming soon'],
