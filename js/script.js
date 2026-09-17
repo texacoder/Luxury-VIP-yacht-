@@ -37,7 +37,7 @@
       tierLabel: 'Classic Tier',
       name: 'Enterprise',
       tagline: 'Experience the Grandeur',
-      pricePerHour: 500,
+      pricePerHour: 600,
       guests: 15,
       cabins: 1,
       washrooms: 1,
@@ -112,7 +112,7 @@
       tierLabel: 'Classic Tier',
       name: 'Big Daddy 90',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerHour: 1500,
+      pricePerHour: 3000,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -147,7 +147,7 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 101',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerHour: 3500,
+      pricePerHour: 6000,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -245,7 +245,7 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 88',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerHour: 1500,
+      pricePerHour: 3000,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -270,7 +270,7 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 59',
       tagline: 'Explore a Fresh Realm of Exclusive Yacht Charters',
-      pricePerHour: 700,
+      pricePerHour: 800,
       guests: 25,
       cabins: 1,
       washrooms: 1,
@@ -316,11 +316,11 @@
     },
     {
       id: 'carmen-140',
-      tier: 'premium',
-      tierLabel: 'Premium Tier',
+      tier: 'classic',
+      tierLabel: 'Classic Tier',
       name: 'Carmen',
       tagline: 'A Mega Yacht Escape on the Water',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 10000,
       guests: 80,
       cabins: 5,
       washrooms: 5, // TODO: assumed 1 per cabin — not stated in source brochure, needs client confirmation
@@ -356,6 +356,52 @@
         { name: 'Main Deck', detail: 'Grand saloon, formal dining area, and bar counter.' },
         { name: 'Middle Deck', detail: 'Jacuzzi with sea views.' },
         { name: 'Lower Deck', detail: '5 guest cabins including master bedroom, each with en-suite bathroom.' }
+      ]
+    },
+    {
+      id: 'imagine',
+      tier: 'classic',
+      tierLabel: 'Classic Tier',
+      name: 'Imagine',
+      tagline: 'A New Addition to the Fleet',
+      pricePerHour: 1500,
+      guests: null, // TODO: not yet provided — needs client input
+      cabins: null, // TODO: not yet provided — needs client input
+      washrooms: null, // TODO: not yet provided — needs client input
+      length: null, // TODO: not yet provided — needs client input
+      crew: null, // TODO: not yet provided — needs client input
+      speedKnots: null,
+      year: null,
+      image: '', // TODO: client says photos are coming soon
+      gallery: [],
+      description: 'Imagine is a recent addition to the VIP Yachts fleet.',
+      overview: 'Full specifications and photos for Imagine will be added as soon as they\'re available. Get in touch with our team for the latest details.',
+      features: ['Full feature list coming soon'],
+      decks: [
+        { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
+      ]
+    },
+    {
+      id: 'benetti-100',
+      tier: 'classic',
+      tierLabel: 'Classic Tier',
+      name: 'Benetti 100',
+      tagline: 'A New Addition to the Fleet',
+      pricePerHour: null, // Price on Request
+      guests: null, // TODO: not yet provided — needs client input
+      cabins: null, // TODO: not yet provided — needs client input
+      washrooms: null, // TODO: not yet provided — needs client input
+      length: 100,
+      crew: null, // TODO: not yet provided — needs client input
+      speedKnots: null,
+      year: null,
+      image: '', // TODO: client says photos are coming soon
+      gallery: [],
+      description: 'Benetti 100 is a recent addition to the VIP Yachts fleet.',
+      overview: 'Full specifications and photos for Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
+      features: ['Full feature list coming soon'],
+      decks: [
+        { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
       ]
     },
     {

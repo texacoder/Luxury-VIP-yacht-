@@ -96,6 +96,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://vipyachtscharter.com/pages/yacht-detail.html?id=imagine</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vipyachtscharter.com/pages/yacht-detail.html?id=benetti-100</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vipyachtscharter.com/pages/yacht-detail.html?id=aarna-90</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
