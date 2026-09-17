@@ -40,7 +40,6 @@
         this.replaceWith(Object.assign(document.createElement('div'), { className: 'img-fallback', textContent: yacht.name, style: 'width:100%;height:100%;' }));
       };
     }
-    qs('#breadcrumb-name').textContent = yacht.name;
     qs('#yacht-tier-badge').textContent = yacht.tierLabel;
     qs('#yacht-name').textContent = yacht.name;
     qs('#yacht-tagline').textContent = yacht.tagline;
