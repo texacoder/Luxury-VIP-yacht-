@@ -1436,6 +1436,26 @@ textarea:focus-visible,
 .booking-yacht-body p{ font-size: var(--fs-small); margin-bottom: var(--space-2); }
 .booking-yacht-price{ font-family: var(--font-display); color: var(--gold); font-weight: 600; }
 
+/* Quick-enquiry shortcut: skip package/add-ons/details entirely and go
+   straight to WhatsApp with just the selected yacht. */
+.quick-enquiry-banner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+  padding: var(--space-5) var(--space-6);
+  background: var(--navy-light);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+}
+.quick-enquiry-text{ display: flex; flex-direction: column; gap: 2px; }
+.quick-enquiry-text strong{ font-family: var(--font-display); font-size: var(--fs-h4); }
+.quick-enquiry-text span{ color: var(--gold); font-weight: 600; }
+
 /* Step 2: customize */
 .customize-grid{
   display: grid;
@@ -1447,6 +1467,7 @@ textarea:focus-visible,
 }
 .customize-subhead{ font-size: var(--fs-h4); margin-bottom: var(--space-4); margin-top: var(--space-7); }
 .customize-subhead:first-child{ margin-top: 0; }
+.customize-subhead-optional{ font-size: var(--fs-small); color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: normal; }
 
 .booking-package-grid{
   display: grid;

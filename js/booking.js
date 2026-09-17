@@ -175,7 +175,24 @@
     var addonList = qs('#booking-addon-list');
     var detailsForm = qs('#booking-details-form');
 
+    function renderQuickEnquiryBanner() {
+      var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
+      var banner = qs('#quick-enquiry-banner');
+      if (!banner) return;
+      if (!yacht) { banner.hidden = true; return; }
+      banner.hidden = false;
+      qs('#quick-enquiry-yacht-name').textContent = yacht.name;
+      qs('#quick-enquiry-yacht-price').textContent = data.formatYachtPrice(yacht.pricePerHour);
+      var message = [
+        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + ' (' + data.formatYachtPrice(yacht.pricePerHour) + ').',
+        '',
+        'Could you tell me more about availability, packages, and pricing?'
+      ].join('\n');
+      qs('#quick-enquiry-btn').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, message);
+    }
+
     function renderStep2() {
+      renderQuickEnquiryBanner();
       // Package options
       pkgGrid.innerHTML = data.PACKAGES.map(function (pkg) {
         var selected = state.packageId === pkg.id;
@@ -307,8 +324,6 @@
         else { errEl.textContent = ''; input.removeAttribute('aria-invalid'); }
       }
 
-      if (!state.packageId) valid = false;
-
       var name = qs('#booking-name').value.trim();
       var email = qs('#booking-email').value.trim();
       var phone = qs('#booking-phone').value.trim();
@@ -336,15 +351,11 @@
       else if (yacht && yacht.guests != null && Number(guests) > yacht.guests) { setErr('guests', 'This yacht holds up to ' + yacht.guests + ' guests.'); }
       else { setErr('guests', ''); }
 
-      return valid && !!state.packageId;
+      return valid;
     }
 
     qs('#step2-back').addEventListener('click', function () { goToStep(1); });
     qs('#step2-next').addEventListener('click', function () {
-      if (!state.packageId) {
-        window.alert('Please select a package to continue.');
-        return;
-      }
       if (!validateStep2()) return;
       goToStep(3);
     });
