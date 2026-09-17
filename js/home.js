@@ -60,7 +60,7 @@
             '<h3>' + yacht.name + '</h3>' +
             '<p class="yacht-card-tagline">' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
             '<div class="yacht-card-footer">' +
-              '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
+              '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
               '<a href="' + base + 'pages/yacht-detail.html?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
             '</div>' +
           '</div>' +

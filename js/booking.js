@@ -128,7 +128,7 @@
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
               '<p>' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
-              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerDay) + '</span>' +
+              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
             '</div>' +
           '</button>'
         );

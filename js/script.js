@@ -37,12 +37,12 @@
       tierLabel: 'Classic Tier',
       name: 'Enterprise',
       tagline: 'Experience the Grandeur',
-      pricePerDay: 35000,
+      pricePerHour: 500,
       guests: 15,
       cabins: 1,
       washrooms: 1,
       length: 48,
-      crew: 2,
+      crew: 3,
       speedKnots: 20,
       year: 2019,
       image: 'images/yacht-enterprise-48-hero.jpg',
@@ -72,7 +72,7 @@
       tierLabel: 'Classic Tier',
       name: 'Grand 82',
       tagline: 'Highly Recommended Luxury Yacht in Dubai',
-      pricePerDay: 70000,
+      pricePerHour: null, // Price on Request
       guests: 35,
       cabins: 4,
       washrooms: 4,
@@ -112,7 +112,7 @@
       tierLabel: 'Classic Tier',
       name: 'Big Daddy 90',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerDay: 80000,
+      pricePerHour: 1500,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -147,7 +147,7 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 101',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerDay: 90000,
+      pricePerHour: 3500,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -183,12 +183,12 @@
       tierLabel: 'Classic Tier',
       name: 'Schaefer 480',
       tagline: 'A Comfortable Introduction to Yachting',
-      pricePerDay: 32000,
+      pricePerHour: null, // Price on Request
       guests: 12,
       cabins: 2,
       washrooms: 1,
       length: 48,
-      crew: 2,
+      crew: 3,
       speedKnots: 20,
       year: 2020,
       image: 'images/yacht-schaefer-480-exterior-1.jpg',
@@ -220,7 +220,7 @@
       tierLabel: 'Classic Tier',
       name: 'Mayyas',
       tagline: 'Experience the Grandeur',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: 900,
       guests: 30,
       cabins: 2,
       washrooms: 2,
@@ -245,7 +245,7 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 88',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: 1500,
       guests: 50,
       cabins: 4,
       washrooms: 4,
@@ -270,12 +270,12 @@
       tierLabel: 'Classic Tier',
       name: 'Majesty 59',
       tagline: 'Explore a Fresh Realm of Exclusive Yacht Charters',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: 700,
       guests: 25,
       cabins: 1,
       washrooms: 1,
       length: 59,
-      crew: 2,
+      crew: 3,
       speedKnots: null,
       year: null,
       image: 'images/yacht-majesty-59-exterior.jpg', // no dedicated hero photo was supplied for this yacht — using the exterior shot as the card/hero image instead
@@ -295,12 +295,12 @@
       tierLabel: 'Classic Tier',
       name: 'Jasmine',
       tagline: 'Experience the Grandeur',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: 22,
       cabins: 4,
       washrooms: 4,
       length: 55,
-      crew: 2,
+      crew: 3,
       speedKnots: null,
       year: null,
       image: 'images/yacht-jasmine-55-hero.jpg',
@@ -316,16 +316,16 @@
     },
     {
       id: 'carmen-140',
-      tier: 'classic',
-      tierLabel: 'Classic Tier',
+      tier: 'premium',
+      tierLabel: 'Premium Tier',
       name: 'Carmen',
       tagline: 'A Mega Yacht Escape on the Water',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: 80,
       cabins: 5,
       washrooms: 5, // TODO: assumed 1 per cabin — not stated in source brochure, needs client confirmation
       length: 140,
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 5,
       speedKnots: null,
       year: null,
       // TODO — IMAGE SOURCING FLAG: photos below were extracted from a client-supplied PDF that
@@ -364,7 +364,7 @@
       tierLabel: 'Premium Tier',
       name: 'Aarna',
       tagline: 'Sunseeker Elegance, Refit for 2023',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: 8,
       cabins: 4,
       washrooms: 4, // TODO: assumed 1 per cabin — not stated in source brochure, needs client confirmation
@@ -403,12 +403,12 @@
       tierLabel: 'Premium Tier',
       name: 'Notorious',
       tagline: 'Sleek Performance Cruiser',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 4,
       speedKnots: null,
       year: 2023,
       image: 'images/yacht-notorious-2023-exterior-1.jpg',
@@ -442,12 +442,12 @@
       tierLabel: 'Premium Tier',
       name: 'Princess X95',
       tagline: 'Closer to a Superyacht Than Her Class',
-      pricePerDay: 120000,
+      pricePerHour: null, // Price on Request
       guests: 12,
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 95,
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 4,
       speedKnots: null,
       year: 2023,
       image: 'images/yacht-princess-x95-exterior-1.jpg',
@@ -475,12 +475,12 @@
       tierLabel: 'Premium Tier',
       name: 'Thunder',
       tagline: 'A 49m Superyacht by Oceanfast',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 50, // 49.9m / 164ft, rounded
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 5,
       speedKnots: 19, // cruising speed per brochure; top speed 40.0kn
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-thunder-49m-exterior-1.jpg',
@@ -512,12 +512,12 @@
       tierLabel: 'Premium Tier',
       name: 'Khalili',
       tagline: 'A Refined Superyacht Charter',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 5,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-khalili-exterior-1.jpg',
@@ -556,12 +556,12 @@
       tierLabel: 'Premium Tier',
       name: 'San Lorenzo SX88',
       tagline: 'Italian Design, Dubai Skyline',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: 8, // TODO: cabins accommodate up to 8 guests per source brochure — needs client confirmation
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 88, // TODO: model designation "SX88" — needs client confirmation of exact LOA
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 4,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-sanlorenzo-sx88-hero.jpg',
@@ -581,12 +581,12 @@
       tierLabel: 'Premium Tier',
       name: 'Fynesse',
       tagline: 'Classic Superyacht, Dubai Waters',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 4,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-fynesse-hero.jpg',
@@ -606,12 +606,12 @@
       tierLabel: 'Premium Tier',
       name: 'Matrix',
       tagline: 'Sleek Sport Cruiser',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 3,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-matrix-hero.jpg',
@@ -631,12 +631,12 @@
       tierLabel: 'Premium Tier',
       name: 'Encore',
       tagline: '140ft Tri-Deck Super Yacht',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: 30, // per source brochure: up to 30 guests
       cabins: 5, // per source brochure: 5 cabins (1 owner, 2 VIP, 2 double)
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 140,
-      crew: 10, // per source brochure: capable of carrying up to 10 crew
+      crew: 5,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-encore-hero.jpg',
@@ -657,12 +657,12 @@
       tierLabel: 'Premium Tier',
       name: 'Notika',
       tagline: 'Sport Yacht Charter',
-      pricePerDay: null, // TODO: pricing not provided in source brochure — needs client input
+      pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
-      crew: null, // TODO: not stated in source brochure — needs client input
+      crew: 4,
       speedKnots: null,
       year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-notika-hero.jpg',
@@ -736,12 +736,13 @@
   }
   window.VIPYachts.formatAED = formatAED;
 
-  // Several yachts in the fleet don't have a confirmed day rate yet (see TODOs
-  // in the YACHTS list above). Rendering "AED 0 / day" for those would look
-  // like a pricing bug, so every price display should go through this instead
-  // of calling formatAED directly on a yacht's pricePerDay.
+  // Some yachts are priced "on request" rather than a fixed hourly rate (see
+  // pricePerHour: null entries in the YACHTS list above). Rendering "AED 0 /
+  // hr" for those would look like a pricing bug, so every price display
+  // should go through this instead of calling formatAED directly on a
+  // yacht's pricePerHour.
   function formatYachtPrice(amount) {
-    return amount ? formatAED(amount) + ' / day' : 'Price on Request';
+    return amount ? formatAED(amount) + ' / hr' : 'Price on Request';
   }
   window.VIPYachts.formatYachtPrice = formatYachtPrice;
 
