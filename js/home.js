@@ -35,10 +35,10 @@
       });
     }
 
-    /* ---------- Fleet preview (first 4 yachts, one per notable tier where possible) ---------- */
+    /* ---------- Fleet preview (smallest 4 by length, same sort as the fleet page) ---------- */
     var previewGrid = qs('#fleet-preview-grid');
     if (previewGrid) {
-      var preview = data.YACHTS.slice(0, 4);
+      var preview = data.sortYachtsByLength(data.YACHTS).slice(0, 4);
       previewGrid.innerHTML = preview.map(renderYachtCard).join('');
     }
 
