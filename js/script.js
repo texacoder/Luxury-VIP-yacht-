@@ -43,8 +43,6 @@
       washrooms: 1,
       length: 48,
       crew: 3,
-      speedKnots: 20,
-      year: 2019,
       image: 'images/yacht-enterprise-48-hero.jpg',
       gallery: [
         'images/yacht-enterprise-48-exterior-1.jpg',
@@ -78,8 +76,6 @@
       washrooms: 4,
       length: 82,
       crew: 4,
-      speedKnots: 24,
-      year: 2022,
       image: 'images/yacht-grand-82-hero.jpg',
       gallery: [
         'images/yacht-grand-82-saloon-1.jpg',
@@ -118,8 +114,6 @@
       washrooms: 4,
       length: 90,
       crew: 5,
-      speedKnots: 8,
-      year: 2021,
       image: 'images/yacht-big-daddy-90-hero.jpg',
       gallery: [
         'images/yacht-big-daddy-90-exterior-1.jpg',
@@ -153,8 +147,6 @@
       washrooms: 4,
       length: 101,
       crew: 5,
-      speedKnots: 18,
-      year: 2022,
       image: 'images/yacht-majesty-101-hero.jpg',
       gallery: [
         'images/yacht-majesty-101-exterior-1.jpg',
@@ -189,8 +181,6 @@
       washrooms: 1,
       length: 48,
       crew: 3,
-      speedKnots: 20,
-      year: 2020,
       image: 'images/yacht-schaefer-480-exterior-1.jpg',
       gallery: [
         'images/yacht-schaefer-480-exterior-2.jpg',
@@ -226,8 +216,6 @@
       washrooms: 2,
       length: 75,
       crew: 3,
-      speedKnots: null,
-      year: null,
       image: 'images/yacht-mayyas-75-hero.jpg',
       gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-exterior-2.jpg', 'images/yacht-mayyas-75-interior.jpg'],
       description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
@@ -251,8 +239,6 @@
       washrooms: 4,
       length: 88,
       crew: 5,
-      speedKnots: 18,
-      year: null,
       image: 'images/yacht-majesty-88-hero.jpg',
       gallery: ['images/yacht-majesty-88-exterior.jpg', 'images/yacht-majesty-88-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
@@ -276,8 +262,6 @@
       washrooms: 1,
       length: 59,
       crew: 3,
-      speedKnots: null,
-      year: null,
       image: 'images/yacht-majesty-59-exterior.jpg', // no dedicated hero photo was supplied for this yacht — using the exterior shot as the card/hero image instead
       gallery: ['images/yacht-majesty-59-exterior.jpg', 'images/yacht-majesty-59-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is a 59-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
@@ -301,8 +285,6 @@
       washrooms: 4,
       length: 55,
       crew: 3,
-      speedKnots: null,
-      year: null,
       image: 'images/yacht-jasmine-55-hero.jpg',
       gallery: ['images/yacht-jasmine-55-exterior.jpg', 'images/yacht-jasmine-55-interior.jpg'],
       description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
@@ -326,8 +308,6 @@
       washrooms: 5, // TODO: assumed 1 per cabin — not stated in source brochure, needs client confirmation
       length: 140,
       crew: 5,
-      speedKnots: null,
-      year: null,
       // TODO — IMAGE SOURCING FLAG: photos below were extracted from a client-supplied PDF that
       // is a generic "Really Great Site" (Canva) yacht-brochure template, not a client photoshoot.
       // Confirm with the client whether these are actually photos of their Carmen or stock/template
@@ -370,8 +350,6 @@
       washrooms: null, // TODO: not yet provided — needs client input
       length: null, // TODO: not yet provided — needs client input
       crew: null, // TODO: not yet provided — needs client input
-      speedKnots: null,
-      year: null,
       image: '', // TODO: client says photos are coming soon
       gallery: [],
       description: 'Imagine is a recent addition to the VIP Yachts fleet.',
@@ -387,14 +365,12 @@
       tierLabel: 'Classic Tier',
       name: 'Benetti 100',
       tagline: 'A New Addition to the Fleet',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 12000,
       guests: null, // TODO: not yet provided — needs client input
       cabins: null, // TODO: not yet provided — needs client input
       washrooms: null, // TODO: not yet provided — needs client input
       length: 100,
       crew: null, // TODO: not yet provided — needs client input
-      speedKnots: null,
-      year: null,
       image: '', // TODO: client says photos are coming soon
       gallery: [],
       description: 'Benetti 100 is a recent addition to the VIP Yachts fleet.',
@@ -416,8 +392,6 @@
       washrooms: 4, // TODO: assumed 1 per cabin — not stated in source brochure, needs client confirmation
       length: 91,
       crew: 5,
-      speedKnots: null,
-      year: 2009, // refit 2023
       image: 'images/yacht-aarna-90-exterior-1.jpg',
       gallery: [
         'images/yacht-aarna-90-exterior-1.jpg',
@@ -445,18 +419,16 @@
     },
     {
       id: 'notorious-2023',
-      tier: 'premium',
-      tierLabel: 'Premium Tier',
+      tier: 'classic',
+      tierLabel: 'Classic Tier',
       name: 'Notorious',
       tagline: 'Sleek Performance Cruiser',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 4500,
       guests: null, // TODO: not stated in source brochure — needs client input
       cabins: null, // TODO: not stated in source brochure — needs client input
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
       crew: 4,
-      speedKnots: null,
-      year: 2023,
       image: 'images/yacht-notorious-2023-exterior-1.jpg',
       gallery: [
         'images/yacht-notorious-2023-exterior-1.jpg',
@@ -494,8 +466,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 95,
       crew: 4,
-      speedKnots: null,
-      year: 2023,
       image: 'images/yacht-princess-x95-exterior-1.jpg',
       gallery: [
         'images/yacht-princess-x95-exterior-1.jpg',
@@ -527,8 +497,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 50, // 49.9m / 164ft, rounded
       crew: 5,
-      speedKnots: 19, // cruising speed per brochure; top speed 40.0kn
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-thunder-49m-exterior-1.jpg',
       gallery: [
         'images/yacht-thunder-49m-exterior-1.jpg',
@@ -564,8 +532,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
       crew: 5,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-khalili-exterior-1.jpg',
       gallery: [
         'images/yacht-khalili-exterior-1.jpg',
@@ -608,8 +574,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 88, // TODO: model designation "SX88" — needs client confirmation of exact LOA
       crew: 4,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-sanlorenzo-sx88-hero.jpg',
       gallery: ['images/yacht-sanlorenzo-sx88-exterior.jpg', 'images/yacht-sanlorenzo-sx88-interior.jpg'],
       description: 'Experience unmatched luxury aboard the Sanlorenzo SX88, a masterpiece of Italian yacht design with expansive indoor and outdoor living spaces.',
@@ -633,8 +597,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
       crew: 4,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-fynesse-hero.jpg',
       gallery: ['images/yacht-fynesse-exterior.jpg', 'images/yacht-fynesse-interior.jpg'],
       description: 'Fynesse is a classic tri-deck superyacht offering a spacious sundeck jacuzzi, wraparound lounge seating, and an elegant formal dining room, cruising against Dubai\'s iconic skyline.',
@@ -658,8 +620,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
       crew: 3,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-matrix-hero.jpg',
       gallery: ['images/yacht-matrix-exterior.jpg', 'images/yacht-matrix-interior.jpg'],
       description: 'Matrix is a striking black-hulled sport yacht cruising Dubai\'s waters, featuring a sleek flybridge, an open aft deck dining area, and a bright, contemporary main salon.',
@@ -683,8 +643,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 140,
       crew: 5,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-encore-hero.jpg',
       gallery: ['images/yacht-encore-exterior.jpg', 'images/yacht-encore-interior.jpg'],
       description: 'Encore is a 140ft tri-deck superyacht with a fully private owner\'s deck, a dedicated sky lounge, and timeless styling with beautiful furnishings throughout.',
@@ -709,8 +667,6 @@
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: null, // TODO: not stated in source brochure — needs client input
       crew: 4,
-      speedKnots: null,
-      year: null, // TODO: build year not stated in source brochure — needs client input
       image: 'images/yacht-notika-hero.jpg',
       gallery: ['images/yacht-notika-exterior.jpg', 'images/yacht-notika-interior.jpg'],
       description: 'Notika is a sleek sport yacht offering a spacious sundeck lounge, an open flybridge dining and bar area, and a comfortable main salon set up for entertaining.',

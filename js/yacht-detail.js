@@ -52,9 +52,7 @@
       { label: 'Cabins', value: data.formatSpec(yacht.cabins) },
       { label: 'Washrooms', value: data.formatSpec(yacht.washrooms) },
       { label: 'Length', value: data.formatSpec(yacht.length, ' ft') },
-      { label: 'Crew', value: data.formatSpec(yacht.crew) },
-      { label: 'Top Speed', value: data.formatSpec(yacht.speedKnots, ' kn') },
-      { label: 'Year', value: data.formatSpec(yacht.year) }
+      { label: 'Crew', value: data.formatSpec(yacht.crew) }
     ];
     specStrip.innerHTML = specs.map(function (s) {
       return '<li><span class="spec-value">' + s.value + '</span><span class="spec-label">' + s.label + '</span></li>';
