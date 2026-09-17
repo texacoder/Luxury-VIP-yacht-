@@ -21,13 +21,13 @@
     if (!yacht) {
       qs('#yacht-not-found').hidden = false;
       qs('#yacht-detail-content').hidden = true;
-      document.title = 'VIP Yachts';
+      document.title = 'Yacht Not Found — VIP Yachts';
       return;
     }
 
     qs('#yacht-detail-content').hidden = false;
-    document.title = 'VIP Yachts';
-    qs('#page-title').textContent = 'VIP Yachts';
+    document.title = yacht.name + ' — VIP Yachts';
+    qs('#page-title').textContent = yacht.name + ' — VIP Yachts';
 
     /* ---------- Hero ---------- */
     var heroImg = qs('#yacht-hero-image');
