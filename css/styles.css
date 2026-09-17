@@ -250,6 +250,17 @@ textarea:focus-visible,
   box-shadow: 0 6px 24px rgba(0,0,0,0.3);
   height: 72px;
 }
+/* Softens the hard edge where the solid header meets a page-hero photo
+   right below it — without this, a bright sky in the photo makes the
+   header's bottom edge look like an unwanted line cutting across it. */
+.site-header.is-scrolled::after{
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 100%;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(10,21,32,0.55) 0%, rgba(10,21,32,0) 100%);
+  pointer-events: none;
+}
 .site-header .container{
   display: flex;
   align-items: center;
@@ -859,6 +870,10 @@ textarea:focus-visible,
   margin-bottom: var(--space-3); font-weight: 600;
 }
 .page-hero-inner h1{ margin-bottom: var(--space-3); }
+/* The badge's own left padding (0.9em) otherwise pushes its text out of
+   line with the breadcrumb and heading text below it — pull it back so
+   all three read as flush-left. */
+.page-hero-inner .badge{ margin-left: -0.9em; }
 .page-hero--media{
   padding-top: 0;
   min-height: 46vh;
