@@ -298,8 +298,8 @@
     },
     {
       id: 'carmen-140',
-      tier: 'classic',
-      tierLabel: 'Classic Tier',
+      tier: 'premium',
+      tierLabel: 'Premium Tier',
       name: 'Carmen',
       tagline: 'A Mega Yacht Escape on the Water',
       pricePerHour: 10000,
@@ -438,10 +438,10 @@
       name: 'Notorious',
       tagline: 'Sleek Performance Cruiser',
       pricePerHour: 4500,
-      guests: null, // TODO: not stated in source brochure — needs client input
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 10,
+      cabins: 5,
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: null, // TODO: not stated in source brochure — needs client input
+      length: 106,
       crew: 4,
       image: 'images/yacht-notorious-2023-exterior-1.jpg',
       gallery: [
@@ -476,7 +476,7 @@
       tagline: 'Closer to a Superyacht Than Her Class',
       pricePerHour: null, // Price on Request
       guests: 12,
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      cabins: '4–5',
       washrooms: null, // TODO: not stated in source brochure — needs client input
       length: 95,
       crew: 4,
@@ -506,10 +506,10 @@
       name: 'Thunder',
       tagline: 'A 49m Superyacht by Oceanfast',
       pricePerHour: null, // Price on Request
-      guests: null, // TODO: not stated in source brochure — needs client input
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 12,
+      cabins: '5–6',
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: 50, // 49.9m / 164ft, rounded
+      length: 164,
       crew: 5,
       image: 'images/yacht-thunder-49m-exterior-1.jpg',
       gallery: [
@@ -541,10 +541,10 @@
       name: 'Khalili',
       tagline: 'A Refined Superyacht Charter',
       pricePerHour: null, // Price on Request
-      guests: null, // TODO: not stated in source brochure — needs client input
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 40,
+      cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: null, // TODO: not stated in source brochure — needs client input
+      length: 107,
       crew: 5,
       image: 'images/yacht-khalili-exterior-1.jpg',
       gallery: [
@@ -583,10 +583,10 @@
       name: 'San Lorenzo SX88',
       tagline: 'Italian Design, Dubai Skyline',
       pricePerHour: null, // Price on Request
-      guests: 8, // TODO: cabins accommodate up to 8 guests per source brochure — needs client confirmation
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 12,
+      cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: 88, // TODO: model designation "SX88" — needs client confirmation of exact LOA
+      length: 88,
       crew: 4,
       image: 'images/yacht-sanlorenzo-sx88-hero.jpg',
       gallery: ['images/yacht-sanlorenzo-sx88-exterior.jpg', 'images/yacht-sanlorenzo-sx88-interior.jpg'],
@@ -629,10 +629,10 @@
       name: 'Matrix',
       tagline: 'Sleek Sport Cruiser',
       pricePerHour: null, // Price on Request
-      guests: null, // TODO: not stated in source brochure — needs client input
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 30,
+      cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: null, // TODO: not stated in source brochure — needs client input
+      length: 82,
       crew: 3,
       image: 'images/yacht-matrix-hero.jpg',
       gallery: ['images/yacht-matrix-exterior.jpg', 'images/yacht-matrix-interior.jpg'],
@@ -676,10 +676,10 @@
       name: 'Notika',
       tagline: 'Sport Yacht Charter',
       pricePerHour: null, // Price on Request
-      guests: null, // TODO: not stated in source brochure — needs client input
-      cabins: null, // TODO: not stated in source brochure — needs client input
+      guests: 12,
+      cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: null, // TODO: not stated in source brochure — needs client input
+      length: 107,
       crew: 4,
       image: 'images/yacht-notika-hero.jpg',
       gallery: ['images/yacht-notika-exterior.jpg', 'images/yacht-notika-interior.jpg'],
