@@ -425,6 +425,7 @@ textarea:focus-visible,
   transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 .footer-social a:hover{ border-color: var(--gold); color: var(--gold); }
+.footer-social svg{ width: 18px; height: 18px; fill: currentColor; }
 
 .footer-col h4{ color: var(--text-primary); margin-bottom: var(--space-4); font-family: var(--font-body); font-weight: 600; font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); }
 .footer-col ul{ display: flex; flex-direction: column; gap: var(--space-3); }
