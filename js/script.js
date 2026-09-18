@@ -35,7 +35,7 @@
       id: 'enterprise-48',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Enterprise',
+      name: 'Vip Enterprise 50',
       tagline: 'Experience the Grandeur',
       pricePerHour: 600,
       guests: 15,
@@ -55,8 +55,8 @@
         'images/yacht-enterprise-48-sundeck-seating.jpg',
         'images/yacht-enterprise-48-master-cabin.jpg'
       ],
-      description: 'Crafted with genuine skill, Enterprise is a 48-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and an unforgettable luxury escapade at sea.',
-      overview: 'Enterprise accommodates up to 15 guests for day charters and also boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. A main salon anchors the interior, with jetski and a variety of water sports available for guest enjoyment.',
+      description: 'Crafted with genuine skill, Vip Enterprise 50 is a 48-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and an unforgettable luxury escapade at sea.',
+      overview: 'Vip Enterprise 50 accommodates up to 15 guests for day charters and also boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. A main salon anchors the interior, with jetski and a variety of water sports available for guest enjoyment.',
       features: ['Main salon', 'Jetski included', 'Water sports available', 'Bimini-shaded flybridge', 'Sundeck seating', 'Onboard crew of 2'],
       decks: [
         { name: 'Flybridge', detail: 'Shaded helm and open-air seating with skyline views.' },
@@ -68,7 +68,7 @@
       id: 'grand-82',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Grand 82',
+      name: 'Vip Grand 85',
       tagline: 'Highly Recommended Luxury Yacht in Dubai',
       pricePerHour: null, // Price on Request
       guests: 35,
@@ -94,7 +94,7 @@
         'images/yacht-grand-82-bathroom.jpg'
       ],
       description: 'An 82-foot luxury yacht with capacity for 35 guests, featuring a premium jacuzzi with water temperature control and a special-edition upper deck with bar counter and seating.',
-      overview: 'Grand 82 pairs a spacious sun bed forward with a premium jacuzzi offering water temperature control. The upper deck bar counter and teak-decked sitting area suit large groups, while a premium finished back table with swimming hydraulic jumper and a fully stocked inside bar counter round out the entertaining spaces. Four bedrooms and four washrooms accommodate overnight and large day-charter groups alike, with a bright, brand-new saloon furnished throughout in luxury quality brands.',
+      overview: 'Vip Grand 85 pairs a spacious sun bed forward with a premium jacuzzi offering water temperature control. The upper deck bar counter and teak-decked sitting area suit large groups, while a premium finished back table with swimming hydraulic jumper and a fully stocked inside bar counter round out the entertaining spaces. Four bedrooms and four washrooms accommodate overnight and large day-charter groups alike, with a bright, brand-new saloon furnished throughout in luxury quality brands.',
       features: ['Premium jacuzzi with temperature control', 'Spacious bow sun bed', 'Upper deck bar counter & seating', 'Swimming hydraulic jumper', 'Fully stocked bar counter', '4 bedrooms, 4 washrooms', 'Ambiance lighting & premium sound system'],
       decks: [
         { name: 'Upper Deck', detail: 'Bar counter, teak seating area, and open-air lounge.' },
@@ -106,7 +106,7 @@
       id: 'big-daddy-90',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Big Daddy 90',
+      name: 'Vip Big Daddy 90',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
       pricePerHour: 3000,
       guests: 50,
@@ -127,7 +127,7 @@
         'images/yacht-big-daddy-90-flybridge.jpg'
       ],
       description: 'The Big Daddy Premium Yacht is a 90-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Big Daddy 90 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon with dining area and bar, spacious flybridge, and spacious bathtub round out the experience, alongside jetski and a variety of water sports.',
+      overview: 'Vip Big Daddy 90 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon with dining area and bar, spacious flybridge, and spacious bathtub round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Spacious flybridge', 'Spacious bathtub', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Live BBQ & international cuisine on request'],
       decks: [
         { name: 'Flybridge', detail: 'Artificial turf lounge, helm station, and open skyline views.' },
@@ -139,7 +139,7 @@
       id: 'majesty-101',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Majesty 101',
+      name: 'Vip Majesty 101',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
       pricePerHour: 6000,
       guests: 50,
@@ -161,7 +161,7 @@
         'images/yacht-majesty-101-flybridge.jpg'
       ],
       description: 'The Majesty Premium Yacht is a 101-ft / 31-meter masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Majesty 101 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
+      overview: 'Vip Majesty 101 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
       decks: [
         { name: 'Flybridge', detail: 'Dedicated dining area, bar, and sunbeds with panoramic views.' },
@@ -173,7 +173,7 @@
       id: 'schaefer-480',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Schaefer 480',
+      name: 'Vip Schaffer 50',
       tagline: 'A Comfortable Introduction to Yachting',
       pricePerHour: 600,
       guests: 12,
@@ -195,8 +195,8 @@
         'images/yacht-schaefer-480-flybridge-top.jpg',
         'images/yacht-schaefer-480-upper-deck.jpg'
       ],
-      description: 'Schaefer 480 offers a comfortable, well-appointed charter for smaller groups, with a shaded flybridge, cream leather saloon, and two guest cabins below deck.',
-      overview: 'Estimated specifications based on vessel size and configuration shown. Schaefer 480 carries a two-cabin layout (a wood-paneled master cabin and a twin-bed second cabin) with a cream leather saloon, marble-topped galley, and dinette. The bow sundeck and aft lounge provide ample outdoor seating, and the shaded flybridge tops off the layout with additional open-air space.',
+      description: 'Vip Schaffer 50 offers a comfortable, well-appointed charter for smaller groups, with a shaded flybridge, cream leather saloon, and two guest cabins below deck.',
+      overview: 'Estimated specifications based on vessel size and configuration shown. Vip Schaffer 50 carries a two-cabin layout (a wood-paneled master cabin and a twin-bed second cabin) with a cream leather saloon, marble-topped galley, and dinette. The bow sundeck and aft lounge provide ample outdoor seating, and the shaded flybridge tops off the layout with additional open-air space.',
       features: ['Two-cabin layout (master + twin)', 'Cream leather saloon', 'Marble-topped galley & dinette', 'Shaded flybridge', 'Bow sundeck', 'Aft lounge seating'],
       decks: [
         { name: 'Flybridge', detail: 'Shaded open-air seating above the main deck.' },
@@ -208,7 +208,7 @@
       id: 'mayyas-75',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Mayyas',
+      name: 'Vip Mayyas 75',
       tagline: 'Experience the Grandeur',
       pricePerHour: 900,
       guests: 30,
@@ -218,8 +218,8 @@
       crew: 3,
       image: 'images/yacht-mayyas-75-hero.jpg',
       gallery: ['images/yacht-mayyas-75-exterior.jpg', 'images/yacht-mayyas-75-exterior-2.jpg', 'images/yacht-mayyas-75-interior.jpg'],
-      description: 'Crafted with genuine skill, Mayyas is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Mayyas accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins, including Master and Twin, each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
+      description: 'Crafted with genuine skill, Vip Mayyas 75 is a 75-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
+      overview: 'Vip Mayyas 75 accommodates up to 30 guests for day charters and boasts an overnight capacity for 3, complete with extra quarters for a dedicated crew of 3. Luxurious cabins, including Master and Twin, each come with an en-suite bathroom. A main salon with bar area and a spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master & Twin cabins, each en-suite', 'Main salon with bar area', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating with dining table and skyline views.' },
@@ -231,7 +231,7 @@
       id: 'majesty-88',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Majesty 88',
+      name: 'Vip Majesty 88',
       tagline: 'Step Into a New Echelon of Opulent Sailing Indulgence',
       pricePerHour: 3000,
       guests: 50,
@@ -242,7 +242,7 @@
       image: 'images/yacht-majesty-88-hero.jpg',
       gallery: ['images/yacht-majesty-88-exterior.jpg', 'images/yacht-majesty-88-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is an 88-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
+      overview: 'Vip Majesty 88 accommodates up to 50 guests for day charters and boasts an overnight capacity for 8, complete with extra quarters for a dedicated crew of 5. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. The main salon features a dining area and bar, while the spacious flybridge offers its own dining area, bar, and sunbeds. A jacuzzi with relaxed seating area, jetski, and a variety of water sports round out the experience.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Flybridge with dining area, bar & sunbeds', 'Jacuzzi with relaxed seating', 'Main salon with dining area and bar', 'Jetski included', 'Water sports available', 'Cruising speed of 18 knots'],
       decks: [
         { name: 'Flybridge', detail: 'Dedicated dining area, bar, and sunbeds with panoramic views.' },
@@ -254,7 +254,7 @@
       id: 'majesty-59',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Majesty 59',
+      name: 'Vip Majesty 59',
       tagline: 'Explore a Fresh Realm of Exclusive Yacht Charters',
       pricePerHour: 800,
       guests: 25,
@@ -265,7 +265,7 @@
       image: 'images/yacht-majesty-59-exterior.jpg', // no dedicated hero photo was supplied for this yacht — using the exterior shot as the card/hero image instead
       gallery: ['images/yacht-majesty-59-exterior.jpg', 'images/yacht-majesty-59-interior.jpg'],
       description: 'Crafted with genuine skill, the Majesty Premium Yacht is a 59-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Majesty 59 accommodates up to 25 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. The Master cabin comes with an en-suite bathroom. A main salon with dining area and a spacious flybridge featuring its own dining area round out the experience, alongside jetski and a variety of water sports.',
+      overview: 'Vip Majesty 59 accommodates up to 25 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. The Master cabin comes with an en-suite bathroom. A main salon with dining area and a spacious flybridge featuring its own dining area round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master cabin, en-suite', 'Main salon with dining area', 'Spacious flybridge with dining area', 'Jetski included', 'Water sports available'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating with dining area and helm station.' },
@@ -277,7 +277,7 @@
       id: 'jasmine-55',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Jasmine',
+      name: 'Vip Jasmine 55',
       tagline: 'Experience the Grandeur',
       pricePerHour: 700,
       guests: 22,
@@ -287,8 +287,8 @@
       crew: 3,
       image: 'images/yacht-jasmine-55-hero.jpg',
       gallery: ['images/yacht-jasmine-55-exterior.jpg', 'images/yacht-jasmine-55-interior.jpg'],
-      description: 'Crafted with genuine skill, the Jasmine Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
-      overview: 'Jasmine accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
+      description: 'Crafted with genuine skill, the Vip Jasmine 55 Premium Yacht is a 55-ft masterpiece gracing the waters of Dubai, delivering opulent sailing and providing an unforgettable luxury escapade at sea.',
+      overview: 'Vip Jasmine 55 accommodates up to 22 guests for day charters and boasts an overnight capacity for 2, complete with extra quarters for a dedicated crew of 2. Luxurious cabins, including Master, VIP, Double, and Twin, each come with an en-suite bathroom. A main salon and spacious flybridge round out the experience, alongside jetski and a variety of water sports.',
       features: ['Master, VIP, Double & Twin cabins, each en-suite', 'Main salon', 'Spacious flybridge', 'Jetski included', 'Water sports available'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating with helm station and skyline views.' },
@@ -300,7 +300,7 @@
       id: 'carmen-140',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Carmen',
+      name: 'Vip Carmen 140',
       tagline: 'A Mega Yacht Escape on the Water',
       pricePerHour: 10000,
       guests: 80,
@@ -310,7 +310,7 @@
       crew: 5,
       // TODO — IMAGE SOURCING FLAG: photos below were extracted from a client-supplied PDF that
       // is a generic "Really Great Site" (Canva) yacht-brochure template, not a client photoshoot.
-      // Confirm with the client whether these are actually photos of their Carmen or stock/template
+      // Confirm with the client whether these are actually photos of their Vip Carmen 140 or stock/template
       // imagery before this goes live — same watermark/stock concern as the FLAGGED- assets.
       image: 'images/yacht-carmen-140-hero.jpg',
       gallery: [
@@ -328,7 +328,7 @@
         'images/yacht-carmen-140-upper-lounge.jpg'
       ],
       description: 'A 140-ft mega yacht offering a huge, elegantly designed saloon and capacity for 80 guests, delivering a grand-scale luxury escapade at sea.',
-      overview: 'Carmen accommodates up to 80 guests for day charters, with 5 guest cabins including a master bedroom with panoramic mid-sea views. A wraparound main saloon anchors the interior, complemented by a formal dining area, stocked bar counter, and multi-helm bridge. The middle-deck jacuzzi and open flybridge lounge offer additional entertaining space, with a second upper-deck lounge for large groups.',
+      overview: 'Vip Carmen 140 accommodates up to 80 guests for day charters, with 5 guest cabins including a master bedroom with panoramic mid-sea views. A wraparound main saloon anchors the interior, complemented by a formal dining area, stocked bar counter, and multi-helm bridge. The middle-deck jacuzzi and open flybridge lounge offer additional entertaining space, with a second upper-deck lounge for large groups.',
       features: ['5 guest cabins', 'Master bedroom with panoramic sea views', 'Huge main saloon', 'Formal dining area', 'Stocked bar counter', 'Middle-deck jacuzzi', 'Open flybridge lounge', 'Second upper-deck lounge'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air lounge seating with marina and skyline views.' },
@@ -363,7 +363,7 @@
       id: 'benetti-100',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Benetti 100',
+      name: 'Vip Benetti 100',
       tagline: 'A New Addition to the Fleet',
       pricePerHour: 12000,
       guests: null, // TODO: not yet provided — needs client input
@@ -387,8 +387,8 @@
         'images/yacht-benetti-100-aft-lounge.jpg',
         'images/yacht-benetti-100-flybridge.jpg'
       ],
-      description: 'Benetti 100 is a recent addition to the VIP Yachts fleet.',
-      overview: 'Full specifications for Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
+      description: 'Vip Benetti 100 is a recent addition to the VIP Yachts fleet.',
+      overview: 'Full specifications for Vip Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
       features: ['Full feature list coming soon'],
       decks: [
         { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
@@ -398,7 +398,7 @@
       id: 'aarna-90',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Aarna',
+      name: 'Vip Aarna 91',
       tagline: 'Sunseeker Elegance, Refit for 2023',
       pricePerHour: null, // Price on Request
       guests: 8,
@@ -421,8 +421,8 @@
         'images/yacht-aarna-90-staircase.jpg',
         'images/yacht-aarna-90-master-cabin.jpg'
       ],
-      description: 'A 91-ft Sunseeker built in 2009 and refit in 2023, Aarna pairs a striking dark hull with warm, classic wood interiors for an elegant charter experience.',
-      overview: 'Aarna accommodates up to 8 guests in 4 cabins (2 double, 2 twin), supported by a crew of 5. Twin MTU 12 V2000 M93 engines power her, and the deck spaces are set up for gourmet alfresco dining, with a built-in grill and a well-stocked bar.',
+      description: 'A 91-ft Sunseeker built in 2009 and refit in 2023, Vip Aarna 91 pairs a striking dark hull with warm, classic wood interiors for an elegant charter experience.',
+      overview: 'Vip Aarna 91 accommodates up to 8 guests in 4 cabins (2 double, 2 twin), supported by a crew of 5. Twin MTU 12 V2000 M93 engines power her, and the deck spaces are set up for gourmet alfresco dining, with a built-in grill and a well-stocked bar.',
       features: ['4 cabins (2 double, 2 twin)', 'Crew of 5', 'Onboard grill', 'Alfresco dining areas', 'Stocked bar', 'Twin MTU engines', '2023 refit'],
       decks: [
         { name: 'Flybridge', detail: 'Shaded lounge seating with bar and skyline views.' },
@@ -435,7 +435,7 @@
       id: 'notorious-2023',
       tier: 'classic',
       tierLabel: 'Classic Tier',
-      name: 'Notorious',
+      name: 'Vip Legend (Notorious)',
       tagline: 'Sleek Performance Cruiser',
       pricePerHour: 4500,
       guests: 10,
@@ -459,8 +459,8 @@
         'images/yacht-notorious-2023-guest-cabin-1.jpg',
         'images/yacht-notorious-2023-guest-cabin-2.jpg'
       ],
-      description: 'Notorious is a sleek black-hulled cruiser set against the Dubai skyline, offering an open flybridge, aft lounge seating, and warm wood-finished interiors.',
-      overview: 'Notorious offers an open flybridge with a wet bar and dining area, an aft cockpit lounge with alfresco dining, and a bright main salon with a formal dining table. Cabins are finished in polished wood with en-suite bathrooms.',
+      description: 'Vip Legend (Notorious) is a sleek black-hulled cruiser set against the Dubai skyline, offering an open flybridge, aft lounge seating, and warm wood-finished interiors.',
+      overview: 'Vip Legend (Notorious) offers an open flybridge with a wet bar and dining area, an aft cockpit lounge with alfresco dining, and a bright main salon with a formal dining table. Cabins are finished in polished wood with en-suite bathrooms.',
       features: ['Open flybridge with bar', 'Aft cockpit lounge', 'Alfresco dining', 'Formal dining table', 'Jetski/watersports platform'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air seating, wet bar, and sun loungers.' },
@@ -472,7 +472,7 @@
       id: 'princess-x95',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Princess X95',
+      name: 'Vip Princess X95',
       tagline: 'Closer to a Superyacht Than Her Class',
       pricePerHour: null, // Price on Request
       guests: 12,
@@ -490,8 +490,8 @@
         'images/yacht-princess-x95-interior-collage-3.jpg',
         'images/yacht-princess-x95-exterior-side.jpg'
       ],
-      description: 'Charter the ultimate in style, space and innovation aboard this 2023 Princess X95, delivering an exceptional cruising experience with expansive volumes, refined design, and effortless comfort.',
-      overview: 'The Princess X95 welcomes up to 12 guests for day charters and sleeps 10, with generous indoor and outdoor areas for relaxation and entertaining. The main deck saloon is filled with natural light through floor-to-ceiling windows, flowing into the aft cockpit lounge, while the flybridge offers multiple seating and sunbathing zones for alfresco dining and sunset cruises.',
+      description: 'Charter the ultimate in style, space and innovation aboard this 2023 Vip Princess X95, delivering an exceptional cruising experience with expansive volumes, refined design, and effortless comfort.',
+      overview: 'The Vip Princess X95 welcomes up to 12 guests for day charters and sleeps 10, with generous indoor and outdoor areas for relaxation and entertaining. The main deck saloon is filled with natural light through floor-to-ceiling windows, flowing into the aft cockpit lounge, while the flybridge offers multiple seating and sunbathing zones for alfresco dining and sunset cruises.',
       features: ['Floor-to-ceiling saloon windows', 'Aft cockpit lounge', 'Flybridge dining and sunbathing zones', 'Contemporary interiors', 'Sleeps 10 overnight'],
       decks: [
         { name: 'Flybridge', detail: 'Multiple seating and sunbathing zones for alfresco dining and sunset cruises.' },
@@ -503,7 +503,7 @@
       id: 'thunder-49m',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Thunder',
+      name: 'Vip Thunder 50',
       tagline: 'A 49m Superyacht by Oceanfast',
       pricePerHour: null, // Price on Request
       guests: 12,
@@ -526,7 +526,7 @@
         'images/yacht-thunder-49m-pool-deck.jpg'
       ],
       description: 'THUNDER is a 49m superyacht built in Australia by Oceanfast, with striking looks and interior spaces designed by Roberto Cavalli and Jon Bannenberg, and a magnificent heated pool on the foredeck.',
-      overview: 'Thunder reaches a top speed of 40.0 knots, cruises at 30.0 knots, and has a maximum cruising range of 1000nm at 18.0 knots, with power from MTU CODAG engines. Her onboard facilities are rivalled only by her striking Roberto Cavalli and Jon Bannenberg-designed interiors, headlined by a heated pool on the foredeck.',
+      overview: 'Vip Thunder 50 reaches a top speed of 40.0 knots, cruises at 30.0 knots, and has a maximum cruising range of 1000nm at 18.0 knots, with power from MTU CODAG engines. Her onboard facilities are rivalled only by her striking Roberto Cavalli and Jon Bannenberg-designed interiors, headlined by a heated pool on the foredeck.',
       features: ['Heated foredeck pool', 'Roberto Cavalli & Jon Bannenberg interior design', 'MTU CODAG engines', '40-knot top speed', 'Gross tonnage 445 GT'],
       decks: [
         { name: 'Sundeck', detail: 'Heated foredeck pool with surrounding lounge seating.' },
@@ -538,7 +538,7 @@
       id: 'khalili',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Khalili',
+      name: 'Vip Khalili',
       tagline: 'A Refined Superyacht Charter',
       pricePerHour: null, // Price on Request
       guests: 40,
@@ -566,8 +566,8 @@
         'images/yacht-khalili-flybridge-bar.jpg',
         'images/yacht-khalili-flybridge-dining.jpg'
       ],
-      description: 'Khalili is a refined superyacht offering spacious lounge interiors, a fully stocked entertainment lounge with games and a large screen, and multiple outdoor deck areas for dining and relaxing.',
-      overview: 'Khalili features an expansive main salon with wraparound seating and formal dining, plus a lower-deck entertainment lounge complete with a large screen, chess and backgammon tables, and a full bar spread. Outdoor deck space includes a shaded aft lounge, an open sundeck bar, and multiple dining and seating areas with skyline and sea views.',
+      description: 'Vip Khalili is a refined superyacht offering spacious lounge interiors, a fully stocked entertainment lounge with games and a large screen, and multiple outdoor deck areas for dining and relaxing.',
+      overview: 'Vip Khalili features an expansive main salon with wraparound seating and formal dining, plus a lower-deck entertainment lounge complete with a large screen, chess and backgammon tables, and a full bar spread. Outdoor deck space includes a shaded aft lounge, an open sundeck bar, and multiple dining and seating areas with skyline and sea views.',
       features: ['Entertainment lounge with large screen', 'Chess and backgammon tables', 'Full bar spread', 'Multiple outdoor dining areas', 'Twin and double cabins'],
       decks: [
         { name: 'Sundeck', detail: 'Open bar, dining, and lounge seating.' },
@@ -580,7 +580,7 @@
       id: 'sanlorenzo-sx88',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'San Lorenzo SX88',
+      name: 'Vip San Lorenzo 88',
       tagline: 'Italian Design, Dubai Skyline',
       pricePerHour: null, // Price on Request
       guests: 12,
@@ -590,8 +590,8 @@
       crew: 4,
       image: 'images/yacht-sanlorenzo-sx88-hero.jpg',
       gallery: ['images/yacht-sanlorenzo-sx88-exterior.jpg', 'images/yacht-sanlorenzo-sx88-interior.jpg'],
-      description: 'Experience unmatched luxury aboard the Sanlorenzo SX88, a masterpiece of Italian yacht design with expansive indoor and outdoor living spaces.',
-      overview: 'The SX88 boasts a spacious salon with panoramic views, a fully equipped galley, and beautifully designed cabins accommodating up to eight guests in ultimate comfort. The vast aft deck and swim platform provide the perfect setting for sunbathing or diving into Dubai\'s crystal-clear waters, while advanced onboard technology ensures a seamless cruising experience.',
+      description: 'Experience unmatched luxury aboard the Vip San Lorenzo 88, a masterpiece of Italian yacht design with expansive indoor and outdoor living spaces.',
+      overview: 'The Vip San Lorenzo 88 boasts a spacious salon with panoramic views, a fully equipped galley, and beautifully designed cabins accommodating up to eight guests in ultimate comfort. The vast aft deck and swim platform provide the perfect setting for sunbathing or diving into Dubai\'s crystal-clear waters, while advanced onboard technology ensures a seamless cruising experience.',
       features: ['Panoramic-view salon', 'Fully equipped galley', 'Vast aft deck & swim platform', 'Advanced onboard technology', 'Accommodates up to 8 guests'],
       decks: [
         { name: 'Upper Deck', detail: 'Open-air lounge and dining with skyline views.' },
@@ -603,7 +603,7 @@
       id: 'fynesse',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Fynesse',
+      name: 'Vip Fynesse',
       tagline: 'Classic Superyacht, Dubai Waters',
       pricePerHour: null, // Price on Request
       guests: null, // TODO: not stated in source brochure — needs client input
@@ -613,8 +613,8 @@
       crew: 4,
       image: 'images/yacht-fynesse-hero.jpg',
       gallery: ['images/yacht-fynesse-exterior.jpg', 'images/yacht-fynesse-interior.jpg'],
-      description: 'Fynesse is a classic tri-deck superyacht offering a spacious sundeck jacuzzi, wraparound lounge seating, and an elegant formal dining room, cruising against Dubai\'s iconic skyline.',
-      overview: 'Fynesse features a sundeck jacuzzi with shaded lounge seating, an upper-deck lounge bar with wraparound seating, and a main-deck formal dining room seating large groups in style. Cabins are finished with classic furnishings for a refined charter experience.',
+      description: 'Vip Fynesse is a classic tri-deck superyacht offering a spacious sundeck jacuzzi, wraparound lounge seating, and an elegant formal dining room, cruising against Dubai\'s iconic skyline.',
+      overview: 'Vip Fynesse features a sundeck jacuzzi with shaded lounge seating, an upper-deck lounge bar with wraparound seating, and a main-deck formal dining room seating large groups in style. Cabins are finished with classic furnishings for a refined charter experience.',
       features: ['Sundeck jacuzzi with shade canopy', 'Upper-deck lounge bar', 'Formal dining room', 'Wraparound outdoor seating', 'Classic tri-deck styling'],
       decks: [
         { name: 'Sundeck', detail: 'Shaded jacuzzi and lounge seating.' },
@@ -626,7 +626,7 @@
       id: 'matrix',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Matrix',
+      name: 'Vip Matrix',
       tagline: 'Sleek Sport Cruiser',
       pricePerHour: null, // Price on Request
       guests: 30,
@@ -636,8 +636,8 @@
       crew: 3,
       image: 'images/yacht-matrix-hero.jpg',
       gallery: ['images/yacht-matrix-exterior.jpg', 'images/yacht-matrix-interior.jpg'],
-      description: 'Matrix is a striking black-hulled sport yacht cruising Dubai\'s waters, featuring a sleek flybridge, an open aft deck dining area, and a bright, contemporary main salon.',
-      overview: 'Matrix pairs an aggressive black hull with an open flybridge helm and lounge seating, a teak-decked aft cockpit set for alfresco dining, and a light-filled main salon with wraparound seating. Cabins offer twin and double configurations with en-suite bathrooms.',
+      description: 'Vip Matrix is a striking black-hulled sport yacht cruising Dubai\'s waters, featuring a sleek flybridge, an open aft deck dining area, and a bright, contemporary main salon.',
+      overview: 'Vip Matrix pairs an aggressive black hull with an open flybridge helm and lounge seating, a teak-decked aft cockpit set for alfresco dining, and a light-filled main salon with wraparound seating. Cabins offer twin and double configurations with en-suite bathrooms.',
       features: ['Flybridge helm & lounge seating', 'Teak aft cockpit dining', 'Contemporary main salon', 'Twin & double cabins', 'Striking black hull'],
       decks: [
         { name: 'Flybridge', detail: 'Helm station with open-air lounge seating.' },
@@ -649,7 +649,7 @@
       id: 'encore',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Encore',
+      name: 'Vip Encore 140',
       tagline: '140ft Tri-Deck Super Yacht',
       pricePerHour: null, // Price on Request
       guests: 30, // per source brochure: up to 30 guests
@@ -659,8 +659,8 @@
       crew: 5,
       image: 'images/yacht-encore-hero.jpg',
       gallery: ['images/yacht-encore-exterior.jpg', 'images/yacht-encore-interior.jpg'],
-      description: 'Encore is a 140ft tri-deck superyacht with a fully private owner\'s deck, a dedicated sky lounge, and timeless styling with beautiful furnishings throughout.',
-      overview: 'Encore\'s 100% owner\'s deck offers a fully private salon and forward jacuzzi pool deck, isolated from cameras for total privacy. Five cabins accommodate up to 12 guests overnight (1 owner, 2 VIP, 2 double), while the prized sky lounge offers a relaxed space for cocktails and entertaining. She can carry up to 10 crew and up to 30 guests for day charters, with 7-star hospitality service throughout.',
+      description: 'Vip Encore 140 is a 140ft tri-deck superyacht with a fully private owner\'s deck, a dedicated sky lounge, and timeless styling with beautiful furnishings throughout.',
+      overview: 'Vip Encore 140\'s 100% owner\'s deck offers a fully private salon and forward jacuzzi pool deck, isolated from cameras for total privacy. Five cabins accommodate up to 12 guests overnight (1 owner, 2 VIP, 2 double), while the prized sky lounge offers a relaxed space for cocktails and entertaining. She can carry up to 10 crew and up to 30 guests for day charters, with 7-star hospitality service throughout.',
       features: ['100% private owner\'s deck with forward jacuzzi', 'Dedicated sky lounge', '5 cabins: 1 owner, 2 VIP, 2 double', 'Formal dining room', '7-star hospitality service', 'Carries up to 10 crew'],
       decks: [
         { name: 'Owner\'s Deck', detail: 'Fully private salon and forward jacuzzi pool deck, isolated from cameras.' },
@@ -673,7 +673,7 @@
       id: 'notika',
       tier: 'premium',
       tierLabel: 'Premium Tier',
-      name: 'Notika',
+      name: 'Vip Notika',
       tagline: 'Sport Yacht Charter',
       pricePerHour: null, // Price on Request
       guests: 12,
@@ -683,8 +683,8 @@
       crew: 4,
       image: 'images/yacht-notika-hero.jpg',
       gallery: ['images/yacht-notika-exterior.jpg', 'images/yacht-notika-interior.jpg'],
-      description: 'Notika is a sleek sport yacht offering a spacious sundeck lounge, an open flybridge dining and bar area, and a comfortable main salon set up for entertaining.',
-      overview: 'Notika\'s sundeck lounge and flybridge dining/bar area give guests multiple spaces to relax and entertain, while the main salon and formal dining area provide comfortable indoor space with sea views. Cabins offer double and twin configurations with en-suite bathrooms.',
+      description: 'Vip Notika is a sleek sport yacht offering a spacious sundeck lounge, an open flybridge dining and bar area, and a comfortable main salon set up for entertaining.',
+      overview: 'Vip Notika\'s sundeck lounge and flybridge dining/bar area give guests multiple spaces to relax and entertain, while the main salon and formal dining area provide comfortable indoor space with sea views. Cabins offer double and twin configurations with en-suite bathrooms.',
       features: ['Sundeck lounge seating', 'Flybridge dining and bar', 'Main salon with sea views', 'Formal dining area', 'Double & twin cabins'],
       decks: [
         { name: 'Flybridge', detail: 'Open-air dining and bar area with lounge seating.' },
