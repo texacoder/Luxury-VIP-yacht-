@@ -339,27 +339,6 @@
       ]
     },
     {
-      id: 'imagine',
-      tier: 'classic',
-      tierLabel: 'Classic Tier',
-      name: 'Imagine',
-      tagline: 'A New Addition to the Fleet',
-      pricePerHour: 1500,
-      guests: null, // TODO: not yet provided — needs client input
-      cabins: null, // TODO: not yet provided — needs client input
-      washrooms: null, // TODO: not yet provided — needs client input
-      length: null, // TODO: not yet provided — needs client input
-      crew: null, // TODO: not yet provided — needs client input
-      image: '', // TODO: client says photos are coming soon
-      gallery: [],
-      description: 'Imagine is a recent addition to the VIP Yachts fleet.',
-      overview: 'Full specifications and photos for Imagine will be added as soon as they\'re available. Get in touch with our team for the latest details.',
-      features: ['Full feature list coming soon'],
-      decks: [
-        { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
-      ]
-    },
-    {
       id: 'benetti-100',
       tier: 'classic',
       tierLabel: 'Classic Tier',
