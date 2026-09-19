@@ -773,7 +773,7 @@
     }
     var alt = yacht.name + (altSuffix || '');
     var escapedName = yacht.name.replace(/'/g, "\\'");
-    return '<img src="' + BASE + yacht.image + '" alt="' + alt + '" ' +
+    return '<img src="' + BASE + yacht.image + '" alt="' + alt + '" loading="lazy" ' +
       'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + escapedName + '\'}))">';
   }
   window.VIPYachts.yachtCardMediaHtml = yachtCardMediaHtml;

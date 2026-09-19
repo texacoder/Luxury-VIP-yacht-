@@ -22,12 +22,42 @@
       qs('#yacht-not-found').hidden = false;
       qs('#yacht-detail-content').hidden = true;
       document.title = 'Yacht Not Found — VIP Yachts';
+      // A missing/invalid ?id= has no real content — keep it out of the index.
+      var robotsMeta = document.createElement('meta');
+      robotsMeta.name = 'robots';
+      robotsMeta.content = 'noindex';
+      document.head.appendChild(robotsMeta);
       return;
     }
 
     qs('#yacht-detail-content').hidden = false;
     document.title = yacht.name + ' — VIP Yachts';
     qs('#page-title').textContent = yacht.name + ' — VIP Yachts';
+
+    /* ---------- Per-yacht SEO tags ----------
+       Without this, every yacht shared this page's static <head> tags —
+       same canonical URL (missing ?id=), same description, same OG/Twitter
+       preview for all 20 yachts. That canonical told Google every yacht
+       page was a duplicate of one URL, so only one (if any) could ever
+       get indexed. Setting these per-yacht at render time fixes that for
+       Google (which executes JS) — note this doesn't help non-JS crawlers
+       like WhatsApp/Facebook's link-preview bots, which only ever see the
+       static HTML underneath. */
+    var canonicalUrl = 'https://vipyachtscharter.com/pages/yacht-detail?id=' + yacht.id;
+    var ogImage = yacht.image ? 'https://vipyachtscharter.com/' + yacht.image : 'https://vipyachtscharter.com/images/hero-poster.png';
+    var setMeta = function (selector, attr, value) {
+      var el = qs(selector);
+      if (el) el.setAttribute(attr, value);
+    };
+    setMeta('link[rel="canonical"]', 'href', canonicalUrl);
+    setMeta('meta[name="description"]', 'content', yacht.description);
+    setMeta('meta[property="og:title"]', 'content', yacht.name + ' — VIP Yachts');
+    setMeta('meta[property="og:description"]', 'content', yacht.description);
+    setMeta('meta[property="og:url"]', 'content', canonicalUrl);
+    setMeta('meta[property="og:image"]', 'content', ogImage);
+    setMeta('meta[name="twitter:title"]', 'content', yacht.name + ' — VIP Yachts');
+    setMeta('meta[name="twitter:description"]', 'content', yacht.description);
+    setMeta('meta[name="twitter:image"]', 'content', ogImage);
 
     /* ---------- Hero ---------- */
     var heroImg = qs('#yacht-hero-image');
@@ -70,7 +100,7 @@
       galleryEl.innerHTML = galleryImages.map(function (src, i) {
         return (
           '<button class="detail-gallery-item" data-index="' + i + '" aria-label="Open image ' + (i + 1) + ' of ' + galleryImages.length + '">' +
-            '<img src="' + base + src + '" alt="' + yacht.name + ' interior or deck view, photo ' + (i + 1) + '" ' +
+            '<img src="' + base + src + '" alt="' + yacht.name + ' interior or deck view, photo ' + (i + 1) + '" loading="lazy" ' +
               'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'Photo ' + (i + 1) + '\'}))">' +
           '</button>'
         );

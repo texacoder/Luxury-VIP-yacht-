@@ -26,7 +26,7 @@
       return (
         '<article class="addon-card fade-up" id="' + addon.id + '">' +
           '<div class="addon-card-media">' +
-            '<img src="' + base + imgPath + '" alt="' + addon.name + '" ' +
+            '<img src="' + base + imgPath + '" alt="' + addon.name + '" loading="lazy" ' +
               'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + addon.name + '\'}))">' +
           '</div>' +
           '<div class="addon-card-body">' +

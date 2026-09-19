@@ -76,7 +76,7 @@
       return (
         '<article class="package-card fade-up' + popularClass + '">' +
           '<div class="package-card-media">' +
-            '<img src="' + base + 'images/package-' + pkg.id + '.png" alt="' + pkg.name + ' charter on the water" ' +
+            '<img src="' + base + 'images/package-' + pkg.id + '.png" alt="' + pkg.name + ' charter on the water" loading="lazy" ' +
               'onerror="this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'img-fallback\',textContent:\'' + pkg.name + '\'}))">' +
             popularBadge +
           '</div>' +

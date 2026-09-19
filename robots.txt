@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /pages/admin
 Disallow: /pages/admin.html
 Allow: /
 
