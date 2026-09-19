@@ -345,11 +345,11 @@
       name: 'Vip Benetti 100',
       tagline: 'A New Addition to the Fleet',
       pricePerHour: 12000,
-      guests: null, // TODO: not yet provided — needs client input
-      cabins: null, // TODO: not yet provided — needs client input
+      guests: 50,
+      cabins: 4,
       washrooms: null, // TODO: not yet provided — needs client input
-      length: 100,
-      crew: null, // TODO: not yet provided — needs client input
+      length: 110,
+      crew: 5,
       image: 'images/yacht-benetti-100-hero.jpg',
       gallery: [
         'images/yacht-benetti-100-salon.jpg',
@@ -366,11 +366,13 @@
         'images/yacht-benetti-100-aft-lounge.jpg',
         'images/yacht-benetti-100-flybridge.jpg'
       ],
-      description: 'Vip Benetti 100 is a recent addition to the VIP Yachts fleet.',
-      overview: 'Full specifications for Vip Benetti 100 will be added as soon as they\'re available. Get in touch with our team for the latest details.',
-      features: ['Full feature list coming soon'],
+      description: 'A 110ft Benetti superyacht with capacity for 50 guests, featuring high-end interiors and full crew service, built for large gatherings from birthday parties to corporate events.',
+      overview: 'Vip Benetti 100 is built for ultimate performance and perfect for large gatherings — whether it\'s a birthday party, a corporate event, a wedding celebration, or a cruise with friends. The yacht\'s high-end interiors feature premium furnishings and full crew service, catering to your every need throughout the journey. Guests can enjoy gourmet meals, sip on refreshing drinks, and take in the beautiful scenery in a relaxed, elegant setting. For those who love adventure, the yacht also offers exciting water activities — swim, snorkel, or simply relax on deck while soaking in the sun. With its smooth cruising experience and world-class hospitality, Vip Benetti 100 guarantees an unforgettable voyage on the waters of Dubai.',
+      features: ['Spacious layout for large gatherings & events', 'High-end interiors with premium furnishings', 'Full crew service throughout the charter', 'Gourmet catering & refreshments on board', 'Swimming & snorkeling water activities', 'Smooth, stable cruising experience', '4 guest cabins'],
       decks: [
-        { name: 'Details Coming Soon', detail: 'A deck-by-deck breakdown will be added once photos and specifications are confirmed.' }
+        { name: 'Main Deck', detail: 'Elegant saloon and dining area with premium interiors, ideal for gourmet dining and entertaining.' },
+        { name: 'Upper Deck & Flybridge', detail: 'Open-air lounge and sun deck for soaking in the views.' },
+        { name: 'Lower Deck', detail: '4 guest cabins with full crew service throughout your charter.' }
       ]
     },
     {
