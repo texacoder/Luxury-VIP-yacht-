@@ -413,43 +413,6 @@
       ]
     },
     {
-      id: 'notorious-2023',
-      tier: 'classic',
-      tierLabel: 'Classic Tier',
-      name: 'Vip Legend (Notorious)',
-      tagline: 'Sleek Performance Cruiser',
-      pricePerHour: 4500,
-      guests: 10,
-      cabins: 5,
-      washrooms: null, // TODO: not stated in source brochure — needs client input
-      length: 106,
-      crew: 4,
-      image: 'images/yacht-notorious-2023-exterior-1.jpg',
-      gallery: [
-        'images/yacht-notorious-2023-exterior-1.jpg',
-        'images/yacht-notorious-2023-exterior-2.jpg',
-        'images/yacht-notorious-2023-exterior-3.jpg',
-        'images/yacht-notorious-2023-aft-lounge.jpg',
-        'images/yacht-notorious-2023-sundeck.jpg',
-        'images/yacht-notorious-2023-flybridge-seating.jpg',
-        'images/yacht-notorious-2023-aft-deck-dining.jpg',
-        'images/yacht-notorious-2023-main-salon.jpg',
-        'images/yacht-notorious-2023-salon-lounge.jpg',
-        'images/yacht-notorious-2023-master-cabin.jpg',
-        'images/yacht-notorious-2023-bathroom.jpg',
-        'images/yacht-notorious-2023-guest-cabin-1.jpg',
-        'images/yacht-notorious-2023-guest-cabin-2.jpg'
-      ],
-      description: 'Vip Legend (Notorious) is a sleek black-hulled cruiser set against the Dubai skyline, offering an open flybridge, aft lounge seating, and warm wood-finished interiors.',
-      overview: 'Vip Legend (Notorious) offers an open flybridge with a wet bar and dining area, an aft cockpit lounge with alfresco dining, and a bright main salon with a formal dining table. Cabins are finished in polished wood with en-suite bathrooms.',
-      features: ['Open flybridge with bar', 'Aft cockpit lounge', 'Alfresco dining', 'Formal dining table', 'Jetski/watersports platform'],
-      decks: [
-        { name: 'Flybridge', detail: 'Open-air seating, wet bar, and sun loungers.' },
-        { name: 'Main Deck', detail: 'Salon, formal dining table, and aft cockpit lounge.' },
-        { name: 'Lower Deck', detail: 'Cabins with en-suite bathrooms.' }
-      ]
-    },
-    {
       id: 'princess-x95',
       tier: 'premium',
       tierLabel: 'Premium Tier',
@@ -609,7 +572,7 @@
       tierLabel: 'Premium Tier',
       name: 'Vip Matrix',
       tagline: 'Sleek Sport Cruiser',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 5500,
       guests: 30,
       cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input

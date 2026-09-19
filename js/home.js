@@ -38,7 +38,7 @@
     /* ---------- Fleet preview (curated pick: 2 Classic, 2 Premium) ---------- */
     var previewGrid = qs('#fleet-preview-grid');
     if (previewGrid) {
-      var FEATURED_IDS = ['enterprise-48', 'notorious-2023', 'princess-x95', 'thunder-49m'];
+      var FEATURED_IDS = ['enterprise-48', 'big-daddy-90', 'princess-x95', 'thunder-49m'];
       var preview = FEATURED_IDS.map(function (id) { return data.getYachtById(id); }).filter(Boolean);
       previewGrid.innerHTML = preview.map(renderYachtCard).join('');
     }
