@@ -711,7 +711,8 @@
     { id: 'birthday-decor', name: 'Birthday Decoration', price: 3000, description: 'Balloons, banner, and table styling for onboard celebrations.' },
     { id: 'dj-system', name: 'DJ System', price: 4000, description: 'Professional sound system with a curated playlist or live DJ on request.' },
     { id: 'photographer', name: 'Photographer', price: 6000, description: 'A dedicated photographer for up to two hours of your charter.' },
-    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' }
+    { id: 'jet-ski', name: 'Jet Ski', price: 8000, description: 'One jet ski with fuel, included for the duration of your charter.' },
+    { id: 'banana-ride', name: 'Banana Ride', price: null, description: 'An inflatable banana boat ride towed behind the yacht — a fun, high-energy activity for groups.' } // TODO: price not yet provided — needs client input
   ];
 
   // Booking and payment are handled over WhatsApp, not through the site —
