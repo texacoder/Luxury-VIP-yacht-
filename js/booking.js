@@ -52,7 +52,22 @@
     var urlYacht = params.get('yacht');
     var urlPackage = params.get('package');
     var urlAddon = params.get('addon');
-    if (urlYacht && data.getYachtById(urlYacht)) { state.yachtId = urlYacht; }
+    if (urlYacht && data.getYachtById(urlYacht)) {
+      // A "Book Now" link always names a specific yacht the customer already
+      // chose on that yacht's page — if it's different from whatever was
+      // already in progress in this tab, treat it as a fresh booking rather
+      // than carrying over a stale package/reference from another yacht.
+      if (state.yachtId && state.yachtId !== urlYacht) {
+        state.packageId = null;
+        state.addonIds = [];
+        state.reference = null;
+        state.loggedToSheet = false;
+      }
+      state.yachtId = urlYacht;
+      // The yacht is already chosen — skip straight past the picker step
+      // instead of asking the customer to select it again.
+      if (state.step < 2) state.step = 2;
+    }
     if (urlPackage && data.getPackageById(urlPackage)) { state.packageId = urlPackage; }
     if (urlAddon && state.addonIds.indexOf(urlAddon) === -1) {
       var addonExists = data.ADDONS.some(function (a) { return a.id === urlAddon; });
