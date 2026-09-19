@@ -418,7 +418,7 @@
       tierLabel: 'Premium Tier',
       name: 'Vip Princess X95',
       tagline: 'Closer to a Superyacht Than Her Class',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 15000,
       guests: 12,
       cabins: '4–5',
       washrooms: null, // TODO: not stated in source brochure — needs client input
@@ -449,7 +449,7 @@
       tierLabel: 'Premium Tier',
       name: 'Vip Thunder 50',
       tagline: 'A 49m Superyacht by Oceanfast',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 18000,
       guests: 12,
       cabins: '5–6',
       washrooms: null, // TODO: not stated in source brochure — needs client input
@@ -484,7 +484,7 @@
       tierLabel: 'Premium Tier',
       name: 'Vip Khalili',
       tagline: 'A Refined Superyacht Charter',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 10000,
       guests: 40,
       cabins: 4,
       washrooms: null, // TODO: not stated in source brochure — needs client input
@@ -595,7 +595,7 @@
       tierLabel: 'Premium Tier',
       name: 'Vip Encore 140',
       tagline: '140ft Tri-Deck Super Yacht',
-      pricePerHour: null, // Price on Request
+      pricePerHour: 15000,
       guests: 30, // per source brochure: up to 30 guests
       cabins: 5, // per source brochure: 5 cabins (1 owner, 2 VIP, 2 double)
       washrooms: null, // TODO: not stated in source brochure — needs client input
