@@ -406,7 +406,7 @@
               '<h3>' + escapeHtml(y.name) + '</h3>' +
               '<span class="admin-yacht-card-meta">' + data.formatSpec(y.guests, ' guests') + ' · ' + data.formatSpec(y.cabins, ' cabins') + ' · ' + data.formatSpec(y.length, ' ft') + '</span>' +
               '<span class="admin-yacht-card-price">' + data.formatYachtPrice(y.pricePerHour) + '</span>' +
-              '<a class="admin-yacht-card-link" href="' + base + 'pages/yacht-detail.html?id=' + y.id + '" target="_blank" rel="noopener">View on site →</a>' +
+              '<a class="admin-yacht-card-link" href="' + base + 'pages/yacht-detail?id=' + y.id + '" target="_blank" rel="noopener">View on site →</a>' +
             '</div>' +
           '</article>'
         );

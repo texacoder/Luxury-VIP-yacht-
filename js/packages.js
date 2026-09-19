@@ -26,7 +26,7 @@
             '<span class="package-hours">' + pkg.hours + ' Hours</span>' +
             '<p class="package-desc">' + pkg.description + '</p>' +
             '<span class="package-price">' + data.formatAED(pkg.price) + '</span>' +
-            '<a href="' + base + 'pages/booking.html?package=' + pkg.id + '" class="btn btn-gold btn-block">Select Package</a>' +
+            '<a href="' + base + 'pages/booking?package=' + pkg.id + '" class="btn btn-gold btn-block">Select Package</a>' +
           '</div>' +
         '</article>'
       );

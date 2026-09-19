@@ -62,7 +62,7 @@
             '<p class="yacht-card-tagline">' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
             '<div class="yacht-card-footer">' +
               '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
-              '<a href="' + base + 'pages/yacht-detail.html?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
+              '<a href="' + base + 'pages/yacht-detail?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
             '</div>' +
           '</div>' +
         '</article>'
@@ -84,7 +84,7 @@
             '<h3>' + pkg.name + '</h3>' +
             '<span class="package-hours">' + pkg.hours + ' Hours</span>' +
             '<span class="package-price">' + data.formatAED(pkg.price) + '</span>' +
-            '<a href="' + base + 'pages/booking.html?package=' + pkg.id + '" class="btn btn-dark btn-block">Select</a>' +
+            '<a href="' + base + 'pages/booking?package=' + pkg.id + '" class="btn btn-dark btn-block">Select</a>' +
           '</div>' +
         '</article>'
       );

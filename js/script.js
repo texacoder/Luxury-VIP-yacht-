@@ -842,13 +842,13 @@
      ========================================================= */
   function buildHeader() {
     var navItems = [
-      { href: 'index.html', label: 'Home', key: 'index' },
-      { href: 'pages/fleet.html', label: 'Yachts', key: 'fleet' },
-      { href: 'pages/packages.html', label: 'Packages', key: 'packages' },
-      { href: 'pages/experiences.html', label: 'Experiences', key: 'experiences' },
-      { href: 'pages/gallery.html', label: 'Gallery', key: 'gallery' },
-      { href: 'pages/about.html', label: 'About', key: 'about' },
-      { href: 'pages/contact.html', label: 'Contact', key: 'contact' }
+      { href: 'index', label: 'Home', key: 'index' },
+      { href: 'pages/fleet', label: 'Yachts', key: 'fleet' },
+      { href: 'pages/packages', label: 'Packages', key: 'packages' },
+      { href: 'pages/experiences', label: 'Experiences', key: 'experiences' },
+      { href: 'pages/gallery', label: 'Gallery', key: 'gallery' },
+      { href: 'pages/about', label: 'About', key: 'about' },
+      { href: 'pages/contact', label: 'Contact', key: 'contact' }
     ];
 
     var linksHtml = navItems.map(function (item) {
@@ -871,7 +871,7 @@
     header.id = 'site-header';
     header.innerHTML =
       '<div class="container">' +
-        '<a href="' + BASE + 'index.html" class="brand" aria-label="VIP Yachts home">' +
+        '<a href="' + BASE + 'index" class="brand" aria-label="VIP Yachts home">' +
           '<img src="' + BASE + 'images/favicon.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VY\'}))">' +
           '<span>VIP Yachts</span>' +
         '</a>' +
@@ -879,7 +879,7 @@
           '<div class="nav-links">' + linksHtml + '</div>' +
         '</nav>' +
         '<div class="header-cta">' +
-          '<a href="' + BASE + 'pages/booking.html" class="btn btn-outline">Book Now</a>' +
+          '<a href="' + BASE + 'pages/booking" class="btn btn-outline">Book Now</a>' +
           '<button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">' +
             '<span></span><span></span><span></span>' +
           '</button>' +
@@ -892,7 +892,7 @@
     mobileNav.setAttribute('role', 'dialog');
     mobileNav.setAttribute('aria-modal', 'true');
     mobileNav.setAttribute('aria-label', 'Mobile navigation');
-    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking.html" class="btn btn-gold" style="transition-delay:' + (navItems.length * 0.04) + 's">Book Now</a>';
+    mobileNav.innerHTML = mobileLinksHtml + '<a href="' + BASE + 'pages/booking" class="btn btn-gold" style="transition-delay:' + (navItems.length * 0.04) + 's">Book Now</a>';
 
     document.body.insertBefore(mobileNav, document.body.firstChild);
     document.body.insertBefore(header, document.body.firstChild);
@@ -945,7 +945,7 @@
       '<div class="container">' +
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
-            '<a href="' + BASE + 'index.html" class="brand" aria-label="VIP Yachts home">' +
+            '<a href="' + BASE + 'index" class="brand" aria-label="VIP Yachts home">' +
               '<img src="' + BASE + 'images/favicon.png" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VY\'}))">' +
               '<span>VIP Yachts</span>' +
             '</a>' +
@@ -965,19 +965,19 @@
           '<div class="footer-col">' +
             '<h4>Explore</h4>' +
             '<ul>' +
-              '<li><a href="' + BASE + 'pages/fleet.html">Our Yachts</a></li>' +
-              '<li><a href="' + BASE + 'pages/packages.html">Packages</a></li>' +
-              '<li><a href="' + BASE + 'pages/experiences.html">Experiences</a></li>' +
-              '<li><a href="' + BASE + 'pages/gallery.html">Gallery</a></li>' +
+              '<li><a href="' + BASE + 'pages/fleet">Our Yachts</a></li>' +
+              '<li><a href="' + BASE + 'pages/packages">Packages</a></li>' +
+              '<li><a href="' + BASE + 'pages/experiences">Experiences</a></li>' +
+              '<li><a href="' + BASE + 'pages/gallery">Gallery</a></li>' +
             '</ul>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Company</h4>' +
             '<ul>' +
-              '<li><a href="' + BASE + 'pages/about.html">About Us</a></li>' +
-              '<li><a href="' + BASE + 'pages/faq.html">FAQs</a></li>' +
-              '<li><a href="' + BASE + 'pages/contact.html">Contact</a></li>' +
-              '<li><a href="' + BASE + 'pages/booking.html">Book Now</a></li>' +
+              '<li><a href="' + BASE + 'pages/about">About Us</a></li>' +
+              '<li><a href="' + BASE + 'pages/faq">FAQs</a></li>' +
+              '<li><a href="' + BASE + 'pages/contact">Contact</a></li>' +
+              '<li><a href="' + BASE + 'pages/booking">Book Now</a></li>' +
             '</ul>' +
           '</div>' +
           '<div class="footer-col">' +
@@ -994,8 +994,8 @@
         '<div class="footer-bottom">' +
           '<span>&copy; ' + new Date().getFullYear() + ' VIP Yachts. All rights reserved.</span>' +
           '<div class="footer-bottom-links">' +
-            '<a href="' + BASE + 'pages/faq.html">FAQs</a>' +
-            '<a href="' + BASE + 'pages/contact.html">Contact</a>' +
+            '<a href="' + BASE + 'pages/faq">FAQs</a>' +
+            '<a href="' + BASE + 'pages/contact">Contact</a>' +
           '</div>' +
         '</div>' +
       '</div>';

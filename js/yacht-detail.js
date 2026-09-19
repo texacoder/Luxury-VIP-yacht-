@@ -136,6 +136,6 @@
     qs('#sidebar-cabins').textContent = data.formatSpec(yacht.cabins);
     qs('#sidebar-crew').textContent = data.formatSpec(yacht.crew);
     qs('#sidebar-length').textContent = data.formatSpec(yacht.length, ' ft');
-    qs('#yacht-book-btn').href = base + 'pages/booking.html?yacht=' + yacht.id;
+    qs('#yacht-book-btn').href = base + 'pages/booking?yacht=' + yacht.id;
   };
 })();

@@ -33,7 +33,7 @@
             '<h3>' + addon.name + '</h3>' +
             '<p>' + addon.description + '</p>' +
             '<span class="addon-price">' + data.formatAED(addon.price) + '</span>' +
-            '<a href="' + base + 'pages/booking.html?addon=' + addon.id + '" class="btn btn-dark btn-block">Add to Booking</a>' +
+            '<a href="' + base + 'pages/booking?addon=' + addon.id + '" class="btn btn-dark btn-block">Add to Booking</a>' +
           '</div>' +
         '</article>'
       );
