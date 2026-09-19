@@ -690,7 +690,7 @@
       pricePerHour: 350,
       guests: null, // TODO: not yet provided — needs client input
       length: 42,
-      image: null, // TODO: awaiting a real photo from the client
+      image: 'images/speedboat-42-hero.jpg',
       description: 'Experience high-speed thrills with our speed boat rentals — perfect for quick coastal cruises, sightseeing, and water adventures.',
       overview: 'Experience high-speed thrills with our speed boat rentals — perfect for quick coastal cruises, sightseeing, and water adventures. Enjoy comfort, safety, and stunning views with every ride.'
     }
