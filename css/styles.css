@@ -362,15 +362,16 @@ textarea:focus-visible,
   transform: translateX(-50%) translateY(0);
 }
 .nav-dropdown-menu a{
-  padding: var(--space-2) var(--space-5);
-  font-size: var(--fs-xs);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  padding: var(--space-3) var(--space-5);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--text-secondary);
   white-space: nowrap;
   transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
-.nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus-visible{ color: var(--text-primary); background: rgba(201,162,75,0.08); }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus-visible{ color: var(--gold-light); background: rgba(201,162,75,0.08); }
 
 .header-cta{ display: flex; align-items: center; gap: var(--space-4); }
 
@@ -496,8 +497,10 @@ textarea:focus-visible,
 .mobile-nav-group.is-open .mobile-submenu{ max-height: 260px; margin-top: var(--space-3); }
 .mobile-nav a.mobile-submenu-link{
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-secondary);
 }
 .mobile-nav a.mobile-submenu-link:hover, .mobile-nav a.mobile-submenu-link:focus-visible{ color: var(--gold-light); }
