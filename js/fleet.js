@@ -20,6 +20,15 @@
 
     var state = { tier: 'all', minGuests: 0 };
 
+    // Pre-select tier from a ?tier=classic|premium link (e.g. from the nav submenu)
+    var requestedTier = new URLSearchParams(window.location.search).get('tier');
+    if (requestedTier === 'classic' || requestedTier === 'premium') {
+      state.tier = requestedTier;
+      tierChips.forEach(function (c) {
+        c.classList.toggle('is-active', c.dataset.tier === requestedTier);
+      });
+    }
+
     function render() {
       var filtered = data.sortYachtsByLength(data.YACHTS.filter(function (y) {
         var tierMatch = state.tier === 'all' || y.tier === state.tier;

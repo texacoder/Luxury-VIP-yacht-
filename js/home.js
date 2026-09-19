@@ -83,7 +83,6 @@
           '<div class="package-card-body">' +
             '<h3>' + pkg.name + '</h3>' +
             '<span class="package-hours">' + pkg.hours + ' Hours</span>' +
-            '<span class="package-price">' + data.formatAED(pkg.price) + '</span>' +
             '<a href="' + base + 'pages/booking?package=' + pkg.id + '" class="btn btn-dark btn-block">Select</a>' +
           '</div>' +
         '</article>'

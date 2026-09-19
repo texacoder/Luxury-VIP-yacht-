@@ -675,6 +675,26 @@
     }
   ];
 
+  /* =========================================================
+     2b. SPEED BOATS — SINGLE SOURCE OF TRUTH
+     A separate category from the yacht fleet (day charters /
+     quick rides rather than full yacht hire). Reuses the same
+     card/detail rendering helpers as YACHTS where the shapes
+     overlap (image, name, pricePerHour, etc.).
+     ========================================================= */
+  var SPEEDBOATS = [
+    {
+      id: 'speedboat-42',
+      name: '42 FT Speed Boat',
+      tagline: 'High-Speed Thrills on Dubai\'s Waters',
+      pricePerHour: 350,
+      guests: null, // TODO: not yet provided — needs client input
+      length: 42,
+      image: null, // TODO: awaiting a real photo from the client
+      description: 'Experience high-speed thrills with our speed boat rentals — perfect for quick coastal cruises, sightseeing, and water adventures.',
+      overview: 'Experience high-speed thrills with our speed boat rentals — perfect for quick coastal cruises, sightseeing, and water adventures. Enjoy comfort, safety, and stunning views with every ride.'
+    }
+  ];
 
   /* =========================================================
      3. PACKAGES & ADD-ONS — SINGLE SOURCE OF TRUTH
@@ -716,6 +736,7 @@
   // Expose to other scripts on the page (booking flow, admin, etc.)
   window.VIPYachts = {
     YACHTS: YACHTS,
+    SPEEDBOATS: SPEEDBOATS,
     PACKAGES: PACKAGES,
     ADDONS: ADDONS,
     WHATSAPP_NUMBERS: WHATSAPP_NUMBERS,
@@ -845,7 +866,16 @@
   function buildHeader() {
     var navItems = [
       { href: 'index', label: 'Home', key: 'index' },
-      { href: 'pages/fleet', label: 'Yachts', key: 'fleet' },
+      {
+        label: 'Yachts',
+        key: 'yachts-menu',
+        activeKeys: ['fleet', 'speedboats'],
+        children: [
+          { href: 'pages/speedboats', label: 'Speed Boat', key: 'speedboats' },
+          { href: 'pages/fleet?tier=classic', label: 'Classic Yacht', key: 'fleet' },
+          { href: 'pages/fleet?tier=premium', label: 'Premium Yacht', key: 'fleet' }
+        ]
+      },
       { href: 'pages/packages', label: 'Packages', key: 'packages' },
       { href: 'pages/experiences', label: 'Experiences', key: 'experiences' },
       { href: 'pages/gallery', label: 'Gallery', key: 'gallery' },
@@ -853,7 +883,21 @@
       { href: 'pages/contact', label: 'Contact', key: 'contact' }
     ];
 
+    var caretSvg = '<svg class="nav-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
     var linksHtml = navItems.map(function (item) {
+      if (item.children) {
+        var menuActive = item.activeKeys.indexOf(CURRENT_PAGE) > -1 ? ' is-active' : '';
+        var subHtml = item.children.map(function (c) {
+          return '<a href="' + BASE + c.href + '">' + c.label + '</a>';
+        }).join('');
+        return (
+          '<div class="nav-dropdown">' +
+            '<button type="button" class="nav-dropdown-toggle' + menuActive + '" aria-expanded="false">' + item.label + caretSvg + '</button>' +
+            '<div class="nav-dropdown-menu">' + subHtml + '</div>' +
+          '</div>'
+        );
+      }
       var href = BASE + item.href;
       var active = CURRENT_PAGE === item.key ? ' is-active' : '';
       var ariaCurrent = CURRENT_PAGE === item.key ? ' aria-current="page"' : '';
@@ -861,10 +905,22 @@
     }).join('');
 
     var mobileLinksHtml = navItems.map(function (item, i) {
+      var delay = ' style="transition-delay:' + (i * 0.04) + 's"';
+      if (item.children) {
+        var menuActive = item.activeKeys.indexOf(CURRENT_PAGE) > -1 ? ' is-active' : '';
+        var subHtml = item.children.map(function (c) {
+          return '<a href="' + BASE + c.href + '" class="mobile-submenu-link">' + c.label + '</a>';
+        }).join('');
+        return (
+          '<div class="mobile-nav-group"' + delay + '>' +
+            '<button type="button" class="mobile-nav-toggle' + menuActive + '" aria-expanded="false">' + item.label + caretSvg + '</button>' +
+            '<div class="mobile-submenu">' + subHtml + '</div>' +
+          '</div>'
+        );
+      }
       var href = BASE + item.href;
       var active = CURRENT_PAGE === item.key ? ' is-active' : '';
       var ariaCurrent = CURRENT_PAGE === item.key ? ' aria-current="page"' : '';
-      var delay = ' style="transition-delay:' + (i * 0.04) + 's"';
       return '<a href="' + href + '" class="' + active.trim() + '"' + ariaCurrent + delay + '>' + item.label + '</a>';
     }).join('');
 
@@ -912,6 +968,39 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // Desktop "Yachts" dropdown
+    qsa('.nav-dropdown', header).forEach(function (dropdown) {
+      var btn = qs('.nav-dropdown-toggle', dropdown);
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = dropdown.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+    document.addEventListener('click', function () {
+      qsa('.nav-dropdown.is-open', header).forEach(function (d) {
+        d.classList.remove('is-open');
+        qs('.nav-dropdown-toggle', d).setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        qsa('.nav-dropdown.is-open', header).forEach(function (d) {
+          d.classList.remove('is-open');
+          qs('.nav-dropdown-toggle', d).setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    // Mobile "Yachts" accordion
+    qsa('.mobile-nav-toggle', mobileNav).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var group = btn.closest('.mobile-nav-group');
+        var isOpen = group.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
 
     // Hamburger toggle
     var toggle = qs('#nav-toggle');
@@ -968,6 +1057,7 @@
             '<h4>Explore</h4>' +
             '<ul>' +
               '<li><a href="' + BASE + 'pages/fleet">Our Yachts</a></li>' +
+              '<li><a href="' + BASE + 'pages/speedboats">Speed Boats</a></li>' +
               '<li><a href="' + BASE + 'pages/packages">Packages</a></li>' +
               '<li><a href="' + BASE + 'pages/experiences">Experiences</a></li>' +
               '<li><a href="' + BASE + 'pages/gallery">Gallery</a></li>' +

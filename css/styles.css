@@ -316,6 +316,60 @@ textarea:focus-visible,
 .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.is-active{ color: var(--text-primary); }
 .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a.is-active::after{ width: 100%; }
 
+/* Desktop "Yachts" dropdown */
+.nav-dropdown{ position: relative; }
+.nav-dropdown-toggle{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-block: var(--space-2);
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav-dropdown-toggle:hover, .nav-dropdown-toggle:focus-visible, .nav-dropdown-toggle.is-active{ color: var(--text-primary); }
+.nav-caret{ width: 10px; height: 7px; transition: transform var(--dur-fast) var(--ease); }
+.nav-dropdown.is-open .nav-caret{ transform: rotate(180deg); }
+.nav-dropdown-menu{
+  position: absolute;
+  top: calc(100% + var(--space-4));
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 190px;
+  background: var(--navy-light);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) 0;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), visibility var(--dur-fast) var(--ease);
+  z-index: 60;
+}
+.nav-dropdown.is-open .nav-dropdown-menu{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu a{
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a:focus-visible{ color: var(--text-primary); background: rgba(201,162,75,0.08); }
+
 .header-cta{ display: flex; align-items: center; gap: var(--space-4); }
 
 .nav-toggle{
@@ -402,6 +456,48 @@ textarea:focus-visible,
 @media (prefers-reduced-motion: reduce){
   .mobile-nav a, .mobile-nav .btn{ transition-delay: 0s !important; }
 }
+
+/* Mobile "Yachts" accordion */
+.mobile-nav-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.mobile-nav.is-open .mobile-nav-group{ opacity: 1; transform: translateY(0); }
+.mobile-nav-toggle{
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.mobile-nav-toggle.is-active{ color: var(--gold-light); }
+.mobile-nav-toggle .nav-caret{ width: 13px; height: 9px; transition: transform var(--dur-fast) var(--ease); }
+.mobile-nav-group.is-open .mobile-nav-toggle .nav-caret{ transform: rotate(180deg); }
+.mobile-submenu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--dur-med) var(--ease), margin var(--dur-med) var(--ease);
+}
+.mobile-nav-group.is-open .mobile-submenu{ max-height: 260px; margin-top: var(--space-3); }
+.mobile-submenu-link{
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+.mobile-submenu-link:hover, .mobile-submenu-link:focus-visible{ color: var(--gold-light); }
 
 /* -------------------- 7. FOOTER -------------------- */
 .site-footer{
