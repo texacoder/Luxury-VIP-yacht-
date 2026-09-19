@@ -190,24 +190,7 @@
     var addonList = qs('#booking-addon-list');
     var detailsForm = qs('#booking-details-form');
 
-    function renderQuickEnquiryBanner() {
-      var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
-      var banner = qs('#quick-enquiry-banner');
-      if (!banner) return;
-      if (!yacht) { banner.hidden = true; return; }
-      banner.hidden = false;
-      qs('#quick-enquiry-yacht-name').textContent = yacht.name;
-      qs('#quick-enquiry-yacht-price').textContent = data.formatYachtPrice(yacht.pricePerHour);
-      var message = [
-        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + ' (' + data.formatYachtPrice(yacht.pricePerHour) + ').',
-        '',
-        'Could you tell me more about availability and packages?'
-      ].join('\n');
-      qs('#quick-enquiry-btn').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, message);
-    }
-
     function renderStep2() {
-      renderQuickEnquiryBanner();
       // Package options
       pkgGrid.innerHTML = data.PACKAGES.map(function (pkg) {
         var selected = state.packageId === pkg.id;

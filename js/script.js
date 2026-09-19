@@ -1077,7 +1077,7 @@
             '<address>' +
               '<span>Dubai Marina & Dubai Harbour, Dubai, UAE</span>' +
               '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a> / <a href="tel:+' + WHATSAPP_NUMBERS[1].digits + '">' + WHATSAPP_NUMBERS[1].display + '</a></span>' +
-              '<span><a href="mailto:charter@vipyachts.ae">charter@vipyachts.ae</a></span>' +
+              '<span><a href="mailto:vipyachtllc@gmail.com">vipyachtllc@gmail.com</a></span>' +
               '<span>Daily, 8:00 AM – 10:00 PM</span>' +
             '</address>' +
           '</div>' +
