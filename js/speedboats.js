@@ -15,7 +15,7 @@
     grid.innerHTML = data.SPEEDBOATS.map(renderCard).join('');
 
     function renderCard(boat) {
-      var message = 'Hi! I\'d like to know more about the ' + boat.name + '.';
+      var message = 'Hi! I\'d like to know more about the ' + boat.name + ' (' + data.formatYachtPrice(boat.pricePerHour) + ').';
       var waHref = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, message);
       return (
         '<article class="yacht-card fade-up is-visible">' +
@@ -30,6 +30,7 @@
               '<span>' + data.formatSpec(boat.length, ' ft') + '</span>' +
             '</div>' +
             '<div class="yacht-card-footer">' +
+              '<span class="yacht-card-price">' + data.formatYachtPrice(boat.pricePerHour) + '</span>' +
               '<a href="' + waHref + '" target="_blank" rel="noopener" class="btn btn-sm btn-dark">Enquire on WhatsApp</a>' +
             '</div>' +
           '</div>' +

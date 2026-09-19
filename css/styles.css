@@ -785,10 +785,12 @@ textarea:focus-visible,
 }
 .yacht-card-meta span{ display: flex; align-items: center; gap: 4px; }
 .yacht-card-footer{
-  display: flex; align-items: center; justify-content: flex-end;
+  display: flex; align-items: center; justify-content: space-between;
   padding-top: var(--space-4);
   border-top: 1px solid var(--border-subtle);
 }
+.yacht-card-price{ font-family: var(--font-display); font-size: 1.15rem; color: var(--gold); font-weight: 600; }
+.yacht-card-price small{ font-family: var(--font-body); font-size: var(--fs-xs); color: var(--text-muted); font-weight: 400; }
 
 .fleet-preview-cta{ text-align: center; margin-top: var(--space-7); }
 
@@ -1136,7 +1138,8 @@ textarea:focus-visible,
   border-radius: var(--radius-lg);
   padding: var(--space-6);
 }
-.booking-sidebar-heading{ font-size: var(--fs-h4); margin-bottom: var(--space-4); }
+.booking-sidebar-price{ font-family: var(--font-display); font-size: 1.7rem; color: var(--gold); font-weight: 600; }
+.booking-sidebar-label{ font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4); }
 .booking-sidebar-facts{ display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-block: var(--space-4); }
 .booking-sidebar-facts div{ display: flex; flex-direction: column; gap: 2px; }
 .booking-sidebar-facts dt{ font-size: var(--fs-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
@@ -1532,6 +1535,7 @@ textarea:focus-visible,
 .booking-yacht-body{ padding: var(--space-4); }
 .booking-yacht-body h3{ margin-block: var(--space-2) 2px; }
 .booking-yacht-body p{ font-size: var(--fs-small); margin-bottom: var(--space-2); }
+.booking-yacht-price{ font-family: var(--font-display); color: var(--gold); font-weight: 600; }
 
 /* Quick-enquiry shortcut: skip package/add-ons/details entirely and go
    straight to WhatsApp with just the selected yacht. */

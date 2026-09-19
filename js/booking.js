@@ -143,6 +143,7 @@
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
               '<p>' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
+              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
             '</div>' +
           '</button>'
         );
@@ -196,8 +197,9 @@
       if (!yacht) { banner.hidden = true; return; }
       banner.hidden = false;
       qs('#quick-enquiry-yacht-name').textContent = yacht.name;
+      qs('#quick-enquiry-yacht-price').textContent = data.formatYachtPrice(yacht.pricePerHour);
       var message = [
-        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + '.',
+        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + ' (' + data.formatYachtPrice(yacht.pricePerHour) + ').',
         '',
         'Could you tell me more about availability and packages?'
       ].join('\n');
