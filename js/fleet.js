@@ -64,7 +64,6 @@
               '<span>' + data.formatSpec(yacht.length, ' ft') + '</span>' +
             '</div>' +
             '<div class="yacht-card-footer">' +
-              '<span class="yacht-card-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
               '<a href="' + base + 'pages/yacht-detail?id=' + yacht.id + '" class="btn btn-sm btn-dark">View Details</a>' +
             '</div>' +
           '</div>' +

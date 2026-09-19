@@ -143,7 +143,6 @@
               '<span class="badge badge-gold">' + yacht.tierLabel + '</span>' +
               '<h3>' + yacht.name + '</h3>' +
               '<p>' + data.formatSpec(yacht.guests, ' Guests') + ' · ' + data.formatSpec(yacht.cabins, ' Cabins') + '</p>' +
-              '<span class="booking-yacht-price">' + data.formatYachtPrice(yacht.pricePerHour) + '</span>' +
             '</div>' +
           '</button>'
         );
@@ -197,11 +196,10 @@
       if (!yacht) { banner.hidden = true; return; }
       banner.hidden = false;
       qs('#quick-enquiry-yacht-name').textContent = yacht.name;
-      qs('#quick-enquiry-yacht-price').textContent = data.formatYachtPrice(yacht.pricePerHour);
       var message = [
-        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + ' (' + data.formatYachtPrice(yacht.pricePerHour) + ').',
+        'Hi VIP Yachts! I\'d like more details about the ' + yacht.name + '.',
         '',
-        'Could you tell me more about availability, packages, and pricing?'
+        'Could you tell me more about availability and packages?'
       ].join('\n');
       qs('#quick-enquiry-btn').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, message);
     }
@@ -217,7 +215,6 @@
             popular +
             '<h3>' + pkg.name + '</h3>' +
             '<span class="package-hours">' + pkg.hours + ' Hours</span>' +
-            '<span class="package-price">' + data.formatAED(pkg.price) + '</span>' +
           '</button>'
         );
       }).join('');
@@ -252,7 +249,6 @@
             '<label>' +
               '<input type="checkbox" data-addon-id="' + addon.id + '"' + (checked ? ' checked' : '') + '>' +
               '<span class="addon-select-name">' + addon.name + '</span>' +
-              '<span class="addon-select-price">' + data.formatAED(addon.price) + '</span>' +
             '</label>' +
           '</li>'
         );
@@ -309,7 +305,6 @@
       var summaryEmpty = qs('#order-summary-empty');
       var summaryContent = qs('#order-summary-content');
       var lines = qs('#order-summary-lines');
-      var totalEl = qs('#order-summary-total');
 
       if (!yacht && !calc.pkg) {
         summaryEmpty.hidden = false;
@@ -320,14 +315,13 @@
       summaryContent.hidden = false;
 
       var linesHtml = '';
-      if (yacht) linesHtml += '<div><dt>' + yacht.name + '</dt><dd>—</dd></div>';
-      if (calc.pkg) linesHtml += '<div><dt>' + calc.pkg.name + ' (' + calc.pkg.hours + 'h)</dt><dd>' + data.formatAED(calc.pkgPrice) + '</dd></div>';
+      if (yacht) linesHtml += '<div><dt>' + yacht.name + '</dt></div>';
+      if (calc.pkg) linesHtml += '<div><dt>' + calc.pkg.name + ' (' + calc.pkg.hours + 'h)</dt></div>';
       state.addonIds.forEach(function (id) {
         var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
-        if (addon) linesHtml += '<div><dt>' + addon.name + '</dt><dd>' + data.formatAED(addon.price) + '</dd></div>';
+        if (addon) linesHtml += '<div><dt>' + addon.name + '</dt></div>';
       });
       lines.innerHTML = linesHtml;
-      totalEl.textContent = data.formatAED(calc.total);
     }
 
     function validateStep2() {
@@ -404,7 +398,7 @@
       if (state.details.email) lines.push('Email: ' + state.details.email);
       if (state.details.special) lines.push('Special Request: ' + state.details.special);
       lines.push('');
-      lines.push('Estimated Total: ' + data.formatAED(calc.total));
+      lines.push('Could you confirm availability and pricing for this?');
 
       return lines.join('\n');
     }
@@ -421,19 +415,19 @@
       var calc = calcTotal();
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
       var pkg = calc.pkg;
+      var addonNames = state.addonIds.map(function (id) {
+        var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
+        return addon ? addon.name : null;
+      }).filter(Boolean);
 
       // Log once per booking, not on every re-render (e.g. clicking back
       // then forward again shouldn't create duplicate sheet rows).
       if (!state.loggedToSheet) {
-        var addonNamesForLog = state.addonIds.map(function (id) {
-          var addon = data.ADDONS.filter(function (a) { return a.id === id; })[0];
-          return addon ? addon.name : null;
-        }).filter(Boolean);
         data.logBookingToSheet({
           reference: state.reference,
           yacht: yacht ? yacht.name : '',
           package: pkg ? pkg.name : '',
-          addons: addonNamesForLog.join(', '),
+          addons: addonNames.join(', '),
           date: state.details.date,
           time: state.details.time,
           guests: state.details.guests,
@@ -448,10 +442,10 @@
       }
 
       var linesHtml = '';
-      if (yacht && pkg) linesHtml += '<div><dt>' + yacht.name + ' — ' + pkg.name + '</dt><dd>' + data.formatAED(calc.pkgPrice) + '</dd></div>';
-      if (calc.addonTotal > 0) linesHtml += '<div><dt>Add-ons</dt><dd>' + data.formatAED(calc.addonTotal) + '</dd></div>';
+      if (yacht) linesHtml += '<div><dt>' + yacht.name + '</dt></div>';
+      if (pkg) linesHtml += '<div><dt>' + pkg.name + ' (' + pkg.hours + 'h)</dt></div>';
+      addonNames.forEach(function (name) { linesHtml += '<div><dt>' + name + '</dt></div>'; });
       qs('#payment-summary-lines').innerHTML = linesHtml;
-      qs('#payment-summary-total').textContent = data.formatAED(calc.total);
 
       var detailsHtml = '';
       if (state.details.name) detailsHtml += '<div><dt>Name</dt><dd>' + data.escapeHtml(state.details.name) + '</dd></div>';
@@ -491,7 +485,6 @@
       if (state.details.date) detailsHtml += '<div><dt>Date</dt><dd>' + data.escapeHtml(state.details.date) + '</dd></div>';
       if (state.details.time) detailsHtml += '<div><dt>Time</dt><dd>' + data.escapeHtml(state.details.time) + '</dd></div>';
       if (state.details.guests) detailsHtml += '<div><dt>Guests</dt><dd>' + data.escapeHtml(state.details.guests) + '</dd></div>';
-      detailsHtml += '<div><dt>Total</dt><dd>' + data.formatAED(calc.total) + '</dd></div>';
       qs('#confirmation-details').innerHTML = '<dl class="order-summary-lines">' + detailsHtml + '</dl>';
 
       qs('#confirmation-whatsapp-link').href = data.whatsappLink(data.WHATSAPP_NUMBERS[0].digits, buildWhatsAppMessage());
