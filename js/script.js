@@ -894,8 +894,7 @@
     header.innerHTML =
       '<div class="container">' +
         '<a href="' + BASE + 'index" class="brand" aria-label="VIP Yachts home">' +
-          '<img src="' + BASE + 'images/favicon.png?v=2" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VY\'}))">' +
-          '<span>VIP Yachts</span>' +
+          '<img src="' + BASE + 'images/logo-full.png?v=1" alt="VIP Yachts — Dubai" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VIP Yachts\'}))">' +
         '</a>' +
         '<nav class="main-nav" aria-label="Primary">' +
           '<div class="nav-links">' + linksHtml + '</div>' +
@@ -1001,8 +1000,7 @@
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
             '<a href="' + BASE + 'index" class="brand" aria-label="VIP Yachts home">' +
-              '<img src="' + BASE + 'images/favicon.png?v=2" alt="VIP Yachts logo" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VY\'}))">' +
-              '<span>VIP Yachts</span>' +
+              '<img src="' + BASE + 'images/logo-full.png?v=1" alt="VIP Yachts — Dubai" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'brand-fallback\',textContent:\'VIP Yachts\'}))">' +
             '</a>' +
             '<p>Premium yacht charters from Dubai Marina and Dubai Harbour, built around effortless service and an unforgettable time on the water.</p>' +
             '<div class="footer-social">' +
