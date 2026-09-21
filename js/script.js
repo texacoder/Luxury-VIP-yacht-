@@ -673,7 +673,7 @@
       tierLabel: 'Catamaran',
       name: '100 FT Bella Vita',
       tagline: 'Spacious Catamaran Living, Business Bay',
-      pricePerHour: 3000,
+      pricePerHour: 3500,
       guests: 80,
       cabins: 1,
       washrooms: null, // TODO: not yet provided — needs client input
