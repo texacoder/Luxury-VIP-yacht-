@@ -660,6 +660,46 @@
   ];
 
   /* =========================================================
+     2c. CATAMARANS — SINGLE SOURCE OF TRUTH
+     A separate category from the yacht fleet (like SPEEDBOATS), but
+     structured like a full YACHTS entry since real specs/photos are
+     available — reuses the yacht-detail page via getYachtById()
+     falling back to this list.
+     ========================================================= */
+  var CATAMARANS = [
+    {
+      id: 'bellavita-100',
+      tier: 'catamaran',
+      tierLabel: 'Catamaran',
+      name: '100 FT Bella Vita',
+      tagline: 'Spacious Catamaran Living, Business Bay',
+      pricePerHour: 3000,
+      guests: 80,
+      cabins: 1,
+      washrooms: null, // TODO: not yet provided — needs client input
+      length: 100,
+      crew: 5,
+      image: 'images/yacht-bellavita-100-hero.jpg',
+      gallery: [
+        'images/yacht-bellavita-100-exterior-front.jpg',
+        'images/yacht-bellavita-100-exterior-skyline.jpg',
+        'images/yacht-bellavita-100-salon-1.jpg',
+        'images/yacht-bellavita-100-salon-2.jpg',
+        'images/yacht-bellavita-100-bedroom.jpg',
+        'images/yacht-bellavita-100-rooftop-1.jpg',
+        'images/yacht-bellavita-100-rooftop-2.jpg'
+      ],
+      description: 'A 100ft catamaran offering a spacious interior salon, a dedicated bedroom suite, and an expansive open-air rooftop deck — built for large group gatherings departing from Business Bay.',
+      overview: 'The best views are seen from the deck of a yacht — which is exactly what the 100ft Bella Vita delivers. This spacious catamaran features a bright interior salon with plush lounge seating, a dedicated bedroom suite, and a huge open-air rooftop deck finished in artificial turf with a built-in sound system, perfect for parties and large gatherings. Gather your loved ones, pack your bags, and get ready for an extraordinary day on the water departing from Business Bay.',
+      features: ['Expansive open-air rooftop deck', 'Artificial turf rooftop lounge with sound system', 'Spacious interior salon with lounge seating', 'Dedicated bedroom suite', 'Stable, spacious catamaran twin-hull design'],
+      decks: [
+        { name: 'Main Deck', detail: 'Bright interior salon with plush lounge seating and a dedicated bedroom suite.' },
+        { name: 'Rooftop Deck', detail: 'Expansive open-air deck finished in artificial turf with built-in sound system — ideal for parties and large groups.' }
+      ]
+    }
+  ];
+
+  /* =========================================================
      3. PACKAGES & ADD-ONS — SINGLE SOURCE OF TRUTH
      ========================================================= */
   var PACKAGES = [
@@ -701,6 +741,7 @@
   window.VIPYachts = {
     YACHTS: YACHTS,
     SPEEDBOATS: SPEEDBOATS,
+    CATAMARANS: CATAMARANS,
     PACKAGES: PACKAGES,
     ADDONS: ADDONS,
     WHATSAPP_NUMBERS: WHATSAPP_NUMBERS,
@@ -743,7 +784,8 @@
   window.VIPYachts.escapeHtml = escapeHtml;
 
   function getYachtById(id) {
-    return YACHTS.filter(function (y) { return y.id === id; })[0] || null;
+    return YACHTS.filter(function (y) { return y.id === id; })[0] ||
+      CATAMARANS.filter(function (y) { return y.id === id; })[0] || null;
   }
   window.VIPYachts.getYachtById = getYachtById;
 
@@ -833,11 +875,12 @@
       {
         label: 'Yachts',
         key: 'yachts-menu',
-        activeKeys: ['fleet', 'speedboats'],
+        activeKeys: ['fleet', 'speedboats', 'catamarans'],
         children: [
           { href: 'pages/speedboats', label: 'Speed Boat', key: 'speedboats' },
           { href: 'pages/fleet?tier=classic', label: 'Classic Yacht', key: 'fleet' },
-          { href: 'pages/fleet?tier=premium', label: 'Premium Yacht', key: 'fleet' }
+          { href: 'pages/fleet?tier=premium', label: 'Premium Yacht', key: 'fleet' },
+          { href: 'pages/catamarans', label: 'Catamaran', key: 'catamarans' }
         ]
       },
       { href: 'pages/packages', label: 'Packages', key: 'packages' },
@@ -1020,6 +1063,7 @@
             '<ul>' +
               '<li><a href="' + BASE + 'pages/fleet">Our Yachts</a></li>' +
               '<li><a href="' + BASE + 'pages/speedboats">Speed Boats</a></li>' +
+              '<li><a href="' + BASE + 'pages/catamarans">Catamarans</a></li>' +
               '<li><a href="' + BASE + 'pages/packages">Packages</a></li>' +
               '<li><a href="' + BASE + 'pages/experiences">Experiences</a></li>' +
               '<li><a href="' + BASE + 'pages/gallery">Gallery</a></li>' +

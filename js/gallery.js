@@ -17,6 +17,8 @@
     // on the About page) — no stock or placeholder imagery.
     var IMAGES = [
       { src: 'images/yacht-aarna-90-exterior-1.jpg', category: 'fleet', alt: 'Aarna exterior view 1' },
+      { src: 'images/yacht-bellavita-100-exterior-front.jpg', category: 'fleet', alt: 'Bella Vita exterior front view' },
+      { src: 'images/yacht-bellavita-100-exterior-skyline.jpg', category: 'fleet', alt: 'Bella Vita exterior with Dubai skyline' },
       { src: 'images/yacht-big-daddy-90-exterior-1.jpg', category: 'fleet', alt: 'Big Daddy 90 exterior view 1' },
       { src: 'images/yacht-big-daddy-90-exterior-2.jpg', category: 'fleet', alt: 'Big Daddy 90 exterior view 2' },
       { src: 'images/yacht-big-daddy-90-hero.jpg', category: 'fleet', alt: 'Big Daddy 90 underway' },
@@ -61,6 +63,9 @@
       { src: 'images/yacht-aarna-90-main-salon.jpg', category: 'interiors', alt: 'Aarna main salon' },
       { src: 'images/yacht-aarna-90-master-cabin.jpg', category: 'interiors', alt: 'Aarna master cabin' },
       { src: 'images/yacht-aarna-90-staircase.jpg', category: 'interiors', alt: 'Aarna staircase' },
+      { src: 'images/yacht-bellavita-100-salon-1.jpg', category: 'interiors', alt: 'Bella Vita salon 1' },
+      { src: 'images/yacht-bellavita-100-salon-2.jpg', category: 'interiors', alt: 'Bella Vita salon 2' },
+      { src: 'images/yacht-bellavita-100-bedroom.jpg', category: 'interiors', alt: 'Bella Vita bedroom' },
       { src: 'images/yacht-big-daddy-90-helm.jpg', category: 'interiors', alt: 'Big Daddy 90 helm' },
       { src: 'images/yacht-big-daddy-90-master-cabin.jpg', category: 'interiors', alt: 'Big Daddy 90 master cabin' },
       { src: 'images/yacht-big-daddy-90-salon.jpg', category: 'interiors', alt: 'Big Daddy 90 salon' },
@@ -120,6 +125,8 @@
       { src: 'images/yacht-aarna-90-foredeck.jpg', category: 'experiences', alt: 'Aarna foredeck' },
       { src: 'images/yacht-aarna-90-grill.jpg', category: 'experiences', alt: 'Aarna grill' },
       { src: 'images/yacht-aarna-90-sundeck-lounge.jpg', category: 'experiences', alt: 'Aarna sundeck lounge' },
+      { src: 'images/yacht-bellavita-100-rooftop-1.jpg', category: 'experiences', alt: 'Bella Vita rooftop deck 1' },
+      { src: 'images/yacht-bellavita-100-rooftop-2.jpg', category: 'experiences', alt: 'Bella Vita rooftop deck 2' },
       { src: 'images/yacht-big-daddy-90-flybridge.jpg', category: 'experiences', alt: 'Big Daddy 90 flybridge' },
       { src: 'images/yacht-big-daddy-90-lower-deck-stairs.jpg', category: 'experiences', alt: 'Big Daddy 90 lower deck stairs' },
       { src: 'images/yacht-big-daddy-90-sunbed.jpg', category: 'experiences', alt: 'Big Daddy 90 sunbed' },

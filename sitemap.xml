@@ -16,6 +16,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vipyachtscharter.com/pages/catamarans</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://vipyachtscharter.com/pages/packages</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -147,6 +152,11 @@
   </url>
   <url>
     <loc>https://vipyachtscharter.com/pages/yacht-detail?id=notika</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vipyachtscharter.com/pages/yacht-detail?id=bellavita-100</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
