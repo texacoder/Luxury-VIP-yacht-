@@ -358,8 +358,7 @@
        STEP 3 — CONFIRM & WHATSAPP
        Booking and payment happen over WhatsApp, not on this site.
        This step assembles the order into a pre-filled WhatsApp
-       message and hands off to one of two numbers (a fallback in
-       case one is unreachable).
+       message.
        ============================================================ */
     function buildWhatsAppMessage() {
       var yacht = state.yachtId ? data.getYachtById(state.yachtId) : null;
@@ -443,7 +442,6 @@
       var message = buildWhatsAppMessage();
       var numbers = data.WHATSAPP_NUMBERS;
       qs('#whatsapp-btn-primary').href = data.whatsappLink(numbers[0].digits, message);
-      qs('#whatsapp-btn-secondary').href = data.whatsappLink(numbers[1].digits, message);
     }
 
     qs('#step3-back').addEventListener('click', function () { goToStep(2); });
@@ -454,7 +452,6 @@
       goToStep(4);
     }
     qs('#whatsapp-btn-primary').addEventListener('click', handleWhatsAppContinue);
-    qs('#whatsapp-btn-secondary').addEventListener('click', handleWhatsAppContinue);
 
     /* ============================================================
        STEP 4 — CONFIRMATION

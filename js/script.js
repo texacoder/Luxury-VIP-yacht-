@@ -718,12 +718,10 @@
     { id: 'banana-ride', name: 'Banana Ride', price: null, description: 'An inflatable banana boat ride towed behind the yacht — a fun, high-energy activity for groups.' } // TODO: price not yet provided — needs client input
   ];
 
-  // Booking and payment are handled over WhatsApp, not through the site —
-  // two numbers so there's a fallback if one is unreachable. Digits-only
-  // form is what wa.me links require; the display form is for showing to
-  // guests (tel: links, footer, contact page).
+  // Booking and payment are handled over WhatsApp, not through the site.
+  // Digits-only form is what wa.me links require; the display form is for
+  // showing to guests (tel: links, footer, contact page).
   var WHATSAPP_NUMBERS = [
-    { digits: '971544033888', display: '+971 54 403 3888' },
     { digits: '971545763101', display: '+971 54 576 3101' }
   ];
 
@@ -1082,7 +1080,7 @@
             '<h4>Dubai Marina & Dubai Harbour</h4>' +
             '<address>' +
               '<span>Dubai Marina & Dubai Harbour, Dubai, UAE</span>' +
-              '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a> / <a href="tel:+' + WHATSAPP_NUMBERS[1].digits + '">' + WHATSAPP_NUMBERS[1].display + '</a></span>' +
+              '<span><a href="tel:+' + WHATSAPP_NUMBERS[0].digits + '">' + WHATSAPP_NUMBERS[0].display + '</a></span>' +
               '<span><a href="mailto:vipyachtllc@gmail.com">vipyachtllc@gmail.com</a></span>' +
               '<span>Daily, 8:00 AM – 10:00 PM</span>' +
             '</address>' +
